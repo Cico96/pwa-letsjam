@@ -10,7 +10,6 @@ export class Comment {
     private user: User;
 
     constructor(id: number,content: string, parentComment: Comment, musicSheet: MusicSheet, user: User) {
-
         this.id = id;
         this.content = content;
         this.parentComment = parentComment;
