@@ -1271,7 +1271,7 @@ ol {
   content: "";
   right: 0;
   width: 50%;
-  background-image: url(../images/demo/demo-bg.jpg);
+  /*background-image: url(../images/demo/demo-bg.jpg);*/
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1951,7 +1951,7 @@ ol {
   content: "";
   right: 0;
   width: 50%;
-  background-image: url("../../img/hero-image.jpg");
+  background-image: url(../../assets/img/hero-image.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -2646,7 +2646,7 @@ ol {
     Intro Video CSS
 ========================================*/
 .intro-video-area {
-  background-image: url("../images/video/video-bg.jpg");
+/*background-image: url("../images/video/video-bg.jpg");*/
   background-size: cover;
   background-attachment: fixed;
   position: relative;
@@ -5112,7 +5112,7 @@ blockquote span {
 .free-version-banner {
   position: relative;
   background: #333;
-  background-image: url("../images/free-version/free-bg.jpg");
+  /*background-image: url("../images/free-version/free-bg.jpg");*/
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -5155,7 +5155,7 @@ blockquote span {
 }
 
 .free-content-background{
-  background-image: url(../img/free-content-background.jpg);
+  background-image: url(../../assets/img/free-content-background.jpg);
 }
 
 .relative{
@@ -5165,7 +5165,7 @@ blockquote span {
 .image-section{
   position: relative;
   background: #333;
-  background-image: url(../img/people-4.jpg);
+  background-image: url(../../assets/img/people-4.jpg);
   opacity: 0.5;
   background-size: cover;
   background-repeat: no-repeat;

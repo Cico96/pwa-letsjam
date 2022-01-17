@@ -1,9 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~static/css/bootstrap.min.css";
-@import "~static/css/_footer.scss"
-/*@import url(static/css/animate.css);
-@import url(static/css/glightbox.min.css);
-@import url(static/css/LineIcons.2.0.css);
-@import url(static/css/main.css);
-@import url(static/css/tiny-slider.css);*/
+@import "~static/css/animate.css";
+@import "~static/css/glightbox.min.css";
+@import"~static/css/LineIcons.2.0.css";
+@import "~static/css/main.css";
+@import "~static/css/tiny-slider.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+html, body {
+    font-family: 'Spartan';
+}

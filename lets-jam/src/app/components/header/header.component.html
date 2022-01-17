@@ -1,1 +1,95 @@
-<p>header works!</p>
+<div class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-icon">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<header class="header">
+    <div class="navbar-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <a class="navbar-brand logo" href="/">
+                            <img class="logo1" src="../../../assets/img/logo.png" alt="LET'S JAM" />
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                            <!--<p class="lang" style="display: none;" th:text="${#locale}"></p>-->
+                            <ul id="nav" class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <!--<a th:class="''+${#httpServletRequest.requestURI.equals('/home') ? 'active' : ''}" href="/home">Home</a>-->
+                                    <a>Home</a>
+
+                                </li>
+                                <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
+                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/musicsheets/') ? 'active' : ''}" href="/musicsheets/" th:text="#{common.musicsheets}"></a>
+                                </li>-->
+                                <li class="nav-item">
+                                    <a>{{"Common.musicSheets" | translate}}</a>
+                                </li>
+                                <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
+                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/songs/') ? 'active' : ''}" href="/songs/" th:text="#{common.songs}"></a>
+                                </li>-->
+                                <li class="nav-item">
+                                    <a>{{"Common.songs" | translate}}</a>
+                                </li>
+                                <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
+                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/musicsheets/create') ? 'active' : ''}" href="/musicsheets/create" th:text="#{common.createupload}"></a>
+                                </li>-->
+                                <li class="nav-item">
+                                    <a>{{"Common.createUpload" | translate}}</a>
+                                </li>
+                                <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
+                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/about-us') ? 'active' : ''}" href="/about-us" th:text="#{common.aboutus}"></a>
+                                </li>-->
+                                <li class="nav-item">
+                                    <a>{{"Common.aboutus" | translate}}</a>
+                                </li>
+                                <!--<li sec:authorize="isAuthenticated() && hasRole('AMMINISTRATORE')" class="nav-item">
+                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/admin/verifyMusicsheet') ? 'active' : ''}" href="/admin/verifyMusicsheet" th:text="#{common.verifyMusicsheets}"></a>
+                                </li>
+                                <li sec:authorize="isAuthenticated() && hasRole('AMMINISTRATORE')" class="nav-item">
+                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/admin/manageUsers') ? 'active' : ''}" href="/admin/manageUsers" th:text="#{common.manageUsers}"></a>
+                                </li>
+                                <li class="ml-4 d-flex align-items-center justify-content-end">
+                                    <a class="p-0" th:with="loggedUser=${#authentication.getPrincipal().getUser()}" sec:authorize="isAuthenticated()" href="/profilo">
+                                        <img th:if="${loggedUser.avatar}" th:src="${loggedUser.avatar}" alt="profile avatar" class="profile">
+                                        <img th:unless="${loggedUser.avatar}" th:src="'https://avatars.dicebear.com/api/male/'+${loggedUser.firstname}+'.svg'" alt="profile avatar" class="profile">
+                                    </a>
+                                </li>
+                                <li class="nav-item ml-2" sec:authorize="isAuthenticated()">
+                                    <a sec:authentication="name" th:class="''+${#httpServletRequest.requestURI.equals('/profilo') ? 'active' : ''}" href="/profilo"></a>
+                                </li>
+                                <li class="nav-item flag-container" th:if="${#locale.toString() == 'it'}"><img th:src="@{/img/i18n/it-flag.png}" alt="it"></li>
+                                <li class="nav-item flag-container" th:if="${#locale.toString() == 'en'}"><img th:src="@{/img/i18n/uk-flag.png}" alt="en"></li>-->
+                            </ul>
+                        </div>
+                        <!-- navbar collapse -->
+                        <div class="button">
+                            <!--<a sec:authorize="!isAuthenticated()" href="/login" class="btn" th:text="#{login.login}"></a>-->
+                            <a>{{"Login.login" | translate}}</a>
+                            <!--<a sec:authorize="isAuthenticated()" href="/logout" class="btn" th:text="#{common.logout}"></a>-->
+                        </div>
+                    </nav>
+                    <!-- navbar -->
+
+                </div>
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- navbar area -->
+</header>
+<!-- End Header Area -->

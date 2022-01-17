@@ -1,5 +1,17 @@
 {
     "Footer": {
         "logoDescription": "Progetto per la creazione di una piattaforma web a tema musicale in cui è possibile creare, condividere e consultare spartiti musicali."
+    },
+    "Common": {
+        "musicSheets": "Spartiti",
+        "songs": "Brani",
+        "createUpload": "Crea/Carica",
+        "aboutus": "Chi siamo",
+        "verifyMusicsheets": "Verifica Spartiti",
+        "manageUsers": "Gestione Utenti",
+        "logout": "Esci"
+    },
+    "Login": {
+        "login": "Accedi"
     }
 }
