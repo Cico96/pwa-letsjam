@@ -29,9 +29,7 @@
                             <p class="lang" style="display: none;"></p>
                             <ul id="nav" class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <!--<a th:class="''+${#httpServletRequest.requestURI.equals('/home') ? 'active' : ''}" href="/home">Home</a>-->
-                                    <a>Home</a>
-
+                                    <a [routerLink]="['/home']">Home</a>
                                 </li>
                                 <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
                                     <a th:class="''+${#httpServletRequest.requestURI.equals('/musicsheets/') ? 'active' : ''}" href="/musicsheets/" th:text="#{common.musicsheets}"></a>

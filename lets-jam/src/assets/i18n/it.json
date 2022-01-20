@@ -52,5 +52,8 @@
         "lastsection_title": "Ti abbiamo convinto adesso?",
         "lastsection_description": "Cosa aspetti iscriviti subito ed esplora la collezione di spartiti su Let's Jam",
         "lastsection_button": "Inizia Subito"
+    },
+    "MusicSheet":{
+        "verified": "Verificato"
     }
 }
