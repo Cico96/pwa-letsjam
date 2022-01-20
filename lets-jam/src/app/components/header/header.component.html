@@ -26,6 +26,7 @@
 
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <!--<p class="lang" style="display: none;" th:text="${#locale}"></p>-->
+                            <p class="lang" style="display: none;"></p>
                             <ul id="nav" class="navbar-nav ml-auto">
                                 <li class="nav-item">
                                     <!--<a th:class="''+${#httpServletRequest.requestURI.equals('/home') ? 'active' : ''}" href="/home">Home</a>-->
@@ -73,6 +74,8 @@
                                 </li>
                                 <li class="nav-item flag-container" th:if="${#locale.toString() == 'it'}"><img th:src="@{/img/i18n/it-flag.png}" alt="it"></li>
                                 <li class="nav-item flag-container" th:if="${#locale.toString() == 'en'}"><img th:src="@{/img/i18n/uk-flag.png}" alt="en"></li>-->
+                                <li class="nav-item flag-container" *ngIf="currentLang == 'it'" style="height: 50px; margin-top: 17px;"><img style="height: 100%;" src="../../../assets/img/i18n/it-flag.png" alt="it"></li>
+                                <li class="nav-item flag-container" *ngIf="currentLang == 'en'" style="height: 50px; margin-top: 17px;"><img style="height: 100%;" src="../../../assets/img/i18n/uk-flag.png" alt="en"></li>
                             </ul>
                         </div>
                         <!-- navbar collapse -->

@@ -1,0 +1,245 @@
+<div>
+    <!-- Start Hero Area -->
+     <section class="hero-area" >
+         <!-- Single Slider -->
+         <div class="hero-inner">
+             <div class="container">
+                 <div class="row ">
+                     <div class="col-lg-6 co-12">
+                         <div class="home-slider">
+                             <div class="hero-text">
+                                 <h1>{{"Home.title" | translate}}</h1>
+                                 <p class="wow fadeInUp" data-wow-delay=".5s">{{"Home.subtitle" | translate}}</p>
+                                 <div class="button wow fadeInUp mb-5" data-wow-delay=".7s">
+                                    <!--<a href="/about-us" class="btn">Per saperne di più</a>-->
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <!--/ End Single Slider -->
+     </section>
+ 
+     <!-- What we do section-->
+     <section class="services section">
+         <div class="container">
+             <div class="row">
+                 <div class="col-12">
+                     <div class="section-title align-left">
+                         <span class="wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">{{"Home.wwd_subtitle" | translate}}</span>
+                         <h2 class="wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">{{"Home.wwd_title" | translate}}</h2>
+                         <p class="wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">{{"Home.wwd_description" | translate}}</p>
+                     </div>
+                 </div>
+             </div>
+             <div class="single-head">
+                 <img class="service-patern wow fadeInLeft" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+                 <div class="row">
+                     <div class="col-lg-3 col-md-6 col-12">
+                         <div class="single-service wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                             <h3>{{"Home.wwd_firstcard_title" | translate}}</h3>
+                             <div class="icon">
+                                 <i class="lni lni-microscope"></i>
+                             </div>
+                             <p>{{"Home.wwd_firstcard_description" | translate}}</p>
+                         </div>
+                     </div>
+                     <div class="col-lg-3 col-md-6 col-12">
+                         <div class="single-service wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                             <h3>{{"Home.wwd_secondcard_title" | translate}}</h3>
+                             <div class="icon">
+                                 <i class="lni lni-blackboard"></i>
+                             </div>
+                             <p>{{"Home.wwd_secondcard_description" | translate}}</p>
+                         </div>
+                     </div>
+                     <div class="col-lg-3 col-md-6 col-12">
+                         <div class="single-service wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+                             <h3>{{"Home.wwd_thirdcard_title" | translate}}</h3>
+                             <div class="icon">
+                                 <i class="lni lni-ux"></i>
+                             </div>
+                             <p>{{"Home.wwd_thirdcard_description" | translate}}</p>
+                         </div>
+                     </div>
+                     <div class="col-lg-3 col-md-6 col-12">
+                         <div class="single-service wow fadeInUp" data-wow-delay=".8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">
+                             <h3>{{"Home.wwd_fourthcard_title" | translate}}</h3>
+                             <div class="icon">
+                                 <i class="lni lni-graph"></i>
+                             </div>
+                             <p>{{"Home.wwd_fourthcard_description" | translate}}</p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- End What we do section-->
+ 
+     <!-- Free Content Section -->
+     <section class="section free-version-banner free-content-background">
+         <div class="container">
+             <div class="row align-items-center">
+                 <div class="col-lg-8 offset-lg-2 col-12">
+                     <div class="section-title mb-60">
+                         <span class="text-white wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">{{"common.free" | translate}</span>
+                         <h2 class="text-white wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">{{"Home.freesection_title" | translate}}</h2>
+                         <p class="text-white wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">{{"Home.freesection_description" | translate}}</p>
+ 
+                         <div class="button">
+                            <a href="#" rel="nofollow" class="btn wow fadeInUp" data-wow-delay=".8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">{{"Home.freesection_button" | translate}}</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!--End Free Content Section -->
+ 
+     <!-- Start MostPopular Section -->
+     <section class="services section about-us"> 
+         <div class="container">
+             <div class="row">
+                 <div class="col-12 relative">
+                     <div class="section-title align-left">
+                         <span class="wow fadeInDown" data-wow-delay=".2s">{{"Home.mostpopular" | translate}}</span>
+                         <h2 class="wow fadeInUp" data-wow-delay=".4s">{{"Home.mostpopular_title" | translate}}</h2>
+                         <p class="wow fadeInUp" data-wow-delay=".6s">{{"Home.mostpopular_description" | translate}}</p>
+                     </div>
+ 
+                     <div th:each="musicsheet : ${mostpopular}">
+                         <div th:replace="fragments/musicSheetCard :: musicSheetCard(musicsheet = ${musicsheet})"></div>
+                     </div>
+                     <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" th:src="@{img/service-patern.png}" alt="#" 
+                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 287px;right: -25px;">
+                     <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" th:src="@{img/service-patern.png}" alt="#" 
+                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;bottom: -3px;left: -25px;">        
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- /End MostPopular Section -->
+ 
+     <!-- Start random mushicSeet filtered by genre Section -->
+     <section class="services section about-us">
+         <div class="container">
+             <div class="row">
+                 <div class="col-12 relative">
+                     <div class="section-title align-left">
+                         <span class="wow fadeInDown" data-wow-delay=".2s" th:text="#{home.musicSheetByGenre}"></span>
+                         <h2 class="wow fadeInUp" data-wow-delay=".4s" th:text="#{home.musicSheetByGenre.title}"></h2>
+                         <p class="wow fadeInUp" data-wow-delay=".6s" th:text="#{home.musicSheetByGenre.description}"></p>
+                     </div>
+ 
+                     <div th:each="musicsheetGenreList : ${musicSheetByGenre}">
+                         <div th:if="${musicsheetGenreList.size > 0}" th:remove="tag">
+                             <h3 class="wow fadeInUp genreTitle mt-5 mb-3" data-wow-delay=".4s" th:text="${musicsheetGenreList[0].song.getGenre().getName()}"></h3>
+                             <div th:each="musicsheet : ${musicsheetGenreList}">
+                                 <div th:replace="fragments/musicSheetCard :: musicSheetCard(musicsheet = ${musicsheet})"></div>
+                             </div>
+                         </div>
+                     </div>
+                     <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" th:src="@{img/service-patern.png}" alt="#"
+                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 287px;right: -25px;">
+                     <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" th:src="@{img/service-patern.png}" alt="#"
+                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;bottom: -3px;left: -25px;">
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- /End random mushicSeet filtered by genre Section -->
+ 
+     <!-- Free Content Section -->
+     <section class="section image-section"></section>
+     <!--End Free Content Section -->
+ 
+     <!--  People section -->
+     <div class="latest-news-area section">
+         <div class="container relative">
+             <div class="row">
+                 <div class="col-12">
+                     <div class="section-title">
+                         <span class="wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Let's Jam</span>
+                         <h2 class="wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;" th:text="#{home.peoplesection.title}"></h2>
+                         <p class="wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;" th:text="#{home.peoplesection.description}"></p>
+                     </div>
+                 </div>
+             </div>
+             <div class="row">
+                 <div class="col-lg-4 col-md-6 col-12">
+                     <!-- Single News -->
+                     <div class="single-news wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                         <div class="image">
+                             <img class="thumb" th:src="@{img/people-1.jpg}" alt="#">
+                             <div class="meta-details">
+                                 <span th:text="#{home.peoplesection.amateur}" style="text-transform: uppercase;"></span>
+                             </div>
+                         </div>
+                         <div class="content-body">
+                             <h4 class="title" th:text="#{home.peoplesection.firstcard.title}"></h4>
+                             <p th:text="#{home.peoplesection.firstcard.description}"></p>
+                         </div>
+                     </div>
+                     <!-- End Single News -->
+                 </div>
+                 <div class="col-lg-4 col-md-6 col-12">
+                     <!-- Single News -->
+                     <div class="single-news wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                         <div class="image">
+                             <img class="thumb" th:src="@{img/people-2.jpg}"  alt="#">
+                             <div class="meta-details">
+                                 <span th:text="#{home.peoplesection.composer}" style="text-transform: uppercase;"></span>
+                             </div>
+                         </div>
+                         <div class="content-body">
+                             <h4 class="title" th:text="#{home.peoplesection.secondcard.title}"></h4>
+                             <p th:text="#{home.peoplesection.secondcard.description}"></p>
+                         </div>
+                     </div>
+                     <!-- End Single News -->
+                 </div>
+                 <div class="col-lg-4 col-md-6 col-12">
+                     <!-- Single News -->
+                     <div class="single-news wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+                         <div class="image">
+                             <img class="thumb" th:src="@{img/people-3.jpg}"  alt="#">
+                             <div class="meta-details">
+                                 <span th:text="#{home.peoplesection.prefessionist}" style="text-transform: uppercase;"></span>
+                             </div>
+                         </div>
+                         <div class="content-body">
+                             <h4 class="title" th:text="#{home.peoplesection.thirdcard.title}"></h4>
+                             <p th:text="#{home.peoplesection.thirdcard.description}"></p>
+                         </div>
+                     </div>
+                     <!-- End Single News -->
+                 </div>
+             </div>
+             <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" th:src="@{img/service-patern.png}" alt="#" 
+                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;bottom: 184px;left: -25px; z-index:-1;"> 
+         </div>
+     </div>
+     <!-- End People section -->
+ 
+     <section class="newsletter-area section">
+         <div class="container">
+             <div class="row ">
+                 <div class="col-12">
+                     
+                     <div class="mini-call-action wow fadeInRight text-center" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInRight; z-index: 2;">
+                         <h4 th:text="#{home.lastsection.title}"></h4>
+                         <p th:text="#{home.lastsection.description}"></p>
+                         <div class="button">
+                             <a href="/login" class="btn" th:text="#{home.lastsection.button}"></a>
+                         </div>
+                     </div>
+ 
+                 </div>
+             </div>
+         </div>
+     </section>
+ 
+ </div>

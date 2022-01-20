@@ -62,9 +62,9 @@ Author: GrayGrids
             navbarCollapse.classList.remove('show')
         })
     );
-    navbarToggler.addEventListener('click', function () {
+    /*navbarToggler.addEventListener('click', function () {
         navbarToggler.classList.toggle("active");
-    })
+    })*/
     // WOW active
     new WOW().init();
 

@@ -9,9 +9,31 @@
         "aboutus": "Chi siamo",
         "verifyMusicsheets": "Verifica Spartiti",
         "manageUsers": "Gestione Utenti",
-        "logout": "Esci"
+        "logout": "Esci",
+        "free": "Gratuito"
     },
     "Login": {
         "login": "Accedi"
+    },
+    "Home": {
+        "title": "Benvenuto nel portale dedicato ai musicisti",
+        "subtitle": "Componi, riarrangia, condividi! Tutte le risorse per dare sfogo alla tua vena creativa con un solo click!",
+        "wwd_title": "Fai uscire l'artista che è in te",
+        "wwd_subtitle": "Funzionalità principali",
+        "wwd_description": "Tutto ciò di cui hai bisogno per comporre e condividere nuovi brani",
+        "wwd_firstcard_title": "Esplora, Componi, Condividi",
+        "wwd_firstcrd_description": "Riscopri la passione per la musica come mai hai fatto prima",
+        "wwd_secondcard_title": "Opera nel mondo della musica",
+        "wwd_secondcard_description": "Esplora tutti i nostri spartiti verificati da noi per garantirne l'originalità",
+        "wwd_thirdcard_title": "Componi le tue melodie sul web",
+        "wwd_thirdcard_description": "Grazie al nostro editor puoi immergerti all'interno del pentagramma",
+        "wwd_fourthcard_title": "Crea & Condividi",
+        "wwd_fourthcard_description": "Prendi spunto dagli spartiti pubblicati dalla nostra community o condividi le tue migliori creazioni",
+        "freesection_title": "Tutti i nostri contenuti completamente gratuiti",
+        "freesection_description": "rediamo che la musica sia universale e che tutti possano comporre le proprie melodie",
+        "freesection_button": "Inizia a comporre adesso",
+        "mostpopular": "Più Popolari",
+        "mostpopular_title": "Scopri i nostri spartiti più popolari",
+        "mostpopular_description": "Crea le tue varianti delle canzoni scritte da te nel nostro editor. Condividi e collabora con migliaia di altri artisti di ogni provenienza uniti soltanto dalla musica."
     }
 }
