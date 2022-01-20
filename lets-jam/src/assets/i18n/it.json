@@ -22,7 +22,7 @@
         "wwd_subtitle": "Funzionalità principali",
         "wwd_description": "Tutto ciò di cui hai bisogno per comporre e condividere nuovi brani",
         "wwd_firstcard_title": "Esplora, Componi, Condividi",
-        "wwd_firstcrd_description": "Riscopri la passione per la musica come mai hai fatto prima",
+        "wwd_firstcard_description": "Riscopri la passione per la musica come mai hai fatto prima",
         "wwd_secondcard_title": "Opera nel mondo della musica",
         "wwd_secondcard_description": "Esplora tutti i nostri spartiti verificati da noi per garantirne l'originalità",
         "wwd_thirdcard_title": "Componi le tue melodie sul web",
@@ -34,6 +34,23 @@
         "freesection_button": "Inizia a comporre adesso",
         "mostpopular": "Più Popolari",
         "mostpopular_title": "Scopri i nostri spartiti più popolari",
-        "mostpopular_description": "Crea le tue varianti delle canzoni scritte da te nel nostro editor. Condividi e collabora con migliaia di altri artisti di ogni provenienza uniti soltanto dalla musica."
+        "mostpopular_description": "Crea le tue varianti delle canzoni scritte da te nel nostro editor. Condividi e collabora con migliaia di altri artisti di ogni provenienza uniti soltanto dalla musica.",
+        "msByGenre": "Per genere",
+        "msByGenre_title": "Scopri i nostri spartiti per genere",
+        "msByGenre_description": "Esplora le canzoni e gli spartiti secondo i filtri che preferisci. Generi, popolarità e tanto altro a disposizione.",
+        "peoplesection_title": "Let's Jam è un punto di svolta per i compositori di tutti i livelli",
+        "peoplesection_description": "Il posto perfetto per crescere come compositori e musicisti. Let's Jam vi offre tutti gli strumenti per ravvivare la tua passione per la musica",
+        "peoplesection_amateur": "Amatore",
+        "peoplesection_first_title": "Dai sfogo alla tua passione",
+        "peoplesection_first_description": "Sfrutta il nostro database di spartiti per dare sfogo alla tua passione per la musica. Lasciati ispirare dalla nostra community",
+        "peoplesection_composer": "Compositore",
+        "peoplesection_second_title": "Metti il turbo alle tue composizioni",
+        "peoplesection_second_description": "Crea, condividi e interagisci con altri compositori appassionati proprio come te",
+        "peoplesection_professionist": "Professionista",
+        "peoplesection_third_title": "Tutti gli strumenti per operare nel settore",
+        "peoplesection_third_description": "Su Let's Jam puoi trovare tutti gli spartiti originali verificati da noi",
+        "lastsection_title": "Ti abbiamo convinto adesso?",
+        "lastsection_description": "Cosa aspetti iscriviti subito ed esplora la collezione di spartiti su Let's Jam",
+        "lastsection_button": "Inizia Subito"
     }
 }
