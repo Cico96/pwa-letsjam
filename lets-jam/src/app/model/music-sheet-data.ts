@@ -1,5 +1,5 @@
 export interface MusicSheetData {
 
     content: string;
-    instrumentMapping: Map<string, string>;
+    instrumentMapping: { [key: string]: string; };
 }

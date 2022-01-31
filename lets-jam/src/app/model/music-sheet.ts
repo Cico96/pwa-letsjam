@@ -12,8 +12,8 @@ export interface MusicSheet {
     rearranged: boolean;
     hasTablature: boolean;
     song: Song;
-    user: User;
-    likes: User[];
-    instruments: Instrument[];
-
+    likes: number;
+    instruments: Array<Instrument>;
+    createDateTime: Date;
+    updateDateTime: Date;
 }

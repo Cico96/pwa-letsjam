@@ -2,15 +2,15 @@ import { Genre } from "./genre";
 
 export interface Song {
 
-    id: number;
+    id?: number;
+    spotifyId?: string;
     author: string;
     title: string;
-    albumName: string;
-    albumType: string;
-    imageUrl: string;
+    albumName?: string;
+    albumType?: string;
+    image?: string;
     isExplicit: boolean;
     duration: number;
-    lyrics: string;
-    spotifyId: string;
+    lyrics?: string;
     genre: Genre;
 }
