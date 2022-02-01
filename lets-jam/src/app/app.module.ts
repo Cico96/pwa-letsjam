@@ -13,6 +13,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HomeComponent } from './pages/home/home.component';
 import { MusicSheetCardComponent } from './components/music-sheet-card/music-sheet-card.component';
 import { FormsModule } from '@angular/forms';
+import { BASE_PATH } from './services/configuration-api/variables';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,7 +48,12 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: BASE_PATH,
+      useValue: environment.BASE_PATH
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

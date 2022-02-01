@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  BASE_PATH: "http://letsjam.ccml.it/rest"
 };

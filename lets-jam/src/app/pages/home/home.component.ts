@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { MusicSheet } from 'src/app/model/music-sheet';
-import { MusicSheetService } from 'src/app/services/music-sheet.service';
+import { MusicsheetService } from 'src/app/services/musicsheet.service';
+
 
 @Component({
   selector: 'app-home',
@@ -8,14 +10,21 @@ import { MusicSheetService } from 'src/app/services/music-sheet.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  id = 1;
-  ms: {} = {};
   
-  constructor(private msService: MusicSheetService) { }
+  constructor(private ms: MusicsheetService) { }
 
   ngOnInit(): void {
-    this.ms = this.msService.getMusicSheetById(this.id);
-    console.log(this.ms);
+    this.getMusicSheet();
+  }
+
+  getMusicSheet() {
+   console.log(this.ms.getMusicSheetById(1))
+   
+   this.ms.getMusicSheetById(1).subscribe(
+     response => {
+       console.log(response);
+     }
+   )
   }
 
 }
