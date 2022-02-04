@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private ms: MusicsheetService) { }
 
   ngOnInit(): void {
-    this.getMusicSheet();
+    //this.getMusicSheet();
   }
 
   getMusicSheet() {

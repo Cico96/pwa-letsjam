@@ -10,10 +10,21 @@
         "verifyMusicsheets": "Verifica Spartiti",
         "manageUsers": "Gestione Utenti",
         "logout": "Esci",
-        "free": "Gratuito"
+        "free": "Gratuito",
+        "firstname": "Nome",
+        "lastname": "Cognome"
     },
     "Login": {
-        "login": "Accedi"
+        "login": "Accedi",
+        "welcome": "Benvenuto",
+        "email_placeholder": "Inserisci un indirizzo email",
+        "password_placeholder": "Inserisci la password",
+        "register": "Registrati"
+    },
+    "Register": {
+        "ph_firstname": "Scrivi il tuo nome",
+        "ph_lastname": "Scrivi il tuo cognome",
+        "ph_username": "Scrivi il nome visualizzato"
     },
     "Home": {
         "title": "Benvenuto nel portale dedicato ai musicisti",
