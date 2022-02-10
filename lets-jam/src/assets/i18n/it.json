@@ -19,7 +19,8 @@
         "welcome": "Benvenuto",
         "email_placeholder": "Inserisci un indirizzo email",
         "password_placeholder": "Inserisci la password",
-        "register": "Registrati"
+        "register": "Registrati",
+        "logout": "Esci"
     },
     "Register": {
         "ph_firstname": "Scrivi il tuo nome",

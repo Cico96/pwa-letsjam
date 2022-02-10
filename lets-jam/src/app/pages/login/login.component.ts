@@ -36,12 +36,17 @@ export class LoginComponent implements OnInit {
 
       this.authBody = this.loginForm.value
       this.authService.login(this.authBody, 'response').subscribe( (response) => {
-        let token = response.headers.get('Authorization')?.split(' ')[1];
-        if (token != undefined) {
-          window.localStorage.setItem('token', token)
+        if(response.status === 401) {
           this.router.navigate(['/home']);
+        }else {
+          let token = response.headers.get('Authorization')?.split(' ')[1];
+          if (token != undefined) {
+            window.localStorage.setItem('token', token)
+            this.router.navigate(['/home']);
+          }
         }
-      })
+      });
+
     }
   }
 

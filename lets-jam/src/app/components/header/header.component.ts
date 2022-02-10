@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthTokenService } from 'src/app/services/auth-token.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +12,24 @@ export class HeaderComponent implements OnInit {
 
   currentLang = '';
 
-  constructor(private translate: TranslateService) { }
+  auth!: boolean;
+  constructor(private translate: TranslateService, private authToken: AuthTokenService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.currentLang = this.translate.currentLang;
-    console.log(this.translate.currentLang);
+
+    if(this.authToken.getAuthToken() != null) {
+      this.auth = true;
+    }else {
+      this.auth = false;
+    }
+  }
+
+  logout() {
+    this.authService.logout('response').subscribe((res) => {
+      console.log(res)
+      localStorage.clear();
+    });
   }
 
 }
