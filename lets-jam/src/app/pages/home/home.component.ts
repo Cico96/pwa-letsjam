@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MusicSheet } from 'src/app/model/music-sheet';
+import { AuthService } from 'src/app/services/auth.service';
 import { MusicsheetService } from 'src/app/services/musicsheet.service';
 
 
@@ -11,10 +12,9 @@ import { MusicsheetService } from 'src/app/services/musicsheet.service';
 })
 export class HomeComponent implements OnInit {
   
-  constructor(private ms: MusicsheetService) { }
+  constructor(private ms: MusicsheetService, private auth: AuthService) { }
 
   ngOnInit(): void {
-    //this.getMusicSheet();
   }
 
   getMusicSheet() {

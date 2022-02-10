@@ -17,36 +17,38 @@
             <a [routerLink]="['/login']" class="mt-2" style="font-size: 16px;">{{"Login.login" | translate}}</a>
         </div>
         
-        <form style="width: 90%;flex:7;">
-            
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" style="width: 90%;flex:7;">
             <div class="input-container mb-3">
                 <label class="mb-1">{{"Common.firstname" | translate}}</label>
-                <input type="text" [placeholder]="'Register.ph_firstname' | translate"/>
+                <input type="text" formControlName="firstname" [placeholder]="'Register.ph_firstname' | translate"/>
             </div>
 
             <div class="input-container mb-3">
                 <label class="mb-1">{{"Common.lastname" | translate}}</label>
-                <input type="text" [placeholder]="'Register.ph_lastname' | translate"/>
+                <input type="text" formControlName="lastname" [placeholder]="'Register.ph_lastname' | translate"/>
             </div>
 
             <div class="input-container mb-3">
                 <label class="mb-1">Username</label>
-                <input type="text" [placeholder]="'Register.ph_username' | translate"/>
+                <input type="text" formControlName="username" [placeholder]="'Register.ph_username' | translate"/>
             </div>
 
             <div class="input-container mb-3">
                 <label class="mb-1"> Email </label>
-                <input type="text" name="email" [placeholder]="'Login.email_placeholder' | translate"/>
+                <input type="text" formControlName="email" [placeholder]="'Login.email_placeholder' | translate"/>
+                <small style="color: red;" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">{{"Register.email_required" | translate}}</small>
             </div>
 
             <div class="input-container mb-3">
                 <label class="mb-1"> Password </label>
-                <input type="password" name="password" [placeholder]="'Login.password_placeholder' | translate"/>
+                <input type="password" formControlName="password" [placeholder]="'Login.password_placeholder' | translate"/>
+                <small style="color: red;" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">{{"Register.password_required" | translate}}</small>
             </div>
             <div class="input-container mb-3 align-items-center">
-                <div class="button wow fadeInUp" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                <button type="submit" class="button wow fadeInUp" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; border-width: inherit;
+                background-color: transparent;">
                     <a class="btn">{{"Login.register" | translate}}</a>
-                </div>
+                </button>
             </div>
         </form>
         

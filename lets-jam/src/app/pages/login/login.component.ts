@@ -1,5 +1,9 @@
+import { HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthLoginBody } from 'src/app/model/auth-login-body';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +12,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
+  authBody!: AuthLoginBody;
   loginForm!: FormGroup;
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -27,7 +32,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    
+    if(this.loginForm.valid) {
+
+      this.authBody = this.loginForm.value
+      this.authService.login(this.authBody, 'response').subscribe( (response) => {
+        let token = response.headers.get('Authorization')?.split(' ')[1];
+        if (token != undefined) {
+          window.localStorage.setItem('token', token)
+          this.router.navigate(['/home']);
+        }
+      })
+    }
   }
 
 }

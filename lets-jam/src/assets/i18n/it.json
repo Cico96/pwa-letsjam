@@ -24,7 +24,9 @@
     "Register": {
         "ph_firstname": "Scrivi il tuo nome",
         "ph_lastname": "Scrivi il tuo cognome",
-        "ph_username": "Scrivi il nome visualizzato"
+        "ph_username": "Scrivi il nome visualizzato",
+        "email_required": "Inserire l'email",
+        "password_required": "Inserire la password"
     },
     "Home": {
         "title": "Benvenuto nel portale dedicato ai musicisti",

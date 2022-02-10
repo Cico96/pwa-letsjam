@@ -117,10 +117,11 @@ export class AuthService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    
     public login(body?: AuthLoginBody, observe?: 'body', reportProgress?: boolean): Observable<string>;
     public login(body?: AuthLoginBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
     public login(body?: AuthLoginBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
-    public login(body?: AuthLoginBody, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public login(body?: AuthLoginBody, observe: any = 'response', reportProgress: boolean = false): Observable<any> {
 
 
         let headers = this.defaultHeaders;
