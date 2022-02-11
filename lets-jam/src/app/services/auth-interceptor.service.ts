@@ -4,9 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthTokenService } from './auth-token.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
 
   constructor(private authToken: AuthTokenService, private router: Router) { }
@@ -17,20 +15,11 @@ export class AuthInterceptorService implements HttpInterceptor {
     if(token) {
 
       req = req.clone({
-        setHeaders: {Authorization: `Authorization token ${token}`}
+        setHeaders: {Authorization: `Bearer ${token}`}
       });
 
     }
 
-    return next.handle(req).pipe(
-      catchError( (err) => {
-        if(err instanceof HttpErrorResponse) {
-          if(err.status === 401) {
-            //do something
-          }
-        }
-        return throwError(err);
-      })
-    )
+    return next.handle(req);
   }
 }

@@ -12,4 +12,14 @@ export class AuthTokenService {
     return localStorage.getItem('token');
     
   }
+
+  isAuthenticated(): boolean {
+    
+    if(localStorage.getItem('token')) {
+      return true;
+    }else {
+      return false;
+    }
+
+  }
 }

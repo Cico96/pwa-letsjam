@@ -12,24 +12,21 @@ export class HeaderComponent implements OnInit {
 
   currentLang = '';
 
-  auth!: boolean;
   constructor(private translate: TranslateService, private authToken: AuthTokenService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.currentLang = this.translate.currentLang;
-
-    if(this.authToken.getAuthToken() != null) {
-      this.auth = true;
-    }else {
-      this.auth = false;
-    }
+    
   }
 
   logout() {
-    this.authService.logout('response').subscribe((res) => {
-      console.log(res)
+    this.authService.logout().subscribe((res) => {
       localStorage.clear();
     });
+  }
+
+  isAuthenticated(): boolean {
+    return this.authToken.isAuthenticated();
   }
 
 }

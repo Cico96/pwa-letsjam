@@ -11,7 +11,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   authBody!: AuthLoginBody;
   loginForm!: FormGroup;
   constructor(public formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
@@ -36,8 +35,8 @@ export class LoginComponent implements OnInit {
 
       this.authBody = this.loginForm.value
       this.authService.login(this.authBody, 'response').subscribe( (response) => {
-        if(response.status === 401) {
-          this.router.navigate(['/home']);
+        if(response.status === 404) {
+          console.log('che dobbiamo fare')
         }else {
           let token = response.headers.get('Authorization')?.split(' ')[1];
           if (token != undefined) {
