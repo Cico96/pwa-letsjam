@@ -1,5 +1,5 @@
 import { NewMusicSheetSong } from './new-music-sheet-song';
-import { User } from './user';
+import { User } from '../user';
 
 export interface NewMusicSheet {
     title: string;

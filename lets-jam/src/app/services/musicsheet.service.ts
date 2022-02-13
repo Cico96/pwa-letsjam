@@ -20,8 +20,8 @@ import { Comment } from '../model/comment';
 import { MusicSheet } from '../model/music-sheet';
 import { MusicSheetData } from '../model/music-sheet-data';
 //import { string } from '../model/string';
-import { MusicsheetMusicsheetIdBody } from '../model/musicsheetMusicsheetIdBody';
-import { NewMusicSheet } from '../model/new-music-sheet';
+import { MusicsheetMusicsheetIdBody } from '../model/requests-model/musicsheetMusicsheetIdBody';
+import { NewMusicSheet } from '../model/requests-model/new-music-sheet';
 
 import { BASE_PATH, COLLECTION_FORMATS } from './configuration-api/variables';
 import { Configuration } from './configuration-api/configuration';

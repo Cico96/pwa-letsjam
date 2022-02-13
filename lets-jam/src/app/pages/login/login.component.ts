@@ -2,7 +2,7 @@ import { HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthLoginBody } from 'src/app/model/auth-login-body';
+import { AuthLoginBody } from 'src/app/model/requests-model/auth-login-body';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({

@@ -16,8 +16,8 @@ import { CustomHttpUrlEncodingCodec } from '../services/configuration-api/encode
 
 import { Observable } from 'rxjs';
 
-import { AuthLoginBody } from '../model/auth-login-body';
-import { NewUser } from '../model/new-user';
+import { AuthLoginBody } from '../model/requests-model/auth-login-body';
+import { NewUser } from '../model/requests-model/new-user';
 import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../services/configuration-api/variables';
