@@ -38,8 +38,12 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     if(this.registerForm.valid){
       this.user = this.registerForm.value;
-      this.authService.addUser(this.user).subscribe( (response) => {
-        this.router.navigate(['/home']);
+      this.authService.addUser(this.user, 'response').subscribe( (response) => {
+        let token = response.headers.get('Authorization')?.split(' ')[1];
+        if(token != undefined) {
+          window.localStorage.setItem('token', token);
+            this.router.navigate(['/home']);
+        }
       });
     }
   }

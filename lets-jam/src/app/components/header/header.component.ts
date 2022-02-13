@@ -29,4 +29,6 @@ export class HeaderComponent implements OnInit {
     return this.authToken.isAuthenticated();
   }
 
+  
+
 }
