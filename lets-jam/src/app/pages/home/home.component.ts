@@ -15,16 +15,17 @@ export class HomeComponent implements OnInit {
   constructor(private ms: MusicsheetService, private auth: AuthService) { }
 
   ngOnInit(): void {
+       this.ms.getMusicSheetById(1).subscribe(
+        response => {
+       console.log(response);
+     }
+   )
   }
 
   getMusicSheet() {
    console.log(this.ms.getMusicSheetById(1))
    
-   this.ms.getMusicSheetById(1).subscribe(
-     response => {
-       console.log(response);
-     }
-   )
+
   }
 
 }
