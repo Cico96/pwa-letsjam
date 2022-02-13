@@ -97,9 +97,9 @@
         </div>
     </section>
      <!--End Free Content Section -->
- 
+
      <!-- Start MostPopular Section -->
-    <section class="services section about-us"> 
+    <section class="services section about-us">
         <div class="container">
             <div class="row">
                 <div class="col-12 relative">
@@ -108,22 +108,19 @@
                         <h2 class="wow fadeInUp" data-wow-delay=".4s">{{"Home.mostpopular_title" | translate}}</h2>
                         <p class="wow fadeInUp" data-wow-delay=".6s">{{"Home.mostpopular_description" | translate}}</p>
                     </div>
-                    
 
-                    <!--<div th:each="musicsheet : ${mostpopular}">
-                        <div th:replace="fragments/musicSheetCard :: musicSheetCard(musicsheet = ${musicsheet})"></div>
-                    </div>-->
+                  <app-music-sheet-card *ngFor="let musicSheet of orderedSheets" [musicSheet]="musicSheet"></app-music-sheet-card>
 
-                    <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#" 
+                    <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#"
                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 287px;right: -25px;">
-                    <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#" 
-                    style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;bottom: -3px;left: -25px;">        
+                    <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#"
+                    style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;bottom: -3px;left: -25px;">
                 </div>
             </div>
         </div>
     </section>
      <!-- /End MostPopular Section -->
- 
+
      <!-- Start random mushicSeet filtered by genre Section -->
     <section class="services section about-us">
         <div class="container">
@@ -219,8 +216,8 @@
                     <!-- End Single News -->
                 </div>
             </div>
-            <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#" 
-                    style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;bottom: 184px;left: -25px; z-index:-1;"> 
+            <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#"
+                    style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;bottom: 184px;left: -25px; z-index:-1;">
         </div>
     </div>
     <!-- End People section -->
@@ -229,7 +226,7 @@
         <div class="container">
             <div class="row ">
                 <div class="col-12">
-                    
+
                     <div class="mini-call-action wow fadeInRight text-center" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInRight; z-index: 2;">
                         <h4>{{"Home.lastsection_title" | translate}}</h4>
                         <p>{{"Home.lastsection_description" | translate}}</p>

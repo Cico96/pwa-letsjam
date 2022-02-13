@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MusicSheet } from 'src/app/model/music-sheet';
-import { MusicsheetService } from 'src/app/services/musicsheet.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {MusicSheet} from "../../model/music-sheet";
 
 @Component({
   selector: 'app-music-sheet-card',
@@ -9,15 +8,13 @@ import { MusicsheetService } from 'src/app/services/musicsheet.service';
 })
 export class MusicSheetCardComponent implements OnInit {
 
-  ms!: MusicSheet;
-  id = 1;
-
-  constructor(private msService: MusicsheetService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.msService.getMusicSheetById(1).subscribe((res) => {
-      this.ms = res;
-    })
+
   }
+
+  @Input()
+  set musicSheet(sheet: MusicSheet | undefined) {}
 
 }
