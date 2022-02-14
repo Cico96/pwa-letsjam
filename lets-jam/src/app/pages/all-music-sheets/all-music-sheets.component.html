@@ -1,34 +1,22 @@
-<html 
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-    xmlns:th="http://www.thymeleaf.org" 
-    xmlns:nl2br="https://github.com/bufferings/thymeleaf-extras-nl2br"
-    layout:decorate="~{layout/layout}">
-<head>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/musicSheetCard.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/musicSheets.css}">
-    <script type="text/javascript" th:src="@{/js/sidebar-submit.js}" ></script>
-</head>
-<body>
 <div layout:fragment="content" style="padding-top: 90px;">
 
    <!-- Start Hero Area -->
     <section class="hero-area">
             <div class="row">
                 <div class="sidebar">
-                    <form th:action="@{/musicsheets/}" th:object="${formData}" method="post" id="sidebar-form">
+                    <form [formGroup]="sidebarForm" id="sidebar-form">
                         <div class="search mb-5">
                             <svg th:replace="fragments/icons :: search"></svg>
-                            <input type="text" th:placeholder="#{common.search}" th:field="*{search}">
+                            <input type="text" [placeholder]="'Common.search' | translate" th:field="*{search}">
                         </div>
     
     
                         <div class="option-container">
                             <div class="option-title-container">
                                 <div class="option-icon">
-                                    <svg th:replace="fragments/icons :: album-type"></svg>
+                                    <img src="../../../assets/img/album-type.svg">
                                 </div>
-                                <h4 style="color: white;" th:text="#{common.genre}"></h4>
+                                <h4 style="color: white;" >{{"Common.genre" | translate}}</h4>
                             </div>
         
                             <div class="sub-option-container">
@@ -44,7 +32,7 @@
                                 <div class="option-icon">
                                     <svg th:replace="fragments/icons :: genres"></svg>
                                 </div>
-                                <h4 style="color: white;" th:text="#{common.instruments}"></h4>
+                                <h4 style="color: white;">{{"Common.instruments" | translate}}</h4>
                             </div>
         
                             <div class="sub-option-container">
@@ -60,7 +48,7 @@
                                 <div class="option-icon">
                                     <svg th:replace="fragments/icons :: sort"></svg>
                                 </div>
-                                <h4 style="color: white;" th:text="#{common.sortby}"></h4>
+                                <h4 style="color: white;">{{"Common.sort" | translate}}</h4>
                                 <div class="option-icon sort-direction">
                                     <div th:if="${formData.sortDirection == 'ASC'}" th:remove="tag">
                                         <svg th:replace="fragments/icons :: sort-asc"></svg>
@@ -76,19 +64,19 @@
                             <div class="sub-option-container">
                                 <div class="radio-option">
                                     <input type="radio" class="form-check-input" th:field="*{sortBy}" value="title">
-                                    <p th:text="#{common.title}"></p>
+                                    <p>{{"Common.title" | translate}}</p>
                                 </div>
                                 <div class="radio-option">
                                     <input type="radio" class="form-check-input" th:field="*{sortBy}" value="song.title">
-                                    <p th:text="#{common.songName}"></p>
+                                    <p>{{"Common.song_name" | translate}}</p>
                                 </div>
                                 <div class="radio-option">
                                     <input type="radio" class="form-check-input" th:field="*{sortBy}" value="createDateTime">
-                                    <p th:text="#{common.creationDate}"></p>
+                                    <p>{{"Common.creation_date"}}</p>
                                 </div>
                                 <div class="radio-option">
                                     <input type="radio" class="form-check-input" th:field="*{sortBy}" value="likes.size">
-                                    <p th:text="#{common.likes}"></p>
+                                    <p>{{"Common.likes" | translate}}</p>
                                 </div>
                             </div>
                         </div>
@@ -98,17 +86,17 @@
                                 <div class="option-icon">
                                     <svg th:replace="fragments/icons :: filter"></svg>
                                 </div>
-                                <h4 style="color: white;" th:text="#{common.filters}"></h4>
+                                <h4 style="color: white;">{{"Common.filters" | translate}}</h4>
                             </div>
         
                             <div class="sub-option-container">
                                 <div class="checkbox-option">
                                     <input type="checkbox" class="form-check-input" th:field="*{verified}">
-                                    <p th:text="#{musicsheets.verified}"></p>
+                                    <p>{{"MusicSheet.verified" | translate}}</p>
                                 </div>
                                 <div class="checkbox-option">
                                     <input type="checkbox" class="form-check-input" th:field="*{rearranged}">
-                                    <p th:text="#{musicsheets.rearranged}"></p>
+                                    <p>{{"MusicSheet.rearrange" | translate}}</p>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +108,7 @@
                         <div th:each="musicSheet : ${musicSheets}" th:remove="tag">
                             <div th:replace="fragments/musicSheetCard :: musicSheetCard(musicsheet = ${musicSheet})"></div>
                         </div>
-                        <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" th:src="@{/img/service-patern.png}" alt="#" 
+                        <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#" 
                         style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 65px;right: -55px;">
 
                         <nav>
@@ -163,6 +151,4 @@
     </section>
 
 </div>
-</body>
 
-</html>

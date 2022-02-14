@@ -12,7 +12,16 @@
         "logout": "Esci",
         "free": "Gratuito",
         "firstname": "Nome",
-        "lastname": "Cognome"
+        "lastname": "Cognome",
+        "genre": "Genere",
+        "instruments": "Strumenti",
+        "sort": "Ordina per",
+        "filters": "Filtri",
+        "title": "Titolo",
+        "song_name": "Nome brano",
+        "creation_date": "Data di creazione",
+        "likes": "Mi piace",
+        "search": "Cerca"
     },
     "Login": {
         "login": "Accedi",
@@ -68,6 +77,7 @@
         "lastsection_button": "Inizia Subito"
     },
     "MusicSheet":{
-        "verified": "Verificato"
+        "verified": "Verificato",
+        "rearranged": "Riarrangiato"
     }
 }

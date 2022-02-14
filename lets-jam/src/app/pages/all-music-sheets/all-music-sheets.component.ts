@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-all-music-sheets',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllMusicSheetsComponent implements OnInit {
 
-  constructor() { }
+  sidebarForm!: FormGroup;
+
+  constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
