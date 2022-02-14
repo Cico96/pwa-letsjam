@@ -17,6 +17,15 @@ import { BASE_PATH } from './services/configuration-api/variables';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { AllMusicSheetsComponent } from './pages/all-music-sheets/all-music-sheets.component';
+import { AllSongsComponent } from './pages/all-songs/all-songs.component';
+import { CreateUploadComponent } from './pages/create-upload/create-upload.component';
+import { MusicSheetComponent } from './pages/music-sheet/music-sheet.component';
+import { SongComponent } from './pages/song/song.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { SongCardComponent } from './components/song-card/song-card.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { FlatComponent } from './components/flat/flat.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,6 +41,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     MusicSheetCardComponent,
     RegisterComponent,
     LoginComponent,
+    AllMusicSheetsComponent,
+    AllSongsComponent,
+    CreateUploadComponent,
+    MusicSheetComponent,
+    SongComponent,
+    AboutUsComponent,
+    SongCardComponent,
+    UserCardComponent,
+    FlatComponent,
   ],
   imports: [
     BrowserModule,
