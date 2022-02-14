@@ -1,6 +1,6 @@
-<html 
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-    xmlns:th="http://www.thymeleaf.org" 
+<html
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org"
     layout:decorate="~{layout/layout}">
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar.css}">
@@ -8,13 +8,13 @@
     <script type="text/javascript" th:src="@{/js/sidebar-submit.js}" ></script>
 </head>
 <body>
-<div layout:fragment="content" style="padding-top: 90px;">
+<div style="padding-top: 90px;">
 
    <!-- Start Hero Area -->
     <section class="hero-area">
             <div class="row">
                 <div class="sidebar">
-                    <form th:action="@{/songs/}" th:object="${formData}" method="post" id="sidebar-form">
+                    <form id="sidebar-form">
                         <div class="search mb-5">
                             <svg th:replace="fragments/icons :: search"></svg>
                             <input type="text" th:placeholder="#{common.search}" th:field="*{search}">
@@ -28,7 +28,7 @@
                                 </div>
                                 <h4 style="color: white;" th:text="#{common.genre}"></h4>
                             </div>
-        
+
                             <div class="sub-option-container">
                                 <div class="checkbox-option" th:each="genre : ${genres}">
                                     <input type="checkbox" class="form-check-input" th:field="*{genres}" th:value="${genre.name}">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div class="option-container">
                             <div class="option-title-container">
                                 <div class="option-icon">
@@ -54,7 +54,7 @@
                                     <input th:if="${formData.sortDirection == 'DESC'}" type="text" name="sortDirection" value="DESC" hidden>
                                 </div>
                             </div>
-        
+
                             <div class="sub-option-container">
                                 <div class="radio-option">
                                     <input type="radio" class="form-check-input" th:field="*{sortBy}" value="title">
@@ -82,7 +82,7 @@
                                 </div>
                                 <h4 style="color: white;" th:text="#{song.albumType}"></h4>
                             </div>
-        
+
                             <div class="sub-option-container">
                                 <div class="radio-option">
                                     <input type="radio" class="form-check-input" th:field="*{albumType}" value="ALBUM">
@@ -106,7 +106,7 @@
                                 </div>
                                 <h4 style="color: white;" th:text="#{common.filters}"></h4>
                             </div>
-        
+
                             <div class="sub-option-container">
                                 <div class="checkbox-option">
                                     <input type="checkbox" class="form-check-input" th:field="*{explicit}">
@@ -129,10 +129,10 @@
                         <div th:each="song : ${songs}" th:remove="tag">
                             <div th:replace="fragments/songCard :: songCard(song = ${song})"></div>
                         </div>
-                        <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" th:src="@{/img/service-patern.png}" alt="#" 
+                        <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" th:src="@{/img/service-patern.png}" alt="#"
                         style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 65px;right: -55px;">
 
-                        
+
                         <nav>
                             <ul class="pagination justify-content-center">
                                 <!-- previus button -->
@@ -146,7 +146,7 @@
                                         <a class="page-link" tabindex="-1">Previous</a>
                                     </li>
                                 </div>
-                                
+
                                 <!-- previus page -->
                                 <!--<li th:if="${formData.pageNumber != 0}" class="page-item" th:page-value="${formData.pageNumber-1}"><a class="page-link" th:inline="text">[[${formData.pageNumber}]]</a></li>-->
                                 <!-- current page -->
@@ -169,7 +169,7 @@
                         </nav>
                 </div>
             </div>
-            
+
     </section>
 
 </div>
