@@ -6,7 +6,9 @@
 @import"~static/css/LineIcons.2.0.css";
 @import "~static/css/main.css";
 @import "~static/css/tiny-slider.css";
-@import "~static/css/musicSheetCard";
+@import "~static/css/musicSheetCard.css";
+@import "~static/css/sidebar.css";
+@import "~static/css/songCard.css";
 
 @import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
