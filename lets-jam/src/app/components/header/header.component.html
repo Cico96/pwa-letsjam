@@ -35,25 +35,25 @@
                                     <a th:class="''+${#httpServletRequest.requestURI.equals('/musicsheets/') ? 'active' : ''}" href="/musicsheets/" th:text="#{common.musicsheets}"></a>
                                 </li>-->
                                 <li class="nav-item">
-                                    <a>{{"Common.musicSheets" | translate}}</a>
+                                    <a [routerLink]="['/musicsheets']">{{"Common.musicSheets" | translate}}</a>
                                 </li>
                                 <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
                                     <a th:class="''+${#httpServletRequest.requestURI.equals('/songs/') ? 'active' : ''}" href="/songs/" th:text="#{common.songs}"></a>
                                 </li>-->
                                 <li class="nav-item">
-                                    <a>{{"Common.songs" | translate}}</a>
+                                    <a [routerLink]="['/songs']">{{"Common.songs" | translate}}</a>
                                 </li>
                                 <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
                                     <a th:class="''+${#httpServletRequest.requestURI.equals('/musicsheets/create') ? 'active' : ''}" href="/musicsheets/create" th:text="#{common.createupload}"></a>
                                 </li>-->
                                 <li class="nav-item">
-                                    <a>{{"Common.createUpload" | translate}}</a>
+                                    <a [routerLink]="['/create-upload']">{{"Common.createUpload" | translate}}</a>
                                 </li>
                                 <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
                                     <a th:class="''+${#httpServletRequest.requestURI.equals('/about-us') ? 'active' : ''}" href="/about-us" th:text="#{common.aboutus}"></a>
                                 </li>-->
                                 <li class="nav-item">
-                                    <a>{{"Common.aboutus" | translate}}</a>
+                                    <a [routerLink]="['/about-us']">{{"Common.aboutus" | translate}}</a>
                                 </li>
                                 <!--<li sec:authorize="isAuthenticated() && hasRole('AMMINISTRATORE')" class="nav-item">
                                     <a th:class="''+${#httpServletRequest.requestURI.equals('/admin/verifyMusicsheet') ? 'active' : ''}" href="/admin/verifyMusicsheet" th:text="#{common.verifyMusicsheets}"></a>
