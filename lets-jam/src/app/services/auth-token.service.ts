@@ -22,4 +22,8 @@ export class AuthTokenService {
     }
 
   }
+
+  getRefreshToken() {
+    return localStorage.getItem('refresh_token');
+  }
 }

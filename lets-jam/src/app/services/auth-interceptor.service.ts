@@ -23,7 +23,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe( tap( event => {
       if (event instanceof HttpResponse) {
         if(event.status === 401) {
-          this.authService.refreshToken().subscribe((res) => {
+          this.authService.login().subscribe((res) => {
             console.log(res);
           })
         }
