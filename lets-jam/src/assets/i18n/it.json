@@ -21,7 +21,14 @@
         "song_name": "Nome brano",
         "creation_date": "Data di creazione",
         "likes": "Mi piace",
-        "search": "Cerca"
+        "search": "Cerca",
+        "sortBy": "Ordina per",
+        "albumName": "Nome dell'album",
+        "songDate": "Data canzone",
+        "duration": "Durata",
+        "hasLyrics": "Lyrics",
+        "isExplicit": "Esplicito",
+        "author": "Autore"
     },
     "Login": {
         "login": "Accedi",
@@ -79,5 +86,8 @@
     "MusicSheet":{
         "verified": "Verificato",
         "rearranged": "Riarrangiato"
+    },
+    "Song":{
+        "heading": "Tutti i nostri brani"
     }
 }

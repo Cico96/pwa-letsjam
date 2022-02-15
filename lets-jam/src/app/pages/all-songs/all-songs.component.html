@@ -1,13 +1,5 @@
-<html
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    xmlns:th="http://www.thymeleaf.org"
-    layout:decorate="~{layout/layout}">
-<head>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/songCard.css}">
-    <script type="text/javascript" th:src="@{/js/sidebar-submit.js}" ></script>
-</head>
-<body>
+
+
 <div style="padding-top: 90px;">
 
    <!-- Start Hero Area -->
@@ -16,23 +8,23 @@
                 <div class="sidebar">
                     <form id="sidebar-form">
                         <div class="search mb-5">
-                            <svg th:replace="fragments/icons :: search"></svg>
-                            <input type="text" th:placeholder="#{common.search}" th:field="*{search}">
+<!--                            <svg th:replace="fragments/icons :: search"></svg>-->
+                            <input type="text" [placeholder]="'Common.search' | translate">
                         </div>
 
 
                         <div class="option-container">
                             <div class="option-title-container">
                                 <div class="option-icon">
-                                    <svg th:replace="fragments/icons :: genres"></svg>
+<!--                                    <svg th:replace="fragments/icons :: genres"></svg>-->
                                 </div>
-                                <h4 style="color: white;" th:text="#{common.genre}"></h4>
+                                <h4 style="color: white;">{{"Common.genre" | translate}}</h4>
                             </div>
 
                             <div class="sub-option-container">
-                                <div class="checkbox-option" th:each="genre : ${genres}">
-                                    <input type="checkbox" class="form-check-input" th:field="*{genres}" th:value="${genre.name}">
-                                    <p th:text="${genre.name}"></p>
+                                <div class="checkbox-option" *ngFor="let genre of genres">
+                                    <input type="checkbox" class="form-check-input" value="{{genre.name}}">
+                                    <p>{{genre.name}}</p>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +34,7 @@
                                 <div class="option-icon">
                                     <svg th:replace="fragments/icons :: sort"></svg>
                                 </div>
-                                <h4 style="color: white;" th:text="#{common.sortby}"></h4>
+                                <h4 style="color: white;"> {{"Common.sortBy" | translate}} </h4>
                                 <div class="option-icon sort-direction">
                                     <div th:if="${formData.sortDirection == 'ASC'}" th:remove="tag">
                                         <svg th:replace="fragments/icons :: sort-asc"></svg>
@@ -57,20 +49,20 @@
 
                             <div class="sub-option-container">
                                 <div class="radio-option">
-                                    <input type="radio" class="form-check-input" th:field="*{sortBy}" value="title">
-                                    <p th:text="#{common.title}"></p>
+                                    <input type="radio" class="form-check-input" value="title">
+                                    <p> {{"Common.title" | translate}} </p>
                                 </div>
                                 <div class="radio-option">
-                                    <input type="radio" class="form-check-input" th:field="*{sortBy}" value="albumName">
-                                    <p th:text="#{common.albumName}"></p>
+                                    <input type="radio" class="form-check-input" value="albumName">
+                                    <p> {{"Common.albumName" | translate}}</p>
                                 </div>
                                 <div class="radio-option">
-                                    <input type="radio" class="form-check-input" th:field="*{sortBy}" value="createDateTime">
-                                    <p th:text="#{common.songDate}"></p>
+                                    <input type="radio" class="form-check-input" value="createDateTime">
+                                    <p> {{"Common.songDate" | translate}}</p>
                                 </div>
                                 <div class="radio-option">
-                                    <input type="radio" class="form-check-input" th:field="*{sortBy}" value="duration">
-                                    <p th:text="#{song.duration}"></p>
+                                    <input type="radio" class="form-check-input" value="duration">
+                                    <p> {{"Common.duration" | translate}}</p>
                                 </div>
                             </div>
                         </div>
@@ -104,75 +96,72 @@
                                 <div class="option-icon">
                                     <svg th:replace="fragments/icons :: filter"></svg>
                                 </div>
-                                <h4 style="color: white;" th:text="#{common.filters}"></h4>
+                                <h4 style="color: white;">{{"Common.filters" | translate}}</h4>
                             </div>
 
                             <div class="sub-option-container">
                                 <div class="checkbox-option">
-                                    <input type="checkbox" class="form-check-input" th:field="*{explicit}">
-                                    <p th:text="#{songs.isExplicit}"></p>
+                                    <input type="checkbox" class="form-check-input">
+                                    <p>{{"Common.isExplicit" | translate}}</p>
                                 </div>
                             </div>
 
                             <div class="sub-option-container">
                                 <div class="checkbox-option">
-                                    <input type="checkbox" class="form-check-input" th:field="*{lyrics}">
-                                    <p th:text="#{songs.hasLyrics}"></p>
+                                    <input type="checkbox" class="form-check-input">
+                                    <p>{{"Common.hasLyrics" | translate}}</p>
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" th:field="*{pageNumber}">
+<!--                        <input type="hidden" th:field="*{pageNumber}">-->
                     </form>
                 </div>
                 <div class="col pt-4 pb-4 pl-4 relative" style="padding: 20px;overflow-y: scroll; overflow-x:hidden">
-                        <h1 class="mb-3" th:text="#{songs.heading}"></h1>
-                        <div th:each="song : ${songs}" th:remove="tag">
-                            <div th:replace="fragments/songCard :: songCard(song = ${song})"></div>
+                        <h1 class="mb-3">{{"Song.heading" | translate}}</h1>
+                        <div *ngFor="let song of songs">
+                            <app-song-card [song]="song"></app-song-card>
                         </div>
-                        <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" th:src="@{/img/service-patern.png}" alt="#"
+                        <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="assets/img/service-patern.png" alt="#"
                         style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 65px;right: -55px;">
 
 
-                        <nav>
-                            <ul class="pagination justify-content-center">
-                                <!-- previus button -->
-                                <div th:if="${formData.pageNumber+1 == 1}" th:remove="tag">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" tabindex="-1">Previous</a>
-                                    </li>
-                                </div>
-                                <div th:unless="${formData.pageNumber+1 == 1}" th:remove="tag">
-                                    <li class="page-item" th:page-value="${formData.pageNumber-1}">
-                                        <a class="page-link" tabindex="-1">Previous</a>
-                                    </li>
-                                </div>
+<!--                        <nav>-->
+<!--                            <ul class="pagination justify-content-center">-->
+<!--                                &lt;!&ndash; previus button &ndash;&gt;-->
+<!--                                <div th:if="${formData.pageNumber+1 == 1}" th:remove="tag">-->
+<!--                                    <li class="page-item disabled">-->
+<!--                                        <a class="page-link" tabindex="-1">Previous</a>-->
+<!--                                    </li>-->
+<!--                                </div>-->
+<!--                                <div th:unless="${formData.pageNumber+1 == 1}" th:remove="tag">-->
+<!--                                    <li class="page-item" th:page-value="${formData.pageNumber-1}">-->
+<!--                                        <a class="page-link" tabindex="-1">Previous</a>-->
+<!--                                    </li>-->
+<!--                                </div>-->
 
-                                <!-- previus page -->
-                                <!--<li th:if="${formData.pageNumber != 0}" class="page-item" th:page-value="${formData.pageNumber-1}"><a class="page-link" th:inline="text">[[${formData.pageNumber}]]</a></li>-->
-                                <!-- current page -->
-                                <!--<li class="page-item active"><a class="page-link" th:inline="text">[[${formData.pageNumber+1}]]</a></li>-->
-                                <!-- next page -->
-                                <!--<li th:if="${formData.pageNumber+2 <= formData.totalPages}" class="page-item" th:page-value="${formData.pageNumber+1}"><a class="page-link" th:inline="text" >[[${formData.pageNumber+2}]]</a></li>-->
+<!--                                &lt;!&ndash; previus page &ndash;&gt;-->
+<!--                                &lt;!&ndash;<li th:if="${formData.pageNumber != 0}" class="page-item" th:page-value="${formData.pageNumber-1}"><a class="page-link" th:inline="text">[[${formData.pageNumber}]]</a></li>&ndash;&gt;-->
+<!--                                &lt;!&ndash; current page &ndash;&gt;-->
+<!--                                &lt;!&ndash;<li class="page-item active"><a class="page-link" th:inline="text">[[${formData.pageNumber+1}]]</a></li>&ndash;&gt;-->
+<!--                                &lt;!&ndash; next page &ndash;&gt;-->
+<!--                                &lt;!&ndash;<li th:if="${formData.pageNumber+2 <= formData.totalPages}" class="page-item" th:page-value="${formData.pageNumber+1}"><a class="page-link" th:inline="text" >[[${formData.pageNumber+2}]]</a></li>&ndash;&gt;-->
 
-                                <!-- next button -->
-                                <div th:if="${formData.pageNumber+1 == formData.totalPages}" th:remove="tag">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" tabindex="+1">Next</a>
-                                    </li>
-                                </div>
-                                <div th:unless="${formData.pageNumber+1 == formData.totalPages}" th:remove="tag">
-                                    <li class="page-item" th:page-value="${formData.pageNumber+1}">
-                                        <a class="page-link" tabindex="+1">Next</a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </nav>
+<!--                                &lt;!&ndash; next button &ndash;&gt;-->
+<!--                                <div th:if="${formData.pageNumber+1 == formData.totalPages}" th:remove="tag">-->
+<!--                                    <li class="page-item disabled">-->
+<!--                                        <a class="page-link" tabindex="+1">Next</a>-->
+<!--                                    </li>-->
+<!--                                </div>-->
+<!--                                <div th:unless="${formData.pageNumber+1 == formData.totalPages}" th:remove="tag">-->
+<!--                                    <li class="page-item" th:page-value="${formData.pageNumber+1}">-->
+<!--                                        <a class="page-link" tabindex="+1">Next</a>-->
+<!--                                    </li>-->
+<!--                                </div>-->
+<!--                            </ul>-->
+<!--                        </nav>-->
                 </div>
             </div>
 
     </section>
 
 </div>
-</body>
-
-</html>

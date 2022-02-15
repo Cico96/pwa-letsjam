@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Song} from "../../model/song";
+import {MusicSheet} from "../../model/music-sheet";
 
 @Component({
   selector: 'app-song-card',
@@ -11,5 +13,8 @@ export class SongCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  @Input()
+  set song(song: Song | undefined) {}
 
 }

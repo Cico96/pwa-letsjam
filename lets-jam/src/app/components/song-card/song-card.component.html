@@ -1,1 +1,35 @@
-<p>song-card works!</p>
+<!--<div th:onclick="window.location.href = '/songs/'+[[${song.id}]];">-->
+<div>
+  <div class="song-card mb-4 fadeInRight">
+    <div *ngIf="song.imageUrl">
+      <img [src]="song.imageUrl" alt="song image cover" class="song-image">
+    </div>
+    <div class="song-info-container">
+      <h3 *ngIf="song.title">{{song.author}}</h3>
+      <div *ngIf="song.albumName" class="d-flex align-items-center mt-1 song-info">
+        <div class="icon mr-2">
+<!--          <svg th:replace="fragments/icons :: album"></svg>-->
+          <i></i>
+        </div>
+        <span class="label mr-2">Album: </span>
+        <p>{{song.albumName}}</p>
+      </div>
+      <div *ngIf="song.author" class="d-flex align-items-center mt-1 song-info">
+        <div class="icon mr-2">
+<!--          <svg th:replace="fragments/icons :: album-type"></svg>-->
+          <i></i>
+        </div>
+        <span class="label mr-2">{{"Common.author" | translate}}:</span>
+        <p>{{song.author}}</p>
+      </div>
+      <div *ngIf="song.duration" class="d-flex align-items-center mt-1 song-info">
+        <div class="icon mr-2">
+<!--          <svg th:replace="fragments/icons :: duration"></svg>-->
+          <i></i>
+        </div>
+        <span class="label mr-2">{{"Common.duration" | translate}}:</span>
+<!--        <p>[[${(song.duration/1000)/60}]] [[#{common.minutes}]] [[${(song.duration/1000)%60}]] [[#{common.seconds}]]</p>-->
+      </div>
+    </div>
+  </div>
+</div>

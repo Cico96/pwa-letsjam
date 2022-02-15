@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {GenreService} from "../../services/genre.service";
+import {Genre} from "../../model/genre";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-all-songs',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllSongsComponent implements OnInit {
 
-  constructor() { }
+  genres?: Array<Genre>
+
+  constructor(private gs: GenreService) { }
 
   ngOnInit(): void {
+    this.gs.getAllGenres().subscribe((res) => {
+      this.genres = res
+    });
   }
 
 }
