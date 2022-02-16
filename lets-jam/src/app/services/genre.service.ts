@@ -22,7 +22,9 @@ import {BASE_PATH} from './configuration-api/variables';
 import {Configuration} from './configuration-api/configuration';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class GenreService {
 
   protected basePath = 'https://letsjam.ccml.it/rest';

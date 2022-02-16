@@ -1,8 +1,8 @@
 <!--<div th:onclick="window.location.href = '/songs/'+[[${song.id}]];">-->
-<div>
+<div *ngIf="song !== undefined">
   <div class="song-card mb-4 fadeInRight">
-    <div *ngIf="song.imageUrl">
-      <img [src]="song.imageUrl" alt="song image cover" class="song-image">
+    <div *ngIf="song.image">
+      <img [src]="song.image" alt="song image cover" class="song-image">
     </div>
     <div class="song-info-container">
       <h3 *ngIf="song.title">{{song.author}}</h3>
