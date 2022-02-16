@@ -3,11 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import {MusicSheetComponent} from "./pages/music-sheet/music-sheet.component";
-import {SongComponent} from "./pages/song/song.component";
 import {CreateUploadComponent} from "./pages/create-upload/create-upload.component";
 import {AboutUsComponent} from "./pages/about-us/about-us.component";
 import {AllSongsComponent} from "./pages/all-songs/all-songs.component";
+import { AllMusicSheetsComponent } from './pages/all-music-sheets/all-music-sheets.component';
 
 const routes: Routes = [
   {
@@ -28,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'musicsheets',
-    component: MusicSheetComponent
+    component: AllMusicSheetsComponent
   },
   {
     path: 'songs',

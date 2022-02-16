@@ -8,13 +8,15 @@ import {MusicSheet} from "../../model/music-sheet";
 })
 export class MusicSheetCardComponent implements OnInit {
 
+  @Input()
+  musicSheet?: MusicSheet;
+  
   constructor() { }
 
   ngOnInit(): void {
 
   }
 
-  @Input()
-  set musicSheet(sheet: MusicSheet | undefined) {}
+ 
 
 }
