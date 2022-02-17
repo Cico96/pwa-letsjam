@@ -1,5 +1,6 @@
 import { Instrument } from "./instrument";
 import { Song } from "./song";
+import { User } from "./user";
 
 export interface MusicSheet {
 
@@ -15,4 +16,5 @@ export interface MusicSheet {
     instruments: Array<Instrument>;
     createDateTime: Date;
     updateDateTime: Date;
+    user: User;
 }
