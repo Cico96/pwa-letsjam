@@ -13,19 +13,10 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 export class AllSongsComponent implements OnInit {
 
   genres?: Array<Genre>
-  songs?: Song[]
+  songs!: Song[]
+  page: number = 1;
 
   sidebarForm!: FormGroup
-
-  // search?:String = undefined
-  // sortby?:String = undefined
-  // sortdirection?:String = undefined
-  // albumtype?:String = undefined
-  // requestGenres?:Array<String> = undefined
-  // explicit?:boolean = undefined
-  // hasLyrics?:boolean = undefined
-  // pagenumber?:number = undefined
-  // pagesize?:number = undefined
 
   constructor(private fb: FormBuilder, private gs: GenreService, private ss: SongService) {
     this.sidebarForm = this.fb.group({
@@ -44,9 +35,12 @@ export class AllSongsComponent implements OnInit {
       this.genres = res
     });
     this.ss.getSongs(undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1, 5).subscribe((res) => {
-      console.log(res)
       this.songs = res
     });
+  }
+
+  pageChanged(num: number){
+    this.page = num;
   }
 
 }

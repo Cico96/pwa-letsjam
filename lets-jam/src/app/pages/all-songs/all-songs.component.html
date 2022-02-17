@@ -112,52 +112,30 @@
                                 </div>
                             </div>
                         </div>
-<!--                        <input type="hidden" th:field="*{pageNumber}">-->
                     </form>
                 </div>
                 <div class="col pt-4 pb-4 pl-4 relative" style="padding: 20px;overflow-y: scroll; overflow-x:hidden">
                         <h1 class="mb-3">{{"Song.heading" | translate}}</h1>
-                        <div *ngFor="let song of songs">
+                        <div *ngFor="let song of songs | paginate:  {
+                                                                            id:'some_id',
+                                                                            itemsPerPage: 5,
+                                                                            currentPage: page}">
                             <app-song-card [song]="song"></app-song-card>
                         </div>
                         <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="assets/img/service-patern.png" alt="#"
                         style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 65px;right: -55px;">
 
+                  <nav>
+                    <pagination-controls id="some_id"
+                                         (pageChange)="pageChanged($event)"
+                                         (pageBoundsCorrection)="pageChanged($event)"
+                                         previousLabel="Previous"
+                                         nextLabel="Next"
+                                         screenReaderPaginationLabel="Pagination"
+                                         screenReaderPageLabel="page">
+                    </pagination-controls>
+                  </nav>
 
-<!--                        <nav>-->
-<!--                            <ul class="pagination justify-content-center">-->
-<!--                                &lt;!&ndash; previus button &ndash;&gt;-->
-<!--                                <div th:if="${formData.pageNumber+1 == 1}" th:remove="tag">-->
-<!--                                    <li class="page-item disabled">-->
-<!--                                        <a class="page-link" tabindex="-1">Previous</a>-->
-<!--                                    </li>-->
-<!--                                </div>-->
-<!--                                <div th:unless="${formData.pageNumber+1 == 1}" th:remove="tag">-->
-<!--                                    <li class="page-item" th:page-value="${formData.pageNumber-1}">-->
-<!--                                        <a class="page-link" tabindex="-1">Previous</a>-->
-<!--                                    </li>-->
-<!--                                </div>-->
-
-<!--                                &lt;!&ndash; previus page &ndash;&gt;-->
-<!--                                &lt;!&ndash;<li th:if="${formData.pageNumber != 0}" class="page-item" th:page-value="${formData.pageNumber-1}"><a class="page-link" th:inline="text">[[${formData.pageNumber}]]</a></li>&ndash;&gt;-->
-<!--                                &lt;!&ndash; current page &ndash;&gt;-->
-<!--                                &lt;!&ndash;<li class="page-item active"><a class="page-link" th:inline="text">[[${formData.pageNumber+1}]]</a></li>&ndash;&gt;-->
-<!--                                &lt;!&ndash; next page &ndash;&gt;-->
-<!--                                &lt;!&ndash;<li th:if="${formData.pageNumber+2 <= formData.totalPages}" class="page-item" th:page-value="${formData.pageNumber+1}"><a class="page-link" th:inline="text" >[[${formData.pageNumber+2}]]</a></li>&ndash;&gt;-->
-
-<!--                                &lt;!&ndash; next button &ndash;&gt;-->
-<!--                                <div th:if="${formData.pageNumber+1 == formData.totalPages}" th:remove="tag">-->
-<!--                                    <li class="page-item disabled">-->
-<!--                                        <a class="page-link" tabindex="+1">Next</a>-->
-<!--                                    </li>-->
-<!--                                </div>-->
-<!--                                <div th:unless="${formData.pageNumber+1 == formData.totalPages}" th:remove="tag">-->
-<!--                                    <li class="page-item" th:page-value="${formData.pageNumber+1}">-->
-<!--                                        <a class="page-link" tabindex="+1">Next</a>-->
-<!--                                    </li>-->
-<!--                                </div>-->
-<!--                            </ul>-->
-<!--                        </nav>-->
                 </div>
             </div>
 

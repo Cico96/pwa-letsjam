@@ -56,9 +56,7 @@ export class AllMusicSheetsComponent implements OnInit {
   }
 
   pageChanged(num: number){
-    console.log(num)
     this.page = num;
-    console.log(num)
   }
 
 }
