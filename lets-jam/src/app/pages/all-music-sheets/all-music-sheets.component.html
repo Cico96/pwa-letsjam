@@ -113,8 +113,10 @@
             <div class="col pt-4 pb-4 pl-4 relative scores-view"
                 style="padding: 20px;overflow-y: scroll; overflow-x:hidden">
                 <h1 class="mb-3"> Tutti i nostri spartiti</h1>
-                <div *ngFor="let musicSheet of musicSheets  | paginate:  {itemsPerPage: 5,
-                    currentPage: 1}">
+                <div *ngFor="let musicSheet of musicSheets  | paginate:  {
+                    id:'some_id',
+                    itemsPerPage: 5,
+                    currentPage: page}">
                     <app-music-sheet-card [musicSheet]="musicSheet"></app-music-sheet-card>
                 </div>
                 <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s"
@@ -123,7 +125,7 @@
 
                 <nav>
                     <!--<ul class="pagination justify-content-center">
-                                 
+
                             <div *ngIf="sidebarForm.get('pageNumber')?.value">
                                 <li class="page-item disabled">
                                     <a class="page-link" tabindex="-1">Previous</a>
@@ -134,14 +136,20 @@
                                     <a class="page-link" tabindex="-1">Previous</a>
                                 </li>
                             </ng-template>
-                            
+
                         </ul>-->
 
                     <!--<mat-paginator [length]="length"
                                     [pageSize]="pageSize">
                         </mat-paginator>-->
 
-                    <pagination-controls id="some_id" (pageChange)="pageChanged($event)">
+                    <pagination-controls id="some_id"
+                                         (pageChange)="pageChanged($event)"
+                                         (pageBoundsCorrection)="pageChanged($event)"
+                                         previousLabel="Previous"
+                                         nextLabel="Next"
+                                         screenReaderPaginationLabel="Pagination"
+                                         screenReaderPageLabel="page">
                     </pagination-controls>
                 </nav>
             </div>

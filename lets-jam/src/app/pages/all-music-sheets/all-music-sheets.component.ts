@@ -23,7 +23,7 @@ export class AllMusicSheetsComponent implements OnInit {
   genres?: Genre[];
   instruments?: Instrument[];
   musicSheets!: MusicSheet[]
-  page!: EventEmitter<number>;
+  page: number = 1;
 
 
   constructor(public formBuilder: FormBuilder, private genreService: GenreService, private instrumentService: InstrumentService,
@@ -55,9 +55,10 @@ export class AllMusicSheetsComponent implements OnInit {
     });
   }
 
-  pageChanged($event: any){
-    this.page = $event;
-    console.log($event)
+  pageChanged(num: number){
+    console.log(num)
+    this.page = num;
+    console.log(num)
   }
 
 }
