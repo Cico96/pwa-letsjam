@@ -51,10 +51,10 @@ export class AllMusicSheetsComponent implements OnInit {
     });
   }
 
-  pageChanged($event: any){
-    console.log(this.page)
-    this.page = $event;
-
+  pageChanged(num: number){
+    console.log(num)
+    this.page = num;
+    console.log(num)
   }
 
 }
