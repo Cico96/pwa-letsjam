@@ -114,7 +114,7 @@
                 style="padding: 20px;overflow-y: scroll; overflow-x:hidden">
                 <h1 class="mb-3"> Tutti i nostri spartiti</h1>
                 <div *ngFor="let musicSheet of musicSheets  | paginate:  {itemsPerPage: 5,
-                    currentPage: 1}">
+                    currentPage: page}">
                     <app-music-sheet-card [musicSheet]="musicSheet"></app-music-sheet-card>
                 </div>
                 <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s"

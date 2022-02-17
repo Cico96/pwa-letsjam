@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Genre } from 'src/app/model/genre';
 import { Instrument } from 'src/app/model/instrument';
@@ -6,10 +6,6 @@ import { MusicSheet } from 'src/app/model/music-sheet';
 import { GenreService } from 'src/app/services/genre.service';
 import { InstrumentService } from 'src/app/services/instrument.service';
 import { MusicsheetService } from 'src/app/services/musicsheet.service';
-import { EventEmitter } from '@angular/core';
-//import {PageEvent, MatPaginator} from '@angular/material/paginator';
-
-
 
 
 @Component({
@@ -23,7 +19,7 @@ export class AllMusicSheetsComponent implements OnInit {
   genres?: Genre[];
   instruments?: Instrument[];
   musicSheets!: MusicSheet[]
-  page!: EventEmitter<number>;
+  page: number = 1;
 
 
   constructor(public formBuilder: FormBuilder, private genreService: GenreService, private instrumentService: InstrumentService,
@@ -56,8 +52,9 @@ export class AllMusicSheetsComponent implements OnInit {
   }
 
   pageChanged($event: any){
+    console.log(this.page)
     this.page = $event;
-    console.log($event)
+
   }
 
 }
