@@ -304,15 +304,6 @@ export class MusicsheetService {
     public getAllMusicSheets(search?: string, sortby?: string, sortdirection?: string, genres?: Array<string>, instruments?: Array<string>, verified?: boolean, rearranged?: boolean, tablature?: boolean, pagenumber?: number, pagesize?: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
 
-
-
-
-
-
-
-
-
-
         let queryParameters = new HttpParams({ encoder: new CustomHttpUrlEncodingCodec() });
         if (search !== undefined && search !== null) {
             queryParameters = queryParameters.set('search', <any>search);

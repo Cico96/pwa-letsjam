@@ -26,6 +26,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { SongCardComponent } from './components/song-card/song-card.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { FlatComponent } from './components/flat/flat.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -57,6 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

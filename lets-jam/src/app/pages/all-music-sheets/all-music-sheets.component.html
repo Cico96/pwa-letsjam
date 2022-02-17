@@ -1,154 +1,152 @@
 <div style="padding-top: 90px;">
 
-   <!-- Start Hero Area -->
+    <!-- Start Hero Area -->
     <section class="hero-area">
-            <div class="row">
-                <div class="sidebar">
-                    <form [formGroup]="sidebarForm" id="sidebar-form">
-                        <div class="search mb-5">
-                            <img src="../../../assets/icons/search.svg">
-                            <input type="text" [placeholder]="'Common.search' | translate" formControlName="search">
-                        </div>
-    
-    
-                        <div class="option-container">
-                            <div class="option-title-container">
-                                <div class="option-icon">
-                                    <img src="../../../assets/img/album-type.svg">
-                                </div>
-                                <h4 style="color: white;" >{{"Common.genre" | translate}}</h4>
-                            </div>
-        
-                            <div class="sub-option-container">
-                                <div class="checkbox-option" *ngFor="let genre of genres">
-                                    <input type="checkbox" class="form-check-input" formControlName="genres">
-                                    <p style="text-transform: capitalize;">{{genre.name}}</p>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="option-container">
-                            <div class="option-title-container">
-                                <div class="option-icon">
-                                    <img src="../../../assets/icons/genres.svg">
-                                </div>
-                                <h4 style="color: white;">{{"Common.instruments" | translate}}</h4>
-                            </div>
-        
-                            <div class="sub-option-container">
-                                    <div class="checkbox-option" *ngFor="let instrument of instruments">
-                                        <input type="checkbox" class="form-check-input" formControlName="instruments">
-                                        <p style="text-transform: capitalize;">{{instrument.name}}</p>
-                                    </div>
-                            </div>
-                        </div>
-                       
-                        <!--<div class="option-container">
-                            <div class="option-title-container">
-                                <div class="option-icon">
-                                    <svg th:replace="fragments/icons :: sort"></svg>
-                                </div>
-                                <h4 style="color: white;">{{"Common.sort" | translate}}</h4>
-                                <div class="option-icon sort-direction">
-                                    <div th:if="${formData.sortDirection == 'ASC'}" th:remove="tag">
-                                        <svg th:replace="fragments/icons :: sort-asc"></svg>
-                                    </div>
-                                    <div th:if="${formData.sortDirection == 'DESC'}" th:remove="tag">
-                                        <svg th:replace="fragments/icons :: sort-desc"></svg>
-                                    </div>
-                                    <input th:if="${formData.sortDirection == 'ASC'}" type="text" name="sortDirection" value="ASC" hidden>
-                                    <input th:if="${formData.sortDirection == 'DESC'}" type="text" name="sortDirection" value="DESC" hidden>
-                                </div>
-                            </div>
-        
-                            <div class="sub-option-container">
-                                <div class="radio-option">
-                                    <input type="radio" class="form-check-input" th:field="*{sortBy}" value="title">
-                                    <p>{{"Common.title" | translate}}</p>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" class="form-check-input" th:field="*{sortBy}" value="song.title">
-                                    <p>{{"Common.song_name" | translate}}</p>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" class="form-check-input" th:field="*{sortBy}" value="createDateTime">
-                                    <p>{{"Common.creation_date"}}</p>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" class="form-check-input" th:field="*{sortBy}" value="likes.size">
-                                    <p>{{"Common.likes" | translate}}</p>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="option-container">
-                            <div class="option-title-container">
-                                <div class="option-icon">
-                                    <svg th:replace="fragments/icons :: filter"></svg>
-                                </div>
-                                <h4 style="color: white;">{{"Common.filters" | translate}}</h4>
-                            </div>
-        
-                            <div class="sub-option-container">
-                                <div class="checkbox-option">
-                                    <input type="checkbox" class="form-check-input" th:field="*{verified}">
-                                    <p>{{"MusicSheet.verified" | translate}}</p>
-                                </div>
-                                <div class="checkbox-option">
-                                    <input type="checkbox" class="form-check-input" th:field="*{rearranged}">
-                                    <p>{{"MusicSheet.rearrange" | translate}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="hidden" th:field="*{pageNumber}">-->
-                    </form>
-                </div>
-                <div class="col pt-4 pb-4 pl-4 relative scores-view" style="padding: 20px;overflow-y: scroll; overflow-x:hidden">
-                        <h1 class="mb-3"> Tutti i nostri spartiti</h1>
-                        <div *ngFor="let musicSheet of musicSheets">
-                            <app-music-sheet-card [musicSheet]="musicSheet"></app-music-sheet-card>
-                        </div>
-                        <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#" 
-                        style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 65px;right: -55px;">
+        <div class="row">
+            <div class="sidebar">
+                <form [formGroup]="sidebarForm" id="sidebar-form">
+                    <div class="search mb-5">
+                        <img src="../../../assets/icons/search.svg">
+                        <input type="text" [placeholder]="'Common.search' | translate" formControlName="search">
+                    </div>
 
-                        <!--<nav>
-                            <ul class="pagination justify-content-center">
-                                 previus button 
-                                <div th:if="${formData.pageNumber+1 == 1}" th:remove="tag">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" tabindex="-1">Previous</a>
-                                    </li>
-                                </div>
-                                <div th:unless="${formData.pageNumber+1 == 1}" th:remove="tag">
-                                    <li class="page-item" th:page-value="${formData.pageNumber-1}">
-                                        <a class="page-link" tabindex="-1">Previous</a>
-                                    </li>
-                                </div>
-                                
-                                 previus page
-                                <li th:if="${formData.pageNumber != 0}" class="page-item" th:page-value="${formData.pageNumber-1}"><a class="page-link" th:inline="text">[[${formData.pageNumber}]]</a></li>
-                                current page
-                                <li class="page-item active"><a class="page-link" th:inline="text">[[${formData.pageNumber+1}]]</a></li>
-                                next page
-                                <li th:if="${formData.pageNumber+2 <= formData.totalPages}" class="page-item" th:page-value="${formData.pageNumber+1}"><a class="page-link" th:inline="text" >[[${formData.pageNumber+2}]]</a></li>
 
-                                next button 
-                                <div th:if="${formData.pageNumber+1 == formData.totalPages}" th:remove="tag">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" tabindex="+1">Next</a>
-                                    </li>
+                    <div class="option-container">
+                        <div class="option-title-container">
+                            <div class="option-icon">
+                                <img src="../../../assets/img/album-type.svg">
+                            </div>
+                            <h4 style="color: white;">{{"Common.genre" | translate}}</h4>
+                        </div>
+
+                        <div class="sub-option-container">
+                            <div class="checkbox-option" *ngFor="let genre of genres">
+                                <input type="checkbox" class="form-check-input" formControlName="genres">
+                                <p style="text-transform: capitalize;">{{genre.name}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-container">
+                        <div class="option-title-container">
+                            <div class="option-icon">
+                                <img src="../../../assets/icons/genres.svg">
+                            </div>
+                            <h4 style="color: white;">{{"Common.instruments" | translate}}</h4>
+                        </div>
+
+                        <div class="sub-option-container">
+                            <div class="checkbox-option" *ngFor="let instrument of instruments">
+                                <input type="checkbox" class="form-check-input" formControlName="instruments">
+                                <p style="text-transform: capitalize;">{{instrument.name}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-container">
+                        <div class="option-title-container">
+                            <div class="option-icon">
+                                <img src="../../../assets/icons/sort.svg">
+                            </div>
+                            <h4 style="color: white;">{{"Common.sort" | translate}}</h4>
+                            <div class="option-icon sort-direction">
+
+                                <div *ngIf="sidebarForm.get('sortDirection')?.value == 'ASC'">
+                                    <img src="../../../assets/icons/sortAsc.svg">
                                 </div>
-                                <div th:unless="${formData.pageNumber+1 == formData.totalPages}" th:remove="tag">
-                                    <li class="page-item" th:page-value="${formData.pageNumber+1}">
-                                        <a class="page-link" tabindex="+1">Next</a>
-                                    </li>
+                                <div *ngIf="sidebarForm.get('sortDirection')?.value == 'DESC'">
+                                    <img src="../../../assets/icons/sortDesc.svg">
                                 </div>
-                            </ul>
-                        </nav>-->
-                </div>
+                                <input *ngIf="sidebarForm.get('sortDirection')?.value == 'ASC'" type="text"
+                                    formControlName="sortDirection" value="ASC" hidden>
+                                <input *ngIf="sidebarForm.get('sortDirection')?.value == 'DESC'" type="text"
+                                    formControlName="sortDirection" value="DESC" hidden>
+
+                            </div>
+                        </div>
+
+                        <div class="sub-option-container">
+                            <div class="radio-option">
+                                <input type="radio" class="form-check-input" formControlName="sortBy" value="title">
+                                <p>{{"Common.title" | translate}}</p>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" class="form-check-input" formControlName="sortBy"
+                                    value="song.title">
+                                <p>{{"Common.song_name" | translate}}</p>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" class="form-check-input" formControlName="sortBy"
+                                    value="createDateTime">
+                                <p>{{"Common.creation_date"}}</p>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" class="form-check-input" formControlName="sortBy"
+                                    value="likes.size">
+                                <p>{{"Common.likes" | translate}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-container">
+                        <div class="option-title-container">
+                            <div class="option-icon">
+                                <img src="../../../assets/icons/filter.svg">
+                            </div>
+                            <h4 style="color: white;">{{"Common.filters" | translate}}</h4>
+                        </div>
+
+                        <div class="sub-option-container">
+                            <div class="checkbox-option">
+                                <input type="checkbox" class="form-check-input" formControlName="verified">
+                                <p>{{"MusicSheet.verified" | translate}}</p>
+                            </div>
+                            <div class="checkbox-option">
+                                <input type="checkbox" class="form-check-input" formControlName="rearranged">
+                                <p>{{"MusicSheet.rearrange" | translate}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" formControlName="pageNumber">
+                </form>
             </div>
-            
+            <div class="col pt-4 pb-4 pl-4 relative scores-view"
+                style="padding: 20px;overflow-y: scroll; overflow-x:hidden">
+                <h1 class="mb-3"> Tutti i nostri spartiti</h1>
+                <div *ngFor="let musicSheet of musicSheets  | paginate:  {itemsPerPage: 5,
+                    currentPage: 1}">
+                    <app-music-sheet-card [musicSheet]="musicSheet"></app-music-sheet-card>
+                </div>
+                <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s"
+                    src="../../../assets/img/service-patern.png" alt="#"
+                    style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 65px;right: -55px;">
+
+                <nav>
+                    <!--<ul class="pagination justify-content-center">
+                                 
+                            <div *ngIf="sidebarForm.get('pageNumber')?.value">
+                                <li class="page-item disabled">
+                                    <a class="page-link" tabindex="-1">Previous</a>
+                                </li>
+                            </div>
+                            <ng-template [ngIf]="sidebarForm.get('pageNumber')?.value" >
+                                <li class="page-item" [value]="sidebarForm.get('pageNumber')?.value-1">
+                                    <a class="page-link" tabindex="-1">Previous</a>
+                                </li>
+                            </ng-template>
+                            
+                        </ul>-->
+
+                    <!--<mat-paginator [length]="length"
+                                    [pageSize]="pageSize">
+                        </mat-paginator>-->
+
+                    <pagination-controls id="some_id" (pageChange)="pageChanged($event)">
+                    </pagination-controls>
+                </nav>
+            </div>
+        </div>
+
     </section>
 
 </div>
-
