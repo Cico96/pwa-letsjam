@@ -35,7 +35,7 @@
                     </div>
                     <!--<div class="avatar" th:unless="${musicsheet.user.avatar}" th:style="'background:url(https://avatars.dicebear.com/api/male/'+${musicsheet.user.firstname}+'.svg);'">
                     </div>-->
-                    <ng-template [ngIf]="musicSheet.user.avatar" style="background:url('https://avatars.dicebear.com/api/male/'"+{musicsheet.user.firstname}+ .svg)"></ng-template>
+                    <ng-template [ngIf]="musicSheet.user.avatar" [ngStyle]="{'background': 'url(https://avatars.dicebear.com/api/male/'+musicSheet.user.firstname+'.svg)'}"></ng-template>
                     <p th:text="${musicsheet.user.username}" class="mt-1"style="margin:0; text-transform: capitalize;"></p>
                 </div>                
             </div>
