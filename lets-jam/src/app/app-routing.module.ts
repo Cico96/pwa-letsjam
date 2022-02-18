@@ -7,6 +7,7 @@ import {CreateUploadComponent} from "./pages/create-upload/create-upload.compone
 import {AboutUsComponent} from "./pages/about-us/about-us.component";
 import {AllSongsComponent} from "./pages/all-songs/all-songs.component";
 import { AllMusicSheetsComponent } from './pages/all-music-sheets/all-music-sheets.component';
+import { MusicSheetComponent } from './pages/music-sheet/music-sheet.component';
 import {SongComponent} from "./pages/song/song.component";
 
 const routes: Routes = [
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: 'about-us',
     component: AboutUsComponent
+  },
+  {
+    path: 'musicSheet/:id',
+    component: MusicSheetComponent
   }
 ];
 

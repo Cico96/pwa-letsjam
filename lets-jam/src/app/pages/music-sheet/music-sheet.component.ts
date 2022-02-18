@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Comment } from 'src/app/model/comment';
+import { MusicSheet } from 'src/app/model/music-sheet';
+import { MusicSheetData } from 'src/app/model/music-sheet-data';
+import { CommentService } from 'src/app/services/comment.service';
+import { MusicsheetService } from 'src/app/services/musicsheet.service';
 
 @Component({
   selector: 'app-music-sheet',
@@ -7,9 +13,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MusicSheetComponent implements OnInit {
 
-  constructor() { }
+  musicSheet!: MusicSheet;
+  musicSheetData!: MusicSheetData;
+  comments!: Comment[];
+
+  constructor(private route: ActivatedRoute, private musicSheetService: MusicsheetService, private commentService: CommentService) { }
 
   ngOnInit(): void {
+
+    this.route.params.subscribe((res) => {
+      this.musicSheetService.getMusicSheetById(res['id']).subscribe((ms) => {
+        this.musicSheet = ms;
+      });
+    });
+
+    this.musicSheetService.getMusicSheetData(this.musicSheet.id).subscribe((res) => {
+      this.musicSheetData = res;
+    });
+
+    this.commentService.getMusicSheetComments(this.musicSheet.id).subscribe((res) => {
+      this.comments = res;
+    })
+
   }
 
 }
+
+

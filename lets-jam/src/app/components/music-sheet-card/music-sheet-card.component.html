@@ -29,23 +29,22 @@
                     </div>
                     <div class="avatar" *ngIf="!musicSheet.user.avatar" style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
                     </div>
-                    <!--<div class="avatar" th:unless="${musicsheet.user.avatar}" th:style="'background:url(https://avatars.dicebear.com/api/male/'+${musicsheet.user.firstname}+'.svg);'">
-                    </div>-->
                     <p class="mt-1"style="margin:0; text-transform: capitalize;">{{musicSheet.user.firstname}}</p>
                 </div>
             </div>
-            <!--<div sec:authorize="!hasRole('AMMINISTRATORE')" class="d-flex flex-row align-items-center justify-content-end" style="gap:20px">
+            <div *ngIf="musicSheet.user.role == 'AMMINISTRATORE'" class="d-flex flex-row align-items-center justify-content-end" style="gap:20px">
 
-                <div class="icon" th:each="instrument : ${musicsheet.instruments}">
+                <div class="icon" *ngFor="let instrument of musicSheet.instruments">
                     <svg th:replace="fragments/icons :: __${instrument.name.toLowerCase()}__"></svg>
+                    <img src="{{'../../../assets/icons/' + instrument.name.toLowerCase() + '.svg'}}">
                     <i></i>
                 </div>
 
-            </div>-->
-            <!--<div class="verify-btn" sec:authorize="hasRole('AMMINISTRATORE')">
-                <div th:data-verify="${musicsheet.id}" th:if="${!musicsheet.verified}" class="action-container">
-                    <span th:text="#{admin.manageSheets.verify}" class="d-flex flex-row align-items-center justify-content-end" style="gap:20px"></span>
+            </div>
+            <div class="verify-btn" *ngIf="musicSheet.user.role == 'AMMINISTRATORE'">
+                <div *ngIf="!musicSheet.verified" class="action-container">
+                    <span class="d-flex flex-row align-items-center justify-content-end" style="gap:20px">{{"Admin.manage_verify" | translate}}</span>
                 </div>
-            </div>-->
+            </div>
     </div>
 </div>

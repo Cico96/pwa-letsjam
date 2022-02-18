@@ -32,6 +32,11 @@
         "minutes": "minuti",
         "seconds": "secondi",
         "confirm": "Conferma"
+        "author": "Autore",
+        "comments": "Commenti",
+        "replay": "Rispondi",
+        "show_replay": "Mostra risposte",
+        "write_comment": "Scrivi il tuo commento"
     },
     "Login": {
         "login": "Accedi",
@@ -88,7 +93,13 @@
     },
     "MusicSheet":{
         "verified": "Verificato",
-        "rearranged": "Riarrangiato"
+        "rearranged": "Riarrangiato",
+        "uploaded_by": "Caricato da:",
+        "uploaded_date": "Data caricamento:",
+        "download": "Scarica lo spartito",
+        "download_xml": "Scarica in musicxml",
+        "print": "Stampa",
+        "download_png": "Scarica in png"
     },
     "Song":{
         "heading": "Tutti i nostri brani",
@@ -115,6 +126,11 @@
         "genre" : "Genere Brano",
         "chooseGenre" : "Seleziona il genere del brano"
 
+    },
+    "Admin": {
+        "manageSheets_verify": "Verifica lo spartito",
+        "manageSheets_confirm": "Confermi di voler verificare lo spartito?",
+        "confirm_button": "Conferma"
       },
       "selectInstruments" : "Scegli gli strumenti con cui iniziare",
       "instrumentserror" : "Devi selezionare almeno uno strumento",
