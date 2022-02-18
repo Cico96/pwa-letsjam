@@ -20,10 +20,10 @@
         </div>
         <div class="d-flex flex-row align-items-center justify-content-between">
             <div class="d-flex flex-column align-items-start justify-content-between">
-                <p *ngIf="musicSheet.song" style="margin:0"><span>Brano: </span>{{musicSheet.song.title + musicSheet.song.author}}</p>
-                <ng-template [ngIf]="musicSheet.song" ><p><span>Brano: </span>Inedito</p></ng-template>
+                <p *ngIf="musicSheet.song" style="margin:0"><span>Brano: </span>{{musicSheet.song.title + ' ' + musicSheet.song.author}}</p>
+                <p *ngIf="!musicSheet.song" ><span>Brano: </span>Inedito</p>
                 <p *ngIf="musicSheet.song != null && musicSheet.song.genre != null"><span>Genere: </span>{{musicSheet.song.genre.name}}</p>
-                <ng-template [ngIf]="musicSheet.song != null && musicSheet.song.genre != null"><p><span>Genere: </span> Non definito</p></ng-template>
+                <p *ngIf="musicSheet.song && !musicSheet.song.genre"><span>Genere: </span> Non definito</p>
                 <div class="d-flex align-items-center justify-content-between mt-2" style="gap:10px;">
                     <div class="avatar" *ngIf="musicSheet.user.avatar" style="{{'background:url(' + musicSheet.user.avatar + '.svg)'}}">
                     </div>
@@ -35,7 +35,6 @@
             <div *ngIf="musicSheet.user.role == 'AMMINISTRATORE'" class="d-flex flex-row align-items-center justify-content-end" style="gap:20px">
 
                 <div class="icon" *ngFor="let instrument of musicSheet.instruments">
-                    <svg th:replace="fragments/icons :: __${instrument.name.toLowerCase()}__"></svg>
                     <img src="{{'../../../assets/icons/' + instrument.name.toLowerCase() + '.svg'}}">
                     <i></i>
                 </div>
