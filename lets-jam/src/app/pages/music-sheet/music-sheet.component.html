@@ -1,1 +1,134 @@
-<p>music-sheet works!</p>
+<div style="padding-top: 90px;">
+    <!-- Start Hero Area -->
+    <section class="hero-area pt-4 pb-4">
+        <div class="container mt-4">
+            <div class="d-flex pt-4 justify-content-between align-items-center">
+                <div class="left-container d-flex flex-column align-items-start">
+                    <h2 class="song-title">{{musicSheet.title}}</h2>
+                    <h4 class="song-author mt-4">{{musicSheet.author}}</h4>
+                    <div class="d-flex align-items-center mt-4 song-info">
+                        <div class="icon mr-2">
+                            <img src="../../../assets/icons/user.svg">
+                            <i></i>
+                        </div>
+                        <span class="label mr-2">{{"MusicSheet.uploaded_by" | translate}}</span>
+                        <p>{{musicSheet.user.firstname + '' + musicSheet.user.lastname}}</p>
+                    </div>
+                    <div class="d-flex align-items-center mt-4 song-info">
+                        <div class="icon mr-2">
+                            <img src="../../../assets/icons/album.svg">
+                            <i></i>
+                        </div>
+                        <span class="label mr-2"></span>
+                        <a [routerLink]="['song', musicSheet.song.id]">
+                            <p>{{musicSheet.song.title + '' + musicSheet.song.author}}</p>
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center mt-4 song-info">
+                        <div class="icon mr-2">
+                            <img src="../../../assets/icons/upload.svg">
+                            <i></i>
+                        </div>
+                        <span class="label mr-2">{{"MusicSheet.uploaded_date" | translate}}</span>
+                        <p>{{musicSheet.createDateTime | date: 'dd/MM/YYYY'}}</p>
+                    </div>
+                    <div class="mt-4 d-flex align-items-center like" style="gap: 5px;">
+                        <div class="icon round mr-2">
+                           <img src="../../../assets/icons/like.svg">
+                            <i></i>
+                        </div>
+                        <span>{{musicSheet.likes}}</span>
+                        {{"Common.likes" | translate}}
+                    </div>
+                    <div class="verified-badge mt-4 d-flex align-items-center" *ngIf="musicSheet.verified">
+                        <img src="../../../assets/icons/verifyBadge.svg">
+                        {{"MusicSheet.verified" | translate}}
+                    </div>
+                    <div class="verify-btn verify-btn-detail-pg" *ngIf="musicSheet.user.role == 'AMMINISTRATORE'">
+                        <div *ngIf="!musicSheet.verified" class="action-container">
+                            <span class="d-flex flex-row align-items-center justify-content-end"
+                                style="gap:20px">Verifica spartito</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-container d-flex flex-column align-items-end">
+                    <img *ngIf="musicSheet.song.image != null" src="{{musicSheet.song.image}}" alt="song image cover" class="song-image">
+                    <img *ngIf="musicSheet.song.image == null" src="../../../assets/img/nocover.jpg" alt="song image cover" class="song-image">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-12 mt-4 pt-4 pb-4">
+                    <div class="editor-container p-4">
+                        <h3 class="mt-4 mb-3">{{"Common.instruments" | translate}}</h3>
+                        <div class="instruments-container mb-4">
+                            <!--<div class="instrument" *ngFor="let data of musicSheetData.instrumentMapping.get('key')" th:partId="${musicSheetData.instrumentMapping.get(key)}">
+                                <svg th:replace="fragments/icons :: __${key.toLowerCase()}__"></svg>
+                            </div>-->
+                        </div>
+                        <div id="embed" class="w-100"></div>
+                        <h3 class="mt-4 mb-3">{{"MusicSheet.download" | translate}}</h3>
+                        <div class="d-flex flex-row align-items-center justify-content-between mb-4 pl-5 pr-5"
+                            style="gap:10px">
+                            <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s" id="downloadXml"
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
+                                <a class="btn">{{"MusicSheet.download_xml" | translate}}</a>
+                            </div>
+
+                            <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s" id="downloadPdf"
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
+                                <a class="btn">{{"MusicSheet.print" | translate}}</a>
+                            </div>
+
+                            <div class="button wow fadeInUp mt-4" id="downloadPng" data-wow-delay=".7s"
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
+                                <a class="btn">{{"MusicSheet.download_png" | translate}}</a>
+                            </div>
+                        </div>
+
+                        <h3 class="mt-5 mb-2">{{"Common.comments" | translate}}</h3>
+                        <div class="comments-container d-flex flex-column mt-4 mb-3 w-100 p-5">
+
+                            <div *ngFor="let comment of comments" class="comment d-flex align-items-center justify-content-start"> <!--th:commentId="${comment.id}"-->
+                                <div class="user-image" *ngIf="comment.user.avatar" style="{{'background:url(' + comment.user.avatar + '.svg)'}}">
+                                </div>
+                                <div class="user-image" *ngIf="!comment.user.avatar" style="{{'background:url(https://avatars.dicebear.com/api/male/' + comment.user.firstname + '.svg)'}}">
+                                </div>
+                                <div class="d-flex flex-column align-items-start justify-content-start"
+                                    style="flex:17;">
+                                    <h6 class="user-name">{{comment.user.firstname + '' + comment.user.lastname}</h6>
+                                    <p class="comment-content">{{comment.content}}</p>
+                                    <div class="d-flex align-items-center justify-content-start comment-actions" style="gap:10px">
+                                        <a href="" class="respond-button">{{"Common.replay" | translate}}</a>
+                                        <a href="" class="showResponses-button" *ngIf="comment.replies > 0">{{"Common.show_replay" | translate}} + '' + {{comment.replies}}</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="write-comment">
+                                <div class="user-image" style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
+                                </div>
+                                <input type="text" [placeholder]="'Common.write_comment' | translate" style="flex:17;">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <a href="" class="rearrangeButton btn-hover">
+        <img src="../../../assets/icons/modify.svg">
+    </a>
+
+    <div *ngIf="musicSheet.user.role == 'AMMINISTRATORE'" id="confirm-verify-modal" class="modal-wrap">
+        <span>{{"Admin.manageSheets_confirm" | translate}}</span>
+        <div id="verify">
+            <button class="upUs btn btn-hover btn-block btn-dark btn-outline-light btn-close-white" type="submit">{{"Admin.confirm_button" | translate}}</button>
+        </div>
+    </div>
+
+</div>

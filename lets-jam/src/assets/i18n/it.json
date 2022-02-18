@@ -28,7 +28,11 @@
         "duration": "Durata",
         "hasLyrics": "Lyrics",
         "isExplicit": "Esplicito",
-        "author": "Autore"
+        "author": "Autore",
+        "comments": "Commenti",
+        "replay": "Rispondi",
+        "show_replay": "Mostra risposte",
+        "write_comment": "Scrivi il tuo commento"
     },
     "Login": {
         "login": "Accedi",
@@ -85,16 +89,25 @@
     },
     "MusicSheet":{
         "verified": "Verificato",
-        "rearranged": "Riarrangiato"
+        "rearranged": "Riarrangiato",
+        "uploaded_by": "Caricato da:",
+        "uploaded_date": "Data caricamento:",
+        "download": "Scarica lo spartito",
+        "download_xml": "Scarica in musicxml",
+        "print": "Stampa",
+        "download_png": "Scarica in png"
     },
     "Song":{
         "heading": "Tutti i nostri brani",
         "albumType": "Tipo di Album"
+        
     },
     "CreteUpload": {
 
     },
     "Admin": {
-        "manageSheets_verify": "Verifica lo spartito"
+        "manageSheets_verify": "Verifica lo spartito",
+        "manageSheets_confirm": "Confermi di voler verificare lo spartito?",
+        "confirm_button": "Conferma"
     }
 }
