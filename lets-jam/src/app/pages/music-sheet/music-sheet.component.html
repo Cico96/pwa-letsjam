@@ -64,9 +64,9 @@
                     <div class="editor-container p-4">
                         <h3 class="mt-4 mb-3">{{"Common.instruments" | translate}}</h3>
                         <div class="instruments-container mb-4">
-                            <!--<div class="instrument" *ngFor="let data of musicSheetData.instrumentMapping.get('key')" th:partId="${musicSheetData.instrumentMapping.get(key)}">
-                                <svg th:replace="fragments/icons :: __${key.toLowerCase()}__"></svg>
-                            </div>-->
+                            <div class="instrument" *ngFor="let data in musicSheetData.instrumentMapping">
+                                <img src="">
+                            </div>
                         </div>
                         <div id="embed" class="w-100"></div>
                         <h3 class="mt-4 mb-3">{{"MusicSheet.download" | translate}}</h3>
@@ -108,6 +108,9 @@
                             </div>
 
                             <div class="write-comment">
+                                <!--<div class="user-image" th:if="${loggedUser.avatar}" th:style="'background:url('+${loggedUser.avatar}+');'">
+                                    &nbsp;
+                                </div>-->
                                 <div class="user-image" style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
                                 </div>
                                 <input type="text" [placeholder]="'Common.write_comment' | translate" style="flex:17;">
