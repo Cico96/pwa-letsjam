@@ -27,6 +27,7 @@ import { SongCardComponent } from './components/song-card/song-card.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { FlatComponent } from './components/flat/flat.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -51,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SongCardComponent,
     UserCardComponent,
     FlatComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
