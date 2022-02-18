@@ -28,7 +28,10 @@
         "duration": "Durata",
         "hasLyrics": "Lyrics",
         "isExplicit": "Esplicito",
-        "author": "Autore"
+        "author": "Autore",
+        "minutes": "minuti",
+        "seconds": "secondi",
+        "confirm": "Conferma"
     },
     "Login": {
         "login": "Accedi",
@@ -89,9 +92,33 @@
     },
     "Song":{
         "heading": "Tutti i nostri brani",
-        "albumType": "Tipo di Album"
+        "albumType": "Tipo di Album",
+        "duration": "Durata"
     },
     "CreteUpload": {
+      "title": "Crea nuovo spartito",
+      "whattodo": "Scegli cosa fare",
+      "musicsheet": {
+        "title" : "Titolo Spartito",
+        "author" : "Autore Spartito",
+        "visibility" : "Visibilità",
+        "visibilitypublic" : "Pubblico",
+        "visibilityprivate" : "Privato"
+      },
+      "song": {
+        "songBrano" : "Brano",
+        "placeholder" : "Scrivi il titolo o l\u0027autore del brano",
+        "existing" : "Esistente",
+        "new" : "Inedito",
+        "title" : "Titolo Brano",
+        "author" : "Autore Brano",
+        "genre" : "Genere Brano",
+        "chooseGenre" : "Seleziona il genere del brano"
 
+      },
+      "selectInstruments" : "Scegli gli strumenti con cui iniziare",
+      "instrumentserror" : "Devi selezionare almeno uno strumento",
+      "create" : "Crea",
+      "upload" : "Carica"
     }
 }

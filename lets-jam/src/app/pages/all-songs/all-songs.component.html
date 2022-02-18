@@ -120,7 +120,7 @@
                                                                             id:'some_id',
                                                                             itemsPerPage: 5,
                                                                             currentPage: page}">
-                            <app-song-card [song]="song"></app-song-card>
+                            <app-song-card [routerLink]="['/song',song.id]" [song]="song"></app-song-card>
                         </div>
                         <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="assets/img/service-patern.png" alt="#"
                         style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 65px;right: -55px;">
