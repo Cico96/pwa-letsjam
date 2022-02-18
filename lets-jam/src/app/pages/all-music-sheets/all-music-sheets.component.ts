@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Genre } from 'src/app/model/genre';
 import { Instrument } from 'src/app/model/instrument';
 import { MusicSheet } from 'src/app/model/music-sheet';
@@ -23,7 +24,7 @@ export class AllMusicSheetsComponent implements OnInit {
 
 
   constructor(public formBuilder: FormBuilder, private genreService: GenreService, private instrumentService: InstrumentService,
-    private musicSheetService: MusicsheetService) { }
+    private musicSheetService: MusicsheetService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -49,10 +50,19 @@ export class AllMusicSheetsComponent implements OnInit {
       rearranged: new FormControl(''),
       pageNumber: new FormControl('')
     });
+
   }
 
   pageChanged(num: number){
     this.page = num;
+  }
+
+  modelChange($event: any) {
+
+  }
+
+  goToMusicSheet(id: number) {
+    this.router.navigate(['/musicSheet', id])
   }
 
 }

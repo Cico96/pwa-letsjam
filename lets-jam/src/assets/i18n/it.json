@@ -93,5 +93,8 @@
     },
     "CreteUpload": {
 
+    },
+    "Admin": {
+        "manageSheets_verify": "Verifica lo spartito"
     }
 }
