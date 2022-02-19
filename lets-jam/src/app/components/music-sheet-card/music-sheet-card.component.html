@@ -35,7 +35,7 @@
             <div *ngIf="musicSheet.user.role == 'AMMINISTRATORE'" class="d-flex flex-row align-items-center justify-content-end" style="gap:20px">
 
                 <div class="icon" *ngFor="let instrument of musicSheet.instruments">
-                    <img src="{{'../../../assets/icons/' + instrument.name.toLowerCase() + '.svg'}}">
+                    <img src="{{'../../../assets/icons/' + instrument.name + '.svg'}}">
                     <i></i>
                 </div>
 
