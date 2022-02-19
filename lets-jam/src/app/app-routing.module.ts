@@ -9,6 +9,7 @@ import {AllSongsComponent} from "./pages/all-songs/all-songs.component";
 import { AllMusicSheetsComponent } from './pages/all-music-sheets/all-music-sheets.component';
 import { MusicSheetComponent } from './pages/music-sheet/music-sheet.component';
 import {SongComponent} from "./pages/song/song.component";
+import { AuthGuardService } from './services/guards/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -29,11 +30,13 @@ const routes: Routes = [
   },
   {
     path: 'musicsheets',
-    component: AllMusicSheetsComponent
+    component: AllMusicSheetsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'songs',
-    component: AllSongsComponent
+    component: AllSongsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'song/:id',
@@ -41,7 +44,8 @@ const routes: Routes = [
   },
   {
     path: 'create-upload',
-    component: CreateUploadComponent
+    component: CreateUploadComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'about-us',
