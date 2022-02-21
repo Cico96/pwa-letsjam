@@ -57,9 +57,6 @@ export class AllMusicSheetsComponent implements OnInit {
     this.page = num;
   }
 
-  modelChange($event: any) {
-
-  }
 
   goToMusicSheet(id: number) {
     this.router.navigate(['/musicSheet', id])

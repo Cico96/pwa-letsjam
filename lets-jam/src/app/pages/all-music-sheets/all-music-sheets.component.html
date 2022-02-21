@@ -7,7 +7,7 @@
                 <form [formGroup]="sidebarForm" id="sidebar-form">
                     <div class="search mb-5">
                         <img src="../../../assets/icons/search.svg">
-                        <input type="text" [placeholder]="'Common.search' | translate" formControlName="search" (ngModelChange)="modelChange($event)">
+                        <input type="text" [placeholder]="'Common.search' | translate" formControlName="search" >
                     </div>
 
 
@@ -21,7 +21,7 @@
 
                         <div class="sub-option-container">
                             <div class="checkbox-option" *ngFor="let genre of genres">
-                                <input type="checkbox" class="form-check-input" formControlName="genres" [value]="genre.name" (ngModelChange)="modelChange($event)">
+                                <input type="checkbox" class="form-check-input" formControlName="genres" [value]="genre.name" >
                                 <p style="text-transform: capitalize;">{{genre.name}}</p>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
 
                         <div class="sub-option-container">
                             <div class="checkbox-option" *ngFor="let instrument of instruments">
-                                <input type="checkbox" class="form-check-input" formControlName="instruments" (ngModelChange)="modelChange($event)">
+                                <input type="checkbox" class="form-check-input" formControlName="instruments" >
                                 <p style="text-transform: capitalize;">{{instrument.name}}</p>
                             </div>
                         </div>
@@ -58,24 +58,24 @@
                                     <img src="../../../assets/icons/sortDesc.svg">
                                 </div>
                                 <input *ngIf="sidebarForm.get('sortDirection')?.value == 'ASC'" type="text"
-                                    formControlName="sortDirection" value="ASC" hidden (ngModelChange)="modelChange($event)">
+                                    formControlName="sortDirection" value="ASC" hidden >
                                 <input *ngIf="sidebarForm.get('sortDirection')?.value == 'DESC'" type="text"
-                                    formControlName="sortDirection" value="DESC" hidden (ngModelChange)="modelChange($event)">
+                                    formControlName="sortDirection" value="DESC" hidden >
 
                             </div>
                         </div>
 
                         <div class="sub-option-container">
                             <div class="radio-option">
-                                <input type="radio" class="form-check-input" formControlName="sortBy" value="title" (ngModelChange)="modelChange($event)">
+                                <input type="radio" class="form-check-input" formControlName="sortBy" value="title" >
                                 <p>{{"Common.title" | translate}}</p>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" class="form-check-input" formControlName="sortBy" value="song.title" (ngModelChange)="modelChange($event)">
+                                <input type="radio" class="form-check-input" formControlName="sortBy" value="song.title" >
                                 <p>{{"Common.song_name" | translate}}</p>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" class="form-check-input" formControlName="sortBy" value="createDateTime" (ngModelChange)="modelChange($event)">
+                                <input type="radio" class="form-check-input" formControlName="sortBy" value="createDateTime" >
                                 <p>{{"Common.creation_date" | translate}}</p>
                             </div>
                             <div class="radio-option">
