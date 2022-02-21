@@ -18,17 +18,18 @@ export class AuthInterceptorService implements HttpInterceptor {
       req = req.clone({
         setHeaders: {Authorization: `Bearer ${token}`}
       });
-      
+
     }
-    return next.handle(req).pipe( tap( event => {
-      if (event instanceof HttpResponse) {
-        if(event.status === 401) {
-          this.authService.login().subscribe((res) => {
-            console.log(res);
-          })
-        }
-      }
-    }))
-    
+    return next.handle(req);
+    // return next.handle(req).pipe( tap( event => {
+    //   if (event instanceof HttpResponse) {
+    //     if(event.status === 401) {
+    //       this.authService.login().subscribe((res) => {
+    //         console.log(res);
+    //       })
+    //     }
+    //   }
+    // }))
+
   }
 }

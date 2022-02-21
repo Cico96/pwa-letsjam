@@ -42,14 +42,14 @@ export class LoginComponent implements OnInit {
           if (token != undefined) {
             window.localStorage.setItem('token', token)
             this.router.navigate(['/home']);
-            setTimeout( () => {
-              this.authService.refreshToken('response').subscribe((res) => {
-                let refresh = res.headers.get('Authorization')?.split(' ')[1];
-                if(refresh != undefined) {
-                  window.localStorage.setItem('refresh_token', refresh)
-                }
-              })
-            }, 1000);
+            // setTimeout( () => {
+            //   this.authService.refreshToken('response').subscribe((res) => {
+            //     let refresh = res.headers.get('Authorization')?.split(' ')[1];
+            //     if(refresh != undefined) {
+            //       window.localStorage.setItem('refresh_token', refresh)
+            //     }
+            //   })
+            // }, 1000);
           }
         }
       });

@@ -63,10 +63,12 @@
 
             <div class="d-flex flex-column align-items-start w-100 mt-2">
               <label name="song" class="mb-0" style="width: 100%;">{{"CreteUpload.song.genre" | translate}}</label>
-<!--              <select class="form-select w-100" name="genre" th:field="${pageData.songGenre}">-->
-<!--                <option value="" selected>{{"CreteUpload.song.chooseGenre" | translate}}</option>-->
-<!--                <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>-->
-<!--              </select>-->
+              <div class="sub-option-container">
+              </div>
+              <select class="form-select w-100" name="genre">
+                <option value="" selected>{{"CreteUpload.song.chooseGenre" | translate}}</option>
+                <option *ngFor="let genre of genres" value="{{genre.id}}">{{genre.name}}</option>
+              </select>
             </div>
 
             <!-- hidden fields-->
@@ -108,21 +110,23 @@
               <option class="opt" value="carica">{{"CreteUpload.upload" | translate}}</option>
             </select>
           </div>
-          <div id="instrumentForSheet" class="instruments-for-sheet wrapper">
-            <h6 style="margin-bottom: 20px" class="align-center">{{"CreteUpload.selectInstruments" | translate}}</h6>
-            <div class="inner-wrp">
-<!--              <div th:each="instrument : ${instruments}" class="check">-->
-<!--                <input type="checkbox" th:name="${instrument.name}"/>-->
-<!--                <label th:for="${instrument.name}" th:text="${instrument.name}">{{instrument.name}}</label>-->
-<!--              </div>-->
+<!--          <ng-template [ngIf]="!showChoose">-->
+            <div *ngIf="showChoose" id="instrumentForSheet" class="instruments-for-sheet wrapper">
+              <h6 style="margin-bottom: 20px" class="align-center">{{"CreteUpload.selectInstruments" | translate}}</h6>
+              <div class="inner-wrp">
+                <div *ngFor="let instrument of instruments" class="check">
+                  <input type="checkbox" id="{{instrument.name}}" name="${instrument.name}"/>
+                  <label for="{{instrument.name}}">{{instrument.name}}</label>
+                </div>
+              </div>
+              <div class="error-message mt-2 ml-5 mb-0" id="noInstrumentSelected" style="display: none;"
+                   >{{"CreteUpload.instrumentserror" | translate}}</div>
             </div>
-            <div class="error-message mt-2 ml-5 mb-0" id="noInstrumentSelected" style="display: none;"
-                 >{{"CreteUpload.instrumentserror" | translate}}</div>
-          </div>
-          <div id="fileForSheet" class="instruments-for-sheet">
+<!--          </ng-template>-->
+          <div *ngIf="showUpload" id="fileForSheet" class="instruments-for-sheet">
             <input type="file" class="custom-file-input"  id="file-input" name="file">
           </div>
-          <button id="confirmFirst" class="create-btn">{{"Common.confirm" | translate}}</button>
+          <button id="confirmFirst" (click)="manageConfirm()" class="create-btn">{{"Common.confirm" | translate}}</button>
         </div>
       </div>
       <div class="flat-part-right">
