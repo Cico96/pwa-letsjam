@@ -109,7 +109,7 @@
                         <p class="wow fadeInUp" data-wow-delay=".6s">{{"Home.mostpopular_description" | translate}}</p>
                     </div>
 
-                  <app-music-sheet-card *ngFor="let musicSheet of orderedSheets" [musicSheet]="musicSheet"></app-music-sheet-card>
+                  <app-music-sheet-card *ngFor="let musicSheet of musicSheetsByLikes" [musicSheet]="musicSheet"></app-music-sheet-card>
 
                     <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#"
                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 287px;right: -25px;">
@@ -131,8 +131,12 @@
                         <h2 class="wow fadeInUp" data-wow-delay=".4s">{{"Home.msByGenre_title" | translate}}</h2>
                         <p class="wow fadeInUp" data-wow-delay=".6s">{{"Home.msByGenre_description" | translate}}</p>
                     </div>
-                    
-                    <app-music-sheet-card *ngFor="let musicSheet of musicSheetsByGenre" [musicSheet]="musicSheet"></app-music-sheet-card>
+                  <div *ngFor="let obj of filteredSheet">
+
+                    <h3 *ngIf="obj.sheets.length !== 0" class="wow fadeInUp genreTitle mt-5 mb-3" data-wow-delay=".4s">{{obj.name}}</h3>
+
+                    <app-music-sheet-card [routerLink]="['/musicSheet',musicSheet.id]" *ngFor="let musicSheet of obj.sheets" [musicSheet]="musicSheet"></app-music-sheet-card>
+                  </div>
 
                     <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#"
                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 287px;right: -25px;">

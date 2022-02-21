@@ -14,9 +14,15 @@ import { Genre } from 'src/app/model/genre';
 })
 export class HomeComponent implements OnInit {
 
-  orderedSheets?: Array<MusicSheet>;
-  allGenre!: Array<string>;
-  musicSheetsByGenre!: Array<MusicSheet>;
+  allGenre!: Array<Genre>;
+  musicSheets!: Array<MusicSheet>;
+  musicSheetsByLikes!: Array<MusicSheet>
+  filteredSheet: Array<{name:String,sheets:Array<MusicSheet>}> = [
+    {
+      name:'',
+      sheets:[]
+    }
+  ]
 
   constructor(private ms: MusicsheetService, private auth: AuthService, private genreService: GenreService) {
   }
@@ -25,27 +31,32 @@ export class HomeComponent implements OnInit {
 
     this.orderMusicSheetsBylikes();
     this.musicSheetPerGenre();
+
   }
 
 
   orderMusicSheetsBylikes(): void {
-    let allMusicsheets: Observable<Array<MusicSheet>> = this.ms.getAllMusicSheets();
-    allMusicsheets.subscribe((sheets) => {
-        this.orderedSheets = sheets.sort((a,b) => {return (a.likes - b.likes < 0) ? -1 : (a.likes - b.likes > 0) ? 1 : 0})
+    this.ms.getAllMusicSheets(undefined, 'LIKES','DESC',undefined,undefined,undefined,undefined,undefined,1,5).subscribe((sheets) => {
+      console.log(sheets)
+      this.musicSheetsByLikes = sheets;
     });
   }
 
   musicSheetPerGenre() {
-
     this.genreService.getAllGenres().subscribe((gen) => {
-      gen.forEach((g) => {
-        this.allGenre.push(g.name);
-      });
-    });
+      this.ms.getAllMusicSheets().subscribe((ms) => {
+        gen.forEach((genre,index) => {
+          const genreSheets = ms?.filter((sheet) => {
+            return sheet.song.genre.name == genre.name
+          })
+          this.filteredSheet[index] = {
+            name:genre.name,
+            sheets: genreSheets
+          }
+        })
 
-    this.ms.getAllMusicSheets(undefined, undefined, undefined, this.allGenre, undefined, undefined, undefined, undefined, undefined, undefined).subscribe((ms) => {
-      this.musicSheetsByGenre = ms;
-    })
+      })
+    });
   }
 
 }
