@@ -83,11 +83,11 @@
               <div class="btn-group btn-group-toggle visibilityToggle" data-toggle="buttons">
                 <label class="btn btn-primary active">
                   {{"CreteUpload.musicsheet.visibilityprivate" | translate}}
-                  <input type="radio" name="musicSheetVisibility" id="option1" value="0" autocomplete="off" checked />
+                  <input type="radio" name="musicSheetVisibility" id="option1Visibility" value="0" autocomplete="off" checked />
                 </label>
                 <label class="btn btn-primary">
                   {{"CreteUpload.musicsheet.visibilitypublic" | translate}}
-                  <input type="radio" name="musicSheetVisibility" id="option2" autocomplete="off" value="1">
+                  <input type="radio" name="musicSheetVisibility" id="option2Visibility" autocomplete="off" value="1">
                 </label>
               </div>
             </div>
@@ -105,20 +105,24 @@
         <h2>{{"CreteUpload.whattodo" | translate}}</h2>
         <div class="choose-alert">
           <div>
-            <select id="select" class="slct">
+            <select [(ngModel)]="selectedOption" id="select" class="slct">
+              <option [ngValue]="undefined" selected>Scegli un'opzione</option>
               <option value="crea" class="opt">{{"CreteUpload.create" | translate}}</option>
               <option class="opt" value="carica">{{"CreteUpload.upload" | translate}}</option>
             </select>
+<!--            <button (click)="print()">Click me</button>-->
           </div>
 <!--          <ng-template [ngIf]="!showChoose">-->
             <div *ngIf="showChoose" id="instrumentForSheet" class="instruments-for-sheet wrapper">
               <h6 style="margin-bottom: 20px" class="align-center">{{"CreteUpload.selectInstruments" | translate}}</h6>
               <div class="inner-wrp">
                 <div *ngFor="let instrument of instruments" class="check">
-                  <input type="checkbox" id="{{instrument.name}}" name="${instrument.name}"/>
+<!--                  <input (click)="manageClick(instrument)" type="checkbox" id="{{instrument.name}}" name="${instrument.name}"/>-->
+                  <input [(ngModel)]="instrumentsSelected" type="checkbox" id="{{instrument.name}}" name="${instrument.name}"/>
                   <label for="{{instrument.name}}">{{instrument.name}}</label>
                 </div>
               </div>
+              <button (click)="print()">Click me</button>
               <div class="error-message mt-2 ml-5 mb-0" id="noInstrumentSelected" style="display: none;"
                    >{{"CreteUpload.instrumentserror" | translate}}</div>
             </div>

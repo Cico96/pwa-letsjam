@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthLoginBody } from 'src/app/model/requests-model/auth-login-body';
 import { AuthService } from 'src/app/services/auth.service';
+import {RefreshTokenService} from "../../services/refresh-token.service";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   authBody!: AuthLoginBody;
   loginForm!: FormGroup;
-  constructor(public formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(public formBuilder: FormBuilder, private rts: RefreshTokenService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -35,22 +36,12 @@ export class LoginComponent implements OnInit {
 
       this.authBody = this.loginForm.value
       this.authService.login(this.authBody, 'response').subscribe( (response) => {
-        if(response.status === 404) {
-          console.log('che dobbiamo fare')
-        }else {
-          let token = response.headers.get('Authorization')?.split(' ')[1];
-          if (token != undefined) {
-            window.localStorage.setItem('token', token)
-            this.router.navigate(['/home']);
-            // setTimeout( () => {
-            //   this.authService.refreshToken('response').subscribe((res) => {
-            //     let refresh = res.headers.get('Authorization')?.split(' ')[1];
-            //     if(refresh != undefined) {
-            //       window.localStorage.setItem('refresh_token', refresh)
-            //     }
-            //   })
-            // }, 1000);
-          }
+        let token = response.headers.get('Authorization')?.split(' ')[1];
+        if (token != undefined) {
+          this.rts.refreshToken()
+
+          window.localStorage.setItem('token', token)
+          this.router.navigate(['/home']);
         }
       });
 

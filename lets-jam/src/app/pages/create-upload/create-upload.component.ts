@@ -11,6 +11,11 @@ import {Genre} from "../../model/genre";
 })
 export class CreateUploadComponent implements OnInit {
 
+  selectedOption?: string;
+  printedOption?: string;
+
+  instrumentsSelected?: Array<String>
+
   constructor(private is:InstrumentService, private gs: GenreService) { }
 
   showChoose:boolean = false
@@ -29,8 +34,13 @@ export class CreateUploadComponent implements OnInit {
     });
   }
 
+  print() {
+    // this.printedOption = this.selectedOption;
+    console.log(this.instrumentsSelected)
+  }
+
   manageConfirm() {
-    if (!this.showChoose) {
+    if (this.selectedOption) {
       this.showChoose = !this.showChoose;
     } else {
 

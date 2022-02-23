@@ -14,7 +14,7 @@ export class FlatComponent implements OnInit {
   constructor() { }
 
   ngAfterViewInit() {
-    console.log('on after view init', this.flat?.nativeElement);
+    // console.log('on after view init', this.flat?.nativeElement);
     // this returns null
     let embed = new Embed(this.flat?.nativeElement, {
       score: "",
