@@ -118,11 +118,11 @@
               <div class="inner-wrp">
                 <div *ngFor="let instrument of instruments" class="check">
 <!--                  <input (click)="manageClick(instrument)" type="checkbox" id="{{instrument.name}}" name="${instrument.name}"/>-->
-                  <input [(ngModel)]="instrumentsSelected" type="checkbox" id="{{instrument.name}}" name="${instrument.name}"/>
+                  <input (click)="manageSelect(instrument.name)" type="checkbox" id="{{instrument.name}}" name="${instrument.name}"/>
                   <label for="{{instrument.name}}">{{instrument.name}}</label>
                 </div>
               </div>
-              <button (click)="print()">Click me</button>
+<!--              <button (click)="print()">Click me</button>-->
               <div class="error-message mt-2 ml-5 mb-0" id="noInstrumentSelected" style="display: none;"
                    >{{"CreteUpload.instrumentserror" | translate}}</div>
             </div>
@@ -134,7 +134,7 @@
         </div>
       </div>
       <div class="flat-part-right">
-        <app-flat></app-flat>
+        <app-flat [score]="score"></app-flat>
       </div>
 
     </div>

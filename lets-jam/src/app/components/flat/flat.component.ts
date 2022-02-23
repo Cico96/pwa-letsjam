@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 // @ts-ignore
 import Embed from 'flat-embed/src/embed';
 
@@ -11,12 +11,18 @@ export class FlatComponent implements OnInit {
 
   @ViewChild('flat') flat?: ElementRef<HTMLDivElement>;
 
-  constructor() { }
+  @Input()
+  score: string = ''
+
+  embed?: any
+
+  constructor() {
+  }
 
   ngAfterViewInit() {
     // console.log('on after view init', this.flat?.nativeElement);
     // this returns null
-    let embed = new Embed(this.flat?.nativeElement, {
+    this.embed = new Embed(this.flat?.nativeElement, {
       score: "",
       height: "800px",
       embedParams: {
@@ -26,6 +32,11 @@ export class FlatComponent implements OnInit {
         controlsPosition: "top"
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes['score'].currentValue)
+    this.embed.loadJSON(JSON.parse(changes['score'].currentValue))
   }
 
   ngOnInit(): void {
