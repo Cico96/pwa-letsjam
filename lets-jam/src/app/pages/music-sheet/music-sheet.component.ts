@@ -24,18 +24,23 @@ export class MusicSheetComponent implements OnInit {
     this.route.params.subscribe((res) => {
       this.musicSheetService.getMusicSheetById(res['id']).subscribe((ms) => {
         this.musicSheet = ms;
+        console.log(ms)
+
+        this.commentService.getMusicSheetComments(ms.id).subscribe((res) => {
+          this.comments = res;
+        });
+
+        // this.musicSheetService.getMusicSheetData(ms.id).subscribe((res) => {
+        //   this.musicSheetData = res;
+        //   console.log(res);
+
+        // });
+
       });
     });
 
-    this.musicSheetService.getMusicSheetData(this.musicSheet.id).subscribe((res) => {
-      this.musicSheetData = res;
-    });
-
-    this.commentService.getMusicSheetComments(this.musicSheet.id).subscribe((res) => {
-      this.comments = res;
-    })
-
   }
+
 
 }
 

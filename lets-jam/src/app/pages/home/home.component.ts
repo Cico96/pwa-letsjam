@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit {
 
   orderMusicSheetsBylikes(): void {
     this.ms.getAllMusicSheets(undefined, 'LIKES','DESC',undefined,undefined,undefined,undefined,undefined,1,5).subscribe((sheets) => {
-      console.log(sheets)
       this.musicSheetsByLikes = sheets;
     });
   }

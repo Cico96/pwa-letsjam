@@ -14,6 +14,7 @@ import {RefreshTokenService} from "../../services/refresh-token.service";
 export class LoginComponent implements OnInit {
   authBody!: AuthLoginBody;
   loginForm!: FormGroup;
+
   constructor(public formBuilder: FormBuilder, private rts: RefreshTokenService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -38,9 +39,12 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.authBody, 'response').subscribe( (response) => {
         let token = response.headers.get('Authorization')?.split(' ')[1];
         if (token != undefined) {
-          this.rts.refreshToken()
 
-          window.localStorage.setItem('token', token)
+          window.localStorage.setItem('token', token);
+          console.log('prima di chiamare il refresh', token);
+
+          this.rts.refreshToken();
+
           this.router.navigate(['/home']);
         }
       });

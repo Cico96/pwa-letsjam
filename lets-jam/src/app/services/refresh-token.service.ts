@@ -11,20 +11,23 @@ export class RefreshTokenService {
 
 
   constructor(private authService: AuthService) {
+    this.refreshToken();
+    
   }
 
   refreshToken() {
-    this.timeoutId = setTimeout(() => {
-      this.authService.refreshToken().subscribe((response) => {
+    this.timeoutId = window.setTimeout(() => {
+      this.authService.refreshToken('response').subscribe((response) => {
         let token = response.headers.get('Authorization')?.split(' ')[1];
+        console.log('stampa del refresh token', token)
         if (token != undefined) {
 
-          // window.localStorage.removeItem('token');
+          window.localStorage.setItem('token', token);
+          console.log('setto effettivamente il token')
 
-          window.localStorage.setItem('token', token)
         }
       });
-    }, 60000)
+    }, 60000 * 10)
   }
 
   clearRefreshTimeout() {
