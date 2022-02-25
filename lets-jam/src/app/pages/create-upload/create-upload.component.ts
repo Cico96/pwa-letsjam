@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {InstrumentService} from "../../services/instrument.service";
 import {Instrument} from "../../model/instrument";
 import {GenreService} from "../../services/genre.service";
@@ -16,16 +16,19 @@ export class CreateUploadComponent implements OnInit {
   printedOption?: string;
 
   instrumentsSelected?: Array<string>
+  file?: any
   score: string = ''
 
-  constructor(private is:InstrumentService, private gs: GenreService, private scoreService: ScoreService) { }
+  constructor(private is: InstrumentService, private gs: GenreService, private scoreService: ScoreService) {
+  }
 
-  showChoose:boolean = false
-  showInstruments:boolean = false
-  showUpload:boolean = false
-  confirm:boolean = false
-  instruments!:Array<Instrument>
-  genres!:Array<Genre>
+  init: boolean = true
+  showChooseInstruments: boolean = false
+  showUploadFile: boolean = false
+  showFileData: boolean = false
+  confirm: boolean = false
+  instruments!: Array<Instrument>
+  genres!: Array<Genre>
 
   ngOnInit(): void {
     this.is.getAllInstruments().subscribe((res) => {
@@ -36,13 +39,18 @@ export class CreateUploadComponent implements OnInit {
     });
   }
 
-  print() {
-    // this.printedOption = this.selectedOption;
-    console.log(this.instrumentsSelected)
+  // print() {
+  //   // this.printedOption = this.selectedOption;
+  //   console.log(this.selectedOption)
+  // }
+
+  onFileChange(event: any) {
+    this.file = event.target;
+    console.log(this.selectedOption)
   }
 
   manageSelect(instrumentName: string) {
-    if ( this.instrumentsSelected !== undefined && this.instrumentsSelected?.includes(instrumentName)) {
+    if (this.instrumentsSelected !== undefined && this.instrumentsSelected?.includes(instrumentName)) {
       this.instrumentsSelected = this.instrumentsSelected.filter((el) => el !== instrumentName)
     } else if (this.instrumentsSelected !== undefined && !this.instrumentsSelected?.includes(instrumentName)) {
       this.instrumentsSelected?.push(instrumentName);
@@ -52,13 +60,40 @@ export class CreateUploadComponent implements OnInit {
   }
 
   manageConfirm() {
-    if (this.instrumentsSelected !== undefined && this.instrumentsSelected.length > 0 ) {
-      this.scoreService.makeEmptyScore(this.instrumentsSelected).subscribe(score => {
-        this.score = score.score ? score.score : ''
-      })
-    } else {
+    if (this.selectedOption == 'crea') {
+      if (!this.showChooseInstruments) {
+        this.showChooseInstruments = true;
+      } else if (this.instrumentsSelected !== undefined && this.instrumentsSelected.length > 0) {
+        this.scoreService.makeEmptyScore(this.instrumentsSelected).subscribe(score => {
+          this.score = score.score ? score.score : ''
+          this.showChooseInstruments = false;
+          this.init = false;
+          this.showFileData = true;
+        })
+      }
+      this.showUploadFile = false
+    } else if (this.selectedOption == 'carica') {
 
-      this.showChoose = !this.showChoose;
+      if (!this.showUploadFile) {
+        this.showUploadFile = true;
+      } else if (this.file !== undefined && this.file) {
+        // console.log(this.file)
+        let reader = new FileReader()
+        reader.onload = (e) => {
+          // console.log(e.target?.result);
+          if (typeof e.target!.result == 'string') {
+            this.score = e.target!.result;
+          }
+        }
+        reader.readAsText(this.file.files[0]);
+        // this.scoreService.analyzeScore(this.instrumentsSelected).subscribe(score => {
+        //   this.score = score.score ? score.score : ''
+        //   this.showChooseInstruments = false;
+        //   this.init = false;
+        //   this.showFileData = true;
+        // })
+      }
+      this.showChooseInstruments = false;
     }
   }
 

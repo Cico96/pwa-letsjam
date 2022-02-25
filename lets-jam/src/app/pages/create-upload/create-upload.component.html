@@ -14,7 +14,7 @@
   <section id="flat-wrap" class="flat-wrap">
     <div class="flat-inner-wrap">
 
-      <div id="create" class="flat-part-left first-hidden mr-4">
+      <div *ngIf="showFileData" id="create" class="flat-part-left mr-4">
         <h2>{{"CreteUpload.title" | translate}}</h2>
         <form id="createForm" method="post" enctype="multipart/form-data" style="width:100%">
           <div class="sheet-info">
@@ -101,19 +101,19 @@
         </form>
       </div>
 
-      <div id="choose" class="flat-part-left">
+      <div *ngIf="showChooseInstruments || showUploadFile || init" id="choose" class="flat-part-left">
         <h2>{{"CreteUpload.whattodo" | translate}}</h2>
         <div class="choose-alert">
           <div>
             <select [(ngModel)]="selectedOption" id="select" class="slct">
               <option [ngValue]="undefined" selected>Scegli un'opzione</option>
               <option value="crea" class="opt">{{"CreteUpload.create" | translate}}</option>
-              <option class="opt" value="carica">{{"CreteUpload.upload" | translate}}</option>
+              <option value="carica" class="opt">{{"CreteUpload.upload" | translate}}</option>
             </select>
 <!--            <button (click)="print()">Click me</button>-->
           </div>
 <!--          <ng-template [ngIf]="!showChoose">-->
-            <div *ngIf="showChoose" id="instrumentForSheet" class="instruments-for-sheet wrapper">
+            <div *ngIf="showChooseInstruments" id="instrumentForSheet" class="instruments-for-sheet wrapper">
               <h6 style="margin-bottom: 20px" class="align-center">{{"CreteUpload.selectInstruments" | translate}}</h6>
               <div class="inner-wrp">
                 <div *ngFor="let instrument of instruments" class="check">
@@ -127,8 +127,8 @@
                    >{{"CreteUpload.instrumentserror" | translate}}</div>
             </div>
 <!--          </ng-template>-->
-          <div *ngIf="showUpload" id="fileForSheet" class="instruments-for-sheet">
-            <input type="file" class="custom-file-input"  id="file-input" name="file">
+          <div *ngIf="showUploadFile" id="fileForSheet" class="instruments-for-sheet">
+              <input (change)="onFileChange($event)" type="file" class="custom-file-input"  id="file-input" name="file">
           </div>
           <button id="confirmFirst" (click)="manageConfirm()" class="create-btn">{{"Common.confirm" | translate}}</button>
         </div>

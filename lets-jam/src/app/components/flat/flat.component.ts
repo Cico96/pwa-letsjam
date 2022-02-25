@@ -35,8 +35,12 @@ export class FlatComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes['score'].currentValue)
-    this.embed.loadJSON(JSON.parse(changes['score'].currentValue))
+    // console.log(changes['score'].currentValue)
+    try {
+      this.embed.loadJSON(JSON.parse(changes['score'].currentValue))
+    } catch {
+      this.embed.loadMusicXML(changes['score'].currentValue)
+    }
   }
 
   ngOnInit(): void {
