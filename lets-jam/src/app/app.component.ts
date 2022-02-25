@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   title = 'lets-jam';
   constructor(private translate: TranslateService){
-    translate.setDefaultLang('it');
+    //translate.setDefaultLang('it');
 
     translate.use('it');
   }

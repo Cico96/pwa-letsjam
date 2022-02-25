@@ -14,6 +14,7 @@ import {RefreshTokenService} from "../../services/refresh-token.service";
 export class LoginComponent implements OnInit {
   authBody!: AuthLoginBody;
   loginForm!: FormGroup;
+  error?: number;
 
   constructor(public formBuilder: FormBuilder, private rts: RefreshTokenService, private authService: AuthService, private router: Router) { }
 
@@ -47,9 +48,14 @@ export class LoginComponent implements OnInit {
 
           this.router.navigate(['/home']);
         }
+      }, err => {
+        if(err.error) {
+          this.error = err.status;
+        }
       });
 
     }
   }
+
 
 }

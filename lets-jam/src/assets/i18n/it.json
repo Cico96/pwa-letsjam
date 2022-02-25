@@ -32,7 +32,6 @@
     "minutes": "minuti",
     "seconds": "secondi",
     "confirm": "Conferma",
-    "author": "Autore",
     "comments": "Commenti",
     "replay": "Rispondi",
     "show_replay": "Mostra risposte",
@@ -44,7 +43,8 @@
     "email_placeholder": "Inserisci un indirizzo email",
     "password_placeholder": "Inserisci la password",
     "register": "Registrati",
-    "logout": "Esci"
+    "logout": "Esci",
+    "error": "Username o password sbagliati"
   },
   "Register": {
     "ph_firstname": "Scrivi il tuo nome",

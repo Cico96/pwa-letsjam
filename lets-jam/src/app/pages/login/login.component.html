@@ -14,6 +14,8 @@
 <div th:if="${param.logout}" class="warning-message" th:text="#{login.loggedout}"></div>-->
 
 <div class="body">
+    <small *ngIf="error == 404" class="error-message" style="margin-top: 20px;">{{"Login.error" | translate}}</small>
+    <small *ngIf="error == 401" class="error-message" style="margin-top: 20px;">{{"Login.error" | translate}}</small>
     <div class="form-container">
         <h2 class="mb-4">{{"Login.welcome" | translate}}</h2>
         <div class="logo-container mb-4">

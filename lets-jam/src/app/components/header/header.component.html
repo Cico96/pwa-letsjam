@@ -70,8 +70,8 @@
                                 <li class="nav-item ml-2" sec:authorize="isAuthenticated()">
                                     <a sec:authentication="name" th:class="''+${#httpServletRequest.requestURI.equals('/profilo') ? 'active' : ''}" href="/profilo"></a>
                                 </li>-->
-                                <li class="nav-item flag-container" *ngIf="currentLang == 'it'"  style="height: 50px; margin-top: 17px;"><img style="height: 100%;" src="../../../assets/img/i18n/it-flag.png" alt="it"></li>
-                                <li class="nav-item flag-container" *ngIf="currentLang == 'en'"  style="height: 50px; margin-top: 17px;"><img style="height: 100%;" src="../../../assets/img/i18n/uk-flag.png" alt="en"></li>
+                                <li class="nav-item flag-container" (click)="changeLang('en')" *ngIf="currentLang == 'it'"  style="height: 50px; margin-top: 17px;"><img style="height: 100%;" src="../../../assets/img/i18n/it-flag.png" alt="it"></li>
+                                <li class="nav-item flag-container" (click)="changeLang('it')" *ngIf="currentLang == 'en'"  style="height: 50px; margin-top: 17px;"><img style="height: 100%;" src="../../../assets/img/i18n/uk-flag.png" alt="en"></li>
                             </ul>
                         </div>
                         <!-- navbar collapse -->

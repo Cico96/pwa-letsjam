@@ -64,11 +64,11 @@
                     <div class="editor-container p-4">
                         <h3 class="mt-4 mb-3">{{"Common.instruments" | translate}}</h3>
                         <div class="instruments-container mb-4">
-                            <!--<div class="instrument" *ngFor="let data in musicSheetData.instrumentMapping">
-                                <img src="">
-                            </div>-->
+                            <div class="instrument" *ngFor="let instrument of instrumentMapping">
+                                <img src="assets/icons/{{instrument.toLowerCase()}}.svg">
+                            </div>
                         </div>
-                        <div id="embed" class="w-100"></div>
+                        <app-flat [score]="score" class="w-100"></app-flat>
                         <h3 class="mt-4 mb-3">{{"MusicSheet.download" | translate}}</h3>
                         <div class="d-flex flex-row align-items-center justify-content-between mb-4 pl-5 pr-5"
                             style="gap:10px">
@@ -92,17 +92,17 @@
                         <div class="comments-container d-flex flex-column mt-4 mb-3 w-100 p-5">
 
                             <div *ngFor="let comment of comments" class="comment d-flex align-items-center justify-content-start"> <!--th:commentId="${comment.id}"-->
-                                <div class="user-image" *ngIf="comment.user.avatar" style="{{'background:url(' + comment.user.avatar + '.svg)'}}">
+                                <div class="user-image" *ngIf="comment.user.avatar" style="{{'background:url(http://letsjam.ccml.it' + comment.user.avatar +')'}}">
                                 </div>
                                 <div class="user-image" *ngIf="!comment.user.avatar" style="{{'background:url(https://avatars.dicebear.com/api/male/' + comment.user.firstname + '.svg)'}}">
                                 </div>
                                 <div class="d-flex flex-column align-items-start justify-content-start"
                                     style="flex:17;">
-                                    <h6 class="user-name">{{comment.user.firstname + '' + comment.user.lastname}}</h6>
+                                    <h6 class="user-name">{{comment.user.firstname + ' ' + comment.user.lastname}}</h6>
                                     <p class="comment-content">{{comment.content}}</p>
                                     <div class="d-flex align-items-center justify-content-start comment-actions" style="gap:10px">
                                         <a href="" class="respond-button">{{"Common.replay" | translate}}</a>
-                                        <a href="" class="showResponses-button" *ngIf="comment.replies > 0">{{"Common.show_replay" | translate}} + '' + {{comment.replies}}</a>
+                                        <a href="" class="showResponses-button" *ngIf="comment.replies > 0">{{"Common.show_replay" | translate}} + ' ' + {{comment.replies}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                             <div class="write-comment">
                                 <div class="user-image" style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
                                 </div>
-                                <input type="text" [placeholder]="'Common.write_comment' | translate" style="flex:17;">
+                                <input type="text" [(ngModel)]="comment" (keydown)="sendComment($event)" [placeholder]="'Common.write_comment' | translate" style="flex:17;">
                             </div>
                         </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthTokenService } from 'src/app/services/auth-token.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,12 +11,13 @@ import {RefreshTokenService} from "../../services/refresh-token.service";
 })
 export class HeaderComponent implements OnInit {
 
-  currentLang = '';
+  currentLang = this.translate.currentLang;
 
   constructor(private translate: TranslateService, private rts: RefreshTokenService, private authToken: AuthTokenService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.currentLang = this.translate.currentLang;
+    console.log(this.currentLang)
 
   }
 
@@ -29,6 +30,16 @@ export class HeaderComponent implements OnInit {
 
   isAuthenticated(): boolean {
     return this.authToken.isAuthenticated();
+  }
+
+  changeLang(lang: string) {
+    this.translate.use(lang).subscribe((res) => {
+      console.log(this.translate.currentLang)
+    })
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
   }
 
 
