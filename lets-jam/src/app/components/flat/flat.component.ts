@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 // @ts-ignore
 import Embed from 'flat-embed/src/embed';
 
@@ -14,14 +14,20 @@ export class FlatComponent implements OnInit {
   @Input()
   score: string = ''
 
+  @Output()
+  sheetEventLoaded: EventEmitter<boolean>;
+
   embed?: any
 
   constructor() {
+    this.sheetEventLoaded = new EventEmitter();
+  }
+
+  ngOnInit(): void {
+
   }
 
   ngAfterViewInit() {
-    // console.log('on after view init', this.flat?.nativeElement);
-    // this returns null
     this.embed = new Embed(this.flat?.nativeElement, {
       score: "",
       height: "800px",
@@ -35,17 +41,19 @@ export class FlatComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // console.log(changes['score'].currentValue)
     try {
       this.embed.loadJSON(JSON.parse(changes['score'].currentValue))
     } catch {
       this.embed.loadMusicXML(changes['score'].currentValue)
+      this.embed.on('scoreLoaded', () => {
+        this.sheetEventLoaded?.emit(true);
+      })
     }
   }
 
-  ngOnInit(): void {
-
-
+  getCurrentJsonSheet():any {
+    return this.embed.getJSON();
   }
+
 
 }

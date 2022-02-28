@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentLang = this.translate.currentLang;
-    console.log(this.currentLang)
 
   }
 
@@ -34,7 +33,6 @@ export class HeaderComponent implements OnInit {
 
   changeLang(lang: string) {
     this.translate.use(lang).subscribe((res) => {
-      console.log(this.translate.currentLang)
     })
   }
 

@@ -10,6 +10,7 @@ import { AllMusicSheetsComponent } from './pages/all-music-sheets/all-music-shee
 import { MusicSheetComponent } from './pages/music-sheet/music-sheet.component';
 import {SongComponent} from "./pages/song/song.component";
 import { AuthGuardService } from './services/guards/auth-guard.service';
+import {ProfileComponent} from "./pages/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: 'musicSheet/:id',
     component: MusicSheetComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   }
 ];
 

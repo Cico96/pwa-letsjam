@@ -1,39 +1,49 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from "./auth.service";
+import {User} from "../model/user";
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RefreshTokenService {
 
-
+  currentUser!: User;
   timeoutId?: any;
 
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private userService : UserService) {
     this.refreshToken();
-    
+  }
+
+  saveLoggedUser(id: string | null) {
+    if (id !== null) {
+      this.userService.getUserById(parseInt(id)).subscribe((data) => {
+        window.localStorage.setItem('user', JSON.stringify(data));
+      })
+    }
+  }
+
+  getLoggedUser() {
+    const user = window.localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user);
+    }
   }
 
   refreshToken() {
     this.timeoutId = setInterval(() => {
       this.authService.refreshToken('response').subscribe((response) => {
         let token = response.headers.get('Authorization')?.split(' ')[1];
-        console.log('stampa del refresh token', token)
         if (token != undefined) {
-
-          window.localStorage.setItem('token', token);  
-          console.log('setto effettivamente il token')
-
+          window.localStorage.setItem('token', token);
         }
       });
-      console.log('pdfkepwodfke')
     }, 60000 * 5);
   }
 
   clearRefreshTimeout() {
     clearTimeout(this.timeoutId);
-    console.log('abbiamo pulito', this.timeoutId)
   }
 
 }

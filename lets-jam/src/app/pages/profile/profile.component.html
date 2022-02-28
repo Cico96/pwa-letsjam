@@ -1,92 +1,95 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"-->
-<!--      layout:decorate="~{layout/layout}">-->
-<!--<head>-->
-<!--  <link rel="stylesheet" type="text/css" th:href="@{/css/song.css}">-->
-<!--  <link rel="stylesheet" type="text/css" th:href="@{/css/musicSheetCard.css}">-->
-<!--  <link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}">-->
-<!--  <link rel="stylesheet" type="text/css" th:href="@{/css/chat.css}">-->
-<!--  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">-->
-<!--</head>-->
-<!--<body>-->
-<!--<div style="padding-top: 90px;">-->
-<!--  <section style="min-height: calc(100vh - 600px);" class="hero-area pt-4 pb-4">-->
-<!--    <div class="container mt-4">-->
-<!--      <div class="row">-->
-<!--        <div class="col-3 pt-5 text-center">-->
-<!--          <img *ngIf="profilo.avatar" src="profilo.avatar" alt="profile avatar" class="profile-avatar">-->
-<!--          <img th:unless="${profilo.avatar}" src="'https://avatars.dicebear.com/api/male/'+${profilo.firstname}+'.svg'" alt="profile avatar" class="profile-avatar">-->
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout}">
+<head>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/song.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/musicSheetCard.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/chat.css}">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div style="padding-top: 90px;">
+  <section style="min-height: calc(100vh - 600px);" class="hero-area pt-4 pb-4">
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-3 pt-5 text-center">
+          <img *ngIf="loggedUser.avatar" src="profilo.avatar" alt="profile avatar" class="profile-avatar">
+          <img *ngIf="!loggedUser.avatar" src="'https://avatars.dicebear.com/api/male/'+${profilo.firstname}+'.svg'" alt="profile avatar" class="profile-avatar">
+
+<!--          add router link to page-->
 <!--          <a class="navbar-brand" th:href="@{/modifica-profilo}">-->
 <!--            <svg th:replace="fragments/icons :: modifyProfile"></svg>-->
 <!--          </a>-->
-<!--        </div>-->
-<!--        <div class="col-3 pt-4 profile-generics">-->
-<!--          <div class="mt-4">-->
-<!--            <h3 class="profile-name">{{profilo.firstname}}</h3>-->
-<!--            <h3 class="profile-name mt-4">{{profilo.lastname}}</h3>-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <h6 class="profile-descr">username:</h6>-->
-<!--            <h5 class="">{{profilo.username}}</h5>-->
-<!--            <h6 class="profile-descr mt-2">email:</h6>-->
-<!--            <h5 class="">{{profilo.email}}</h5>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div th:if="${profilo.role.toString().equals('UTENTE')}" class="col-6 pt-4 profile-preferred">-->
-<!--          <div>-->
-<!--            <div class="d-flex align-items-center">-->
-<!--              <div class="icon mr-2">-->
+        </div>
+        <div class="col-3 pt-4 profile-generics">
+          <div class="mt-4">
+            <h3 class="profile-name">{{loggedUser.firstname}}</h3>
+            <h3 class="profile-name mt-4">{{loggedUser.lastname}}</h3>
+          </div>
+          <div>
+            <h6 class="profile-descr">username:</h6>
+            <h5 class="">{{loggedUser.username}}</h5>
+            <h6 class="profile-descr mt-2">email:</h6>
+            <h5 class="">{{loggedUser.email}}</h5>
+          </div>
+        </div>
+        <div *ngIf="loggedUser.role === 'UTENTE'" class="col-6 pt-4 profile-preferred">
+          <div>
+            <div class="d-flex align-items-center">
+              <div class="icon mr-2">
 <!--                <svg th:replace="fragments/icons :: genres"></svg>-->
-<!--                <i></i>-->
-<!--              </div>-->
-<!--              <h3 th:text="#{profile.preferredGenres}+':'" class=""></h3>-->
-<!--            </div>-->
-<!--            <span class="pref-genre" th:each="genre : ${profilo.preferredGenres}" th:text="${genre.name}"></span>-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <div class="d-flex align-items-center">-->
-<!--              <div class="icon mr-2">-->
+                <i></i>
+              </div>
+              <h3 th:text="#{profile.preferredGenres}+':'" class=""></h3>
+            </div>
+            <span class="pref-genre" *ngFor="let genre of prefererdGenres"> {{genre.name}}</span>
+          </div>
+          <div>
+            <div class="d-flex align-items-center">
+              <div class="icon mr-2">
 <!--                <svg th:replace="fragments/icons :: violin"></svg>-->
-<!--                <i></i>-->
-<!--              </div>-->
-<!--              <h3 th:text="#{profile.preferredInstruments}+':'" class=""></h3>-->
-<!--            </div>-->
-<!--            <div class="d-flex aling-items-center justify-content-start w-100 mt-3 pl-4" style="gap: 15px;">-->
-<!--              <div class="icon round" style="width: 60px; height: 60px;" th:each="instrument : ${profilo.preferredInstruments}">-->
+                <i></i>
+              </div>
+              <h3  class=""> Strumenti preferiti:</h3>
+            </div>
+            <div class="d-flex aling-items-center justify-content-start w-100 mt-3 pl-4" style="gap: 15px;">
+              <div class="icon round" style="width: 60px; height: 60px;" *ngFor="let inst of preferredInstruments">
 <!--                <svg th:replace="fragments/icons :: __${instrument.name.toLowerCase()}__"></svg>-->
-<!--                <i></i>-->
-<!--              </div>-->
-<!--            </div>-->
+<!--                <svg th:replace="fragments/icons :: __${instrument.name.toLowerCase()}__"></svg>-->
+                <i></i>
+              </div>
+            </div>
 
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div th:if="${profilo.getRole().toString().equals('UTENTE')}" class="row">-->
-<!--        <div class="col-12 mt-4 pt-4 pb-4">-->
-<!--          <h3 class="mt-4 mb-4">{{"Profile.yourSheets" | translate}}</h3>-->
-<!--        </div>-->
+          </div>
+        </div>
+      </div>
+      <div *ngIf="loggedUser.role === 'UTENTE'" class="row">
+        <div class="col-12 mt-4 pt-4 pb-4">
+          <h3 class="mt-4 mb-4">{{"Profile.yourSheets" | translate}}</h3>
+        </div>
 
-<!--        &lt;!&ndash; Start mine Section &ndash;&gt;-->
-<!--        <section class="services about-us">-->
-<!--          <div class="container">-->
-<!--            <div class="row">-->
-<!--              <div class="col-12 relative">-->
-<!--&lt;!&ndash;                <div th:each="musicsheet : ${myMusicSheets}">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <div th:replace="fragments/musicSheetCard :: musicSheetCard(musicsheet = ${musicsheet})"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--                <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="assets/img/service-patern.png" alt="#"-->
-<!--                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 287px;right: -25px;">-->
-<!--                <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="assets/img/service-patern.png" alt="#"-->
-<!--                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;bottom: -3px;left: -25px;">-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </section>-->
-<!--        &lt;!&ndash; /End mine Section &ndash;&gt;-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </section>-->
-<!--</div>-->
-<!--</body>-->
+        <!-- Start mine Section -->
+        <section class="services about-us">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 relative">
+<!--                <div th:each="musicsheet : ${myMusicSheets}">-->
+<!--                  <div th:replace="fragments/musicSheetCard :: musicSheetCard(musicsheet = ${musicsheet})"></div>-->
+<!--                </div>-->
+                <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="assets/img/service-patern.png" alt="#"
+                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 287px;right: -25px;">
+                <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="assets/img/service-patern.png" alt="#"
+                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;bottom: -3px;left: -25px;">
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /End mine Section -->
+      </div>
+    </div>
+  </section>
+</div>
+</body>
 
-<!--</html>-->
+</html>

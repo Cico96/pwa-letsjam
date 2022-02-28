@@ -30,7 +30,6 @@ export class AllSongsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.sidebarForm.value)
     this.gs.getAllGenres().subscribe((res) => {
       this.genres = res
     });

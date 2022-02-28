@@ -42,9 +42,9 @@ export class LoginComponent implements OnInit {
         if (token != undefined) {
 
           window.localStorage.setItem('token', token);
-          console.log('prima di chiamare il refresh', token);
 
           this.rts.refreshToken();
+          this.rts.saveLoggedUser(response.headers.get('loggeduser'));
 
           this.router.navigate(['/home']);
         }

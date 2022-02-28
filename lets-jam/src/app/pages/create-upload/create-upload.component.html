@@ -16,33 +16,40 @@
 
       <div *ngIf="showFileData" id="create" class="flat-part-left mr-4">
         <h2>{{"CreteUpload.title" | translate}}</h2>
-        <form id="createForm" method="post" enctype="multipart/form-data" style="width:100%">
+        <form [formGroup]="newSheetForm" id="createForm" enctype="multipart/form-data" (ngSubmit)="saveSheet()"
+              style="width:100%">
           <div class="sheet-info">
-            <label name="title" >
+            <label name="title">
               {{"CreteUpload.musicsheet.title" | translate}}
-              <input id="sheet-title" type="text" />
+              <input formControlName="sheetTitle" [value]="sheetTitle" id="sheet-title" type="text"/>
             </label>
             <label name="author">
               {{"CreteUpload.musicsheet.author" | translate}}
-              <input id="sheet-author" name="title" type="text" required/>
+              <input id="sheet-author" formControlName="sheetAuthor" [value]="sheetAuthor" name="title" type="text"
+                     required/>
             </label>
 
             <div class="d-flex flex-column align-items-start mt-3">
-              <label name="song" class="mb-0">{{"CreteUpload.songBrano" | translate}}></label>
+              <label name="song" class="mb-0">{{"CreteUpload.song.songBrano" | translate}}</label>
               <div class="btn-group btn-group-toggle songToggle" data-toggle="buttons">
-                <label class="btn btn-primary active">
+                <label for="option1" class="btn btn-primary"
+                       [ngClass]="{'active': newSheetForm.get('songType')?.value == 0}">
                   {{"CreteUpload.song.existing" | translate}}
-                  <input type="radio" name="songType" id="option1" value="0" autocomplete="off" checked />
+                  <input type="radio" formControlName="songType" name="songType" id="option1" value="0"
+                         autocomplete="off" checked/>
                 </label>
-                <label class="btn btn-primary" >
+                <label for="option2" class="btn btn-primary"
+                       [ngClass]="{'active': newSheetForm.get('songType')?.value == 1}">
                   {{"CreteUpload.song.new" | translate}}
-                  <input type="radio" name="songType" id="option2" autocomplete="off" value="1" />
+                  <input type="radio" formControlName="songType" name="songType" id="option2" autocomplete="off"
+                         value="1"/>
                 </label>
               </div>
             </div>
 
             <!-- New Song -->
-            <div class="flex-column align-items-start" id="newSongContainer" style="display: none;">
+            <div *ngIf="newSheetForm.get('songType')?.value == 1" class="flex-column align-items-start"
+                 id="newSongContainer">
               <label name="song" class="mb-0" style="width: 100%;">
                 {{"CreteUpload.song.title" | translate}}
                 <input name="songTitle" type="text"/>
@@ -50,14 +57,17 @@
 
               <label name="song" class="mb-0" style="width: 100%;">
                 {{"CreteUpload.song.author" | translate}}
-                <input name="songTitle" type="text"/>
+                <input name="songAuthor" type="text"/>
               </label>
 
             </div>
             <!-- Existing song -->
-            <input id="chooseSong" name="song" type="text" placeholder="{{'CreteUpload.song.placeholder' | translate}}" />
-            <ul id="songList">
+            <input *ngIf="newSheetForm.get('songType')?.value == 0" (change)="searchSong($event)"
+                   id="chooseSong" name="song" type="text"
+                   placeholder="{{'CreteUpload.song.placeholder' | translate}}"/>
+            <ul *ngIf="availableSongs !== undefined" id="songList">
               <!-- songs result from search -->
+              <li *ngFor="let sg of availableSongs" (click)="selectSong(sg)"> {{sg.title}}</li>
             </ul>
             <!--  -->
 
@@ -65,43 +75,42 @@
               <label name="song" class="mb-0" style="width: 100%;">{{"CreteUpload.song.genre" | translate}}</label>
               <div class="sub-option-container">
               </div>
-              <select class="form-select w-100" name="genre">
+              <select formControlName="newSheetGenre" class="form-select w-100" name="genre">
                 <option value="" selected>{{"CreteUpload.song.chooseGenre" | translate}}</option>
                 <option *ngFor="let genre of genres" value="{{genre.id}}">{{genre.name}}</option>
               </select>
             </div>
 
-            <!-- hidden fields-->
-            <input id="selectedSong" type="hidden"/>
-            <input id="musicSheetContent" type="hidden"/>
-            <input id="songType" type="hidden" />
-            <input id="visibility" type="hidden" />
-            <!-- -->
-
             <div class="d-flex flex-column align-items-start mt-3">
               <label name="visibility" class="mb-0">{{"CreteUpload.musicsheet.visibility" | translate}}</label>
               <div class="btn-group btn-group-toggle visibilityToggle" data-toggle="buttons">
-                <label class="btn btn-primary active">
+                <label class="btn btn-primary"
+                       [ngClass]="{'active': newSheetForm.get('musicSheetVisibility')?.value == 0}">
                   {{"CreteUpload.musicsheet.visibilityprivate" | translate}}
-                  <input type="radio" name="musicSheetVisibility" id="option1Visibility" value="0" autocomplete="off" checked />
+                  <input type="radio" formControlName="musicSheetVisibility" name="musicSheetVisibility"
+                         id="option1Visibility" value="0" autocomplete="off"
+                         checked/>
                 </label>
-                <label class="btn btn-primary">
+                <label class="btn btn-primary"
+                       [ngClass]="{'active': newSheetForm.get('musicSheetVisibility')?.value == 1}">
                   {{"CreteUpload.musicsheet.visibilitypublic" | translate}}
-                  <input type="radio" name="musicSheetVisibility" id="option2Visibility" autocomplete="off" value="1">
+                  <input type="radio" formControlName="musicSheetVisibility" name="musicSheetVisibility"
+                         id="option2Visibility" autocomplete="off" value="1">
                 </label>
               </div>
             </div>
 
-            <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s"
-                 style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
+            <button class="button wow fadeInUp submit mt-4" data-wow-delay=".7s"
+                    style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
               <a class="btn">{{"CreteUpload.create" | translate}}</a>
-            </div>
+            </button>
 
           </div>
         </form>
       </div>
 
-      <div *ngIf="showChooseInstruments || showUploadFile || init" id="choose" class="flat-part-left">
+      <div *ngIf="(showChooseInstruments || showUploadFile || init) && !showFileData" id="choose"
+           class="flat-part-left">
         <h2>{{"CreteUpload.whattodo" | translate}}</h2>
         <div class="choose-alert">
           <div>
@@ -110,31 +119,29 @@
               <option value="crea" class="opt">{{"CreteUpload.create" | translate}}</option>
               <option value="carica" class="opt">{{"CreteUpload.upload" | translate}}</option>
             </select>
-<!--            <button (click)="print()">Click me</button>-->
           </div>
-<!--          <ng-template [ngIf]="!showChoose">-->
-            <div *ngIf="showChooseInstruments" id="instrumentForSheet" class="instruments-for-sheet wrapper">
-              <h6 style="margin-bottom: 20px" class="align-center">{{"CreteUpload.selectInstruments" | translate}}</h6>
-              <div class="inner-wrp">
-                <div *ngFor="let instrument of instruments" class="check">
-<!--                  <input (click)="manageClick(instrument)" type="checkbox" id="{{instrument.name}}" name="${instrument.name}"/>-->
-                  <input (click)="manageSelect(instrument.name)" type="checkbox" id="{{instrument.name}}" name="${instrument.name}"/>
-                  <label for="{{instrument.name}}">{{instrument.name}}</label>
-                </div>
+          <div *ngIf="showChooseInstruments && !showFileData" id="instrumentForSheet"
+               class="instruments-for-sheet wrapper">
+            <h6 style="margin-bottom: 20px" class="align-center">{{"CreteUpload.selectInstruments" | translate}}</h6>
+            <div class="inner-wrp">
+              <div *ngFor="let instrument of instruments" class="check">
+                <input (click)="manageSelect(instrument.name)" type="checkbox" id="{{instrument.name}}"
+                       name="${instrument.name}"/>
+                <label for="{{instrument.name}}">{{instrument.name}}</label>
               </div>
-<!--              <button (click)="print()">Click me</button>-->
-              <div class="error-message mt-2 ml-5 mb-0" id="noInstrumentSelected" style="display: none;"
-                   >{{"CreteUpload.instrumentserror" | translate}}</div>
             </div>
-<!--          </ng-template>-->
-          <div *ngIf="showUploadFile" id="fileForSheet" class="instruments-for-sheet">
-              <input (change)="onFileChange($event)" type="file" class="custom-file-input"  id="file-input" name="file">
+            <div class="error-message mt-2 ml-5 mb-0" id="noInstrumentSelected" style="display: none;"
+            >{{"CreteUpload.instrumentserror" | translate}}</div>
           </div>
-          <button id="confirmFirst" (click)="manageConfirm()" class="create-btn">{{"Common.confirm" | translate}}</button>
+          <div *ngIf="showUploadFile && !showFileData" id="fileForSheet" class="instruments-for-sheet">
+            <input (change)="onFileChange($event)" type="file" class="custom-file-input" id="file-input" name="file">
+          </div>
+          <button id="confirmFirst" (click)="manageConfirm()"
+                  class="create-btn">{{"Common.confirm" | translate}}</button>
         </div>
       </div>
       <div class="flat-part-right">
-        <app-flat [score]="score"></app-flat>
+        <app-flat (sheetEventLoaded)="extractInfo($event)" [score]="score"></app-flat>
       </div>
 
     </div>
