@@ -20,6 +20,10 @@ export class MusicSheetComponent implements OnInit {
   comments!: Comment[];
   instrumentMapping!: Array<string>
   comment!: string;
+  answer!: string;
+  //showAnswer: boolean = false;
+  replies!: Comment[];
+  commentId?: number;
 
   constructor(private route: ActivatedRoute, private musicSheetService: MusicsheetService, private commentService: CommentService) { }
 
@@ -59,6 +63,35 @@ export class MusicSheetComponent implements OnInit {
         });
       })
     }
+  }
+
+  viewComment(id: number) {
+    //this.showAnswer = true;
+    console.log(id)
+    this.commentId = id;  
+  }
+
+  addAnswer($event: KeyboardEvent, id: number) {
+    if($event.key == 'Enter') {
+      const answer: MusicsheetIdCommentBody = { content: this.answer};
+      this.commentService.addComment(this.musicSheet.id, answer, id).subscribe((res) => {
+        this.answer = '';
+        
+      })
+    }
+  }
+
+  showReplies(id: number) {
+    this.commentService.getReplies(id).subscribe((res) => {
+      if(res.length > 0) {
+        this.replies = res;
+        console.log(this.replies)
+      }
+    })
+  }
+
+  downloadXml() {
+    
   }
 
 

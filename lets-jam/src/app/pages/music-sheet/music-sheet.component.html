@@ -34,7 +34,7 @@
                     </div>
                     <div class="mt-4 d-flex align-items-center like" style="gap: 5px;">
                         <div class="icon round mr-2">
-                           <img src="../../../assets/icons/like.svg">
+                            <img src="../../../assets/icons/like.svg">
                             <i></i>
                         </div>
                         <span>{{musicSheet.likes}}</span>
@@ -53,8 +53,10 @@
                 </div>
 
                 <div class="right-container d-flex flex-column align-items-end">
-                    <img *ngIf="musicSheet.song.image != null" src={{musicSheet.song.image}} alt="song image cover" class="song-image">
-                    <img *ngIf="musicSheet.song.image == null" src="../../../assets/img/nocover.jpg" alt="song image cover" class="song-image">
+                    <img *ngIf="musicSheet.song.image != null" src={{musicSheet.song.image}} alt="song image cover"
+                        class="song-image">
+                    <img *ngIf="musicSheet.song.image == null" src="../../../assets/img/nocover.jpg"
+                        alt="song image cover" class="song-image">
                 </div>
 
             </div>
@@ -68,12 +70,14 @@
                                 <img src="assets/icons/{{instrument.toLowerCase()}}.svg">
                             </div>
                         </div>
+
                         <app-flat [score]="score" class="w-100"></app-flat>
+
                         <h3 class="mt-4 mb-3">{{"MusicSheet.download" | translate}}</h3>
                         <div class="d-flex flex-row align-items-center justify-content-between mb-4 pl-5 pr-5"
                             style="gap:10px">
                             <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s" id="downloadXml"
-                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;" (click)="downloadXml()">
                                 <a class="btn">{{"MusicSheet.download_xml" | translate}}</a>
                             </div>
 
@@ -91,26 +95,58 @@
                         <h3 class="mt-5 mb-2">{{"Common.comments" | translate}}</h3>
                         <div class="comments-container d-flex flex-column mt-4 mb-3 w-100 p-5">
 
-                            <div *ngFor="let comment of comments" class="comment d-flex align-items-center justify-content-start"> <!--th:commentId="${comment.id}"-->
-                                <div class="user-image" *ngIf="comment.user.avatar" style="{{'background:url(http://letsjam.ccml.it' + comment.user.avatar +')'}}">
+                            <div *ngFor="let comment of comments"
+                                class="comment d-flex align-items-center justify-content-start">
+                                <div class="user-image" *ngIf="comment.user.avatar"
+                                    style="{{'background:url(http://letsjam.ccml.it' + comment.user.avatar +')'}}">
                                 </div>
-                                <div class="user-image" *ngIf="!comment.user.avatar" style="{{'background:url(https://avatars.dicebear.com/api/male/' + comment.user.firstname + '.svg)'}}">
+                                <div class="user-image" *ngIf="!comment.user.avatar"
+                                    style="{{'background:url(https://avatars.dicebear.com/api/male/' + comment.user.firstname + '.svg)'}}">
                                 </div>
                                 <div class="d-flex flex-column align-items-start justify-content-start"
                                     style="flex:17;">
                                     <h6 class="user-name">{{comment.user.firstname + ' ' + comment.user.lastname}}</h6>
                                     <p class="comment-content">{{comment.content}}</p>
-                                    <div class="d-flex align-items-center justify-content-start comment-actions" style="gap:10px">
-                                        <a href="" class="respond-button">{{"Common.replay" | translate}}</a>
-                                        <a href="" class="showResponses-button" *ngIf="comment.replies > 0">{{"Common.show_replay" | translate}} + ' ' + {{comment.replies}}</a>
+
+                                    <div class="d-flex align-items-center justify-content-start comment-actions"
+                                        style="gap:10px">
+                                        <a class="respond-button" (click)="viewComment(comment.id)">{{"Common.replay" |
+                                            translate}}</a>
+
+                                        <a class="showResponses-button" *ngIf="comment.replies > 0"
+                                            (click)="showReplies(comment.id)">{{"Common.show_replay" | translate}} {{' ' +comment.replies}}</a>
+                                            
+                                        <div *ngFor="let reply of replies" class="comment response d-flex align-items-center justify-content-start">
+                                            <div class="user-image" *ngIf="reply.user.avatar"
+                                            style="{{'background:url(http://letsjam.ccml.it' + reply.user.avatar +')'}}">
+                                            </div>
+                                            <div class="user-image" *ngIf="!reply.user.avatar"
+                                                style="{{'background:url(https://avatars.dicebear.com/api/male/' + reply.user.firstname + '.svg)'}}">
+                                            </div>
+                                            <div class="d-flex flex-column align-items-start justify-content-start" style="flex:17;">
+                                                <h6 class="user-name">{{reply.user.firstname + ' ' + reply.user.lastname}}</h6>
+                                                <p class="comment-content">{{reply.content}}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="write-comment">
-                                <div class="user-image" style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
+                            <div *ngIf="commentId != undefined" class="write-comment">
+                                <div class="user-image"
+                                    style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
                                 </div>
-                                <input type="text" [(ngModel)]="comment" (keydown)="sendComment($event)" [placeholder]="'Common.write_comment' | translate" style="flex:17;">
+                                <input type="text" [(ngModel)]="answer"
+                                    (keydown)="addAnswer($event, commentId)"
+                                    [placeholder]="'Common.write_comment' | translate" style="flex:17;">
+                            </div>
+
+                            <div class="write-comment">
+                                <div class="user-image"
+                                    style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
+                                </div>
+                                <input type="text" [(ngModel)]="comment" (keydown)="sendComment($event)"
+                                    [placeholder]="'Common.write_comment' | translate" style="flex:17;">
                             </div>
                         </div>
 
@@ -124,10 +160,11 @@
         <img src="../../../assets/icons/modify.svg">
     </a>
 
-    <div *ngIf="musicSheet.user.role == 'AMMINISTRATORE'" id="confirm-verify-modal" class="modal-wrap">
+    <div *ngIf="musicSheet?.user?.role == 'AMMINISTRATORE'" id="confirm-verify-modal" class="modal-wrap">
         <span>{{"Admin.manageSheets_confirm" | translate}}</span>
         <div id="verify">
-            <button class="upUs btn btn-hover btn-block btn-dark btn-outline-light btn-close-white" type="submit">{{"Admin.confirm_button" | translate}}</button>
+            <button class="upUs btn btn-hover btn-block btn-dark btn-outline-light btn-close-white"
+                type="submit">{{"Admin.confirm_button" | translate}}</button>
         </div>
     </div>
 
