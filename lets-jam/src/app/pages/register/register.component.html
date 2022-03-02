@@ -1,8 +1,5 @@
 <div class="body">
-
-    <!--<div th:if="${error == 'email'}" class="error-message" th:text="#{register.email.error}"></div>
-    <div th:if="${error == 'password'}" class="error-message" th:text="#{register.password.error}"></div>-->
-
+    <small *ngIf="error == 409 || 500" class="error-message" style="margin-top: 20px;">{{"Register.error" | translate}}</small>
     <div class="form-container flex-row" style="width:900px;">
         <div class="d-flex flex-column align-items-center justify-content-between pb-4" style="flex:5; height: 100%;">
             <h2 class="mb-4 text-center">{{"Login.register" | translate}}</h2>

@@ -51,7 +51,8 @@
     "ph_lastname": "Scrivi il tuo cognome",
     "ph_username": "Scrivi il nome visualizzato",
     "email_required": "Inserire l'email",
-    "password_required": "Inserire la password"
+    "password_required": "Inserire la password",
+    "error": "Utente già esistente"
   },
   "Home": {
     "title": "Benvenuto nel portale dedicato ai musicisti",

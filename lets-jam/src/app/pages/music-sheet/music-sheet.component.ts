@@ -76,7 +76,9 @@ export class MusicSheetComponent implements OnInit {
       const answer: MusicsheetIdCommentBody = { content: this.answer};
       this.commentService.addComment(this.musicSheet.id, answer, id).subscribe((res) => {
         this.answer = '';
-        
+        // this.commentService.getReplies(id).subscribe((r) => {
+        //   this.replies = r;
+        // })
       })
     }
   }

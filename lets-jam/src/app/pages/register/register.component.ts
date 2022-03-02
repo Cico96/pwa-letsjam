@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
   user!: NewUser;
+  error?: number;
 
   constructor(public formBuilder: FormBuilder, private authService: AuthService, private router: Router) {  }
 
@@ -30,6 +31,8 @@ export class RegisterComponent implements OnInit {
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(30),
         // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
       ]))
     });
@@ -43,6 +46,10 @@ export class RegisterComponent implements OnInit {
         if(token != undefined) {
           window.localStorage.setItem('token', token);
             this.router.navigate(['/home']);
+        }
+      }, err => {
+        if(err.error) {
+          this.error = err.status;
         }
       });
     }

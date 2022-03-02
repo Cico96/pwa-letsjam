@@ -11,6 +11,7 @@ import { MusicSheetComponent } from './pages/music-sheet/music-sheet.component';
 import {SongComponent} from "./pages/song/song.component";
 import { AuthGuardService } from './services/guards/auth-guard.service';
 import {ProfileComponent} from "./pages/profile/profile.component";
+import { RearrangeMusicSheetComponent } from './pages/rearrange-music-sheet/rearrange-music-sheet.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent
+  },
+  {
+    path: 'rearrangeMusicSheet/:id',
+    component: RearrangeMusicSheetComponent
   }
 ];
 
