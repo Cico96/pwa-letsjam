@@ -144,5 +144,15 @@
     "messagesCentre": "Centro messaggi",
     "button": "Invio",
     "addNewConversation": "Aggiungi nuova conversazione"
+  },
+  "Rearrange": {
+    "title": "Riarrangia lo spartito",
+    "musicSheet_title": "Titolo spartito",
+    "musicSheet_author": "Autore spartito",
+    "musicSheet_visibility": "Visibilità spartito",
+    "musicSheet_visibility_private": "Privato",
+    "musicSheet_visibility_public": "Pubblico",
+    "check_instruments": "Conferma",
+    "rearrange": "Riarrangia"
   }
 }

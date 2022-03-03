@@ -76,8 +76,8 @@
                         </div>
                         <!-- navbar collapse -->
                         <div class="button">
-                            <a *ngIf="!isAuthenticated()" [routerLink]="['/login']">{{"Login.login" | translate}}</a>
-                            <a *ngIf="isAuthenticated()" (click)="logout()">{{"Login.logout" | translate}}</a>
+                            <a *ngIf="!isAuthenticated()" [routerLink]="['/login']" class="btn">{{"Login.login" | translate}}</a>
+                            <a *ngIf="isAuthenticated()" (click)="logout()" class="btn">{{"Login.logout" | translate}}</a>
                         </div>
                     </nav>
                     <!-- navbar -->

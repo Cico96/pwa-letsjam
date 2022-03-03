@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FlatComponent } from 'src/app/components/flat/flat.component';
 import { Comment } from 'src/app/model/comment';
 import { MusicSheet } from 'src/app/model/music-sheet';
 import { MusicSheetData } from 'src/app/model/music-sheet-data';
@@ -25,6 +26,10 @@ export class MusicSheetComponent implements OnInit {
   replies!: Comment[];
   commentId?: number;
   answerId?: number;
+  urlXML!: string;
+  urlPNG!: any;
+
+  @ViewChild(FlatComponent) child!: FlatComponent;
 
   constructor(private route: ActivatedRoute, private musicSheetService: MusicsheetService, private commentService: CommentService) { }
 
@@ -94,10 +99,39 @@ export class MusicSheetComponent implements OnInit {
     })
   }
 
-  downloadXml() {
-    
+  downloadXml($event: any) {
+    // if(!this.urlXML) {
+    //   $event?.preventDefault();
+    // }
+    let a = $event.target;
+    this.child.embed.getMusicXML().then( (r: any) => {
+      const blob = new Blob([r], { type: "application/xml" });
+      this.urlXML = window.URL.createObjectURL(blob);
+      // a.click();
+      // if(this.urlXML) {
+      //   a.remove();
+      // }
+    });
+ 
   }
 
+  downloadPNG() {
+    this.child.embed.getPNG({
+      result: "dataURL",
+      layout: "page",
+      dpi: 300,
+    })
+    .then((r: any) => {
+      this.urlPNG = r;
+    })
+    console.log(this.urlPNG)
+  }
+
+  print() {
+    this.child.embed.print();
+  }
+
+  
 
 }
 

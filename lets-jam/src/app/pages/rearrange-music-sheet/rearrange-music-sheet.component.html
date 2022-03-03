@@ -1,1 +1,50 @@
-<p>rearrange-music-sheet works!</p>
+<div style="padding-top:90px">
+    <section id="flat-wrap" class="flat-wrap">
+        <div class="flat-inner-wrap">
+            <div id="create" class="flat-part-left mr-4">
+                <h2>{{"Rearrange.title" | translate}}</h2>
+                <form id="createForm" [formGroup]="rearrangeForm" enctype="multipart/form-data" style="width:100%" (ngSubmit)="rearrangeSheet()">
+                    <div class="sheet-info">
+                        <label name="title">
+                            {{"Rearrange.musicSheet_title" | translate}}
+                            <input formControlName="title" [value]="msTitle" id="sheet-title" type="text"/>
+                        </label>
+                        <label name="author">
+                            {{"Rearrange.musicSheet_author" | translate}}
+                            <input formControlName="author" [value]="msAuthor" id="sheet-author" type="text"/>
+                        </label>
+                    
+                        <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s"
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content; display:none">
+                            <a id="check-instrument" class="btn">{{"Rearrange.check_instruments" | translate}}</a>
+                        </div>
+
+                        <div class="d-flex flex-column align-items-start mt-3">
+                            <label name="visibility" class="mb-0">{{"Rearrange.musicSheet_visibility" | translate}}</label>
+                            <div class="btn-group btn-group-toggle visibilityToggle" data-toggle="buttons">
+                                <label class="btn btn-primary active" [ngClass]="{'active': rearrangeForm.get('visibility')?.value == 0}">
+                                    {{"Rearrange.musicSheet_visibility_private" | translate}}
+                                    <input type="radio" formControlName="visibility" id="option1" value="0" autocomplete="off" checked>
+                                </label>
+                                <label class="btn btn-primary" [ngClass]="{'active': rearrangeForm.get('visibility')?.value == 1}">
+                                    {{"Rearrange.musicSheet_visibility_public" | translate}}
+                                    <input type="radio" formControlName="visibility" id="option2" autocomplete="off"  value="1">
+                                </label>
+                            </div>
+                        </div>
+
+                        <!--<input id="musicSheetContent" th:field="${pageData.content}" type="hidden">
+                        <input id="visibility" th:field="${pageData.visibility}" type="hidden" />-->
+
+                        <button type="submit" id="rearrange-submit" class="button wow fadeInUp submit mt-4" data-wow-delay=".7s"
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content; border-width: inherit;
+                                background-color: transparent;">
+                            <a class="btn">{{"Rearrange.rearrange" | translate}}</a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <app-flat [score]="score" class="w-100"></app-flat>
+        </div>
+    </section>
+</div>

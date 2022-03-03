@@ -77,18 +77,18 @@
                         <div class="d-flex flex-row align-items-center justify-content-between mb-4 pl-5 pr-5"
                             style="gap:10px">
                             <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s" id="downloadXml"
-                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;" (click)="downloadXml()">
-                                <a class="btn">{{"MusicSheet.download_xml" | translate}}</a>
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
+                                <a class="btn" (click)="downloadXml($event)" href="https://{{urlXML}}" download="{{musicSheet.title}}.musicxml">{{"MusicSheet.download_xml" | translate}}</a>
                             </div>
 
                             <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s" id="downloadPdf"
-                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;" (click)="print()">
                                 <a class="btn">{{"MusicSheet.print" | translate}}</a>
                             </div>
 
                             <div class="button wow fadeInUp mt-4" id="downloadPng" data-wow-delay=".7s"
-                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
-                                <a class="btn">{{"MusicSheet.download_png" | translate}}</a>
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;" (click)="downloadPNG()">
+                                <a class="btn" href="{{urlPNG}}" download="{{musicSheet.title}}.png">{{"MusicSheet.download_png" | translate}}</a>
                             </div>
                         </div>
 
@@ -160,7 +160,7 @@
 
         </div>
     </section>
-    <a [routerLink]="['/rearrangeMusicSheet', musicSheet.id]" class="rearrangeButton btn-hover">
+    <a [routerLink]="['/rearrangeMusicSheet', musicSheet?.id]" class="rearrangeButton btn-hover">
         <img src="../../../assets/icons/modify.svg">
     </a>
 

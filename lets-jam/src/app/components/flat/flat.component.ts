@@ -19,6 +19,8 @@ export class FlatComponent implements OnInit {
 
   embed?: any
 
+  url!: string;
+
   constructor() {
     this.sheetEventLoaded = new EventEmitter();
   }
@@ -34,13 +36,14 @@ export class FlatComponent implements OnInit {
         mode: "edit",
         appId: "59e7684b476cba39490801c2",
         branding: false,
-        controlsPosition: "top"
+        controlsDisplay: true,
+        controlsPanel: false,
+        controlsPosition: "top",
+        hideFlatPlayback: false,
+        layout: "page",
       }
     });
 
-    // this.embed.getMusicXML().then((res: any) => {
-    //   console.log(res)
-    // })
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -56,6 +59,16 @@ export class FlatComponent implements OnInit {
 
   getCurrentJsonSheet():any {
     return this.embed.getJSON();
+  }
+
+  getMusicXML() {
+
+    this.embed.getMusicXML().then((r: any) => {
+      const blob = new Blob([r], { type: "application/xml" });
+      this.url = window.URL.createObjectURL(blob);
+      
+    });
+    return this.url;
   }
 
 

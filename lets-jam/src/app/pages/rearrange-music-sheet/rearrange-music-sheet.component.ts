@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { MusicSheet } from 'src/app/model/music-sheet';
 import { MusicsheetService } from 'src/app/services/musicsheet.service';
 
 @Component({
@@ -9,10 +11,31 @@ import { MusicsheetService } from 'src/app/services/musicsheet.service';
 })
 export class RearrangeMusicSheetComponent implements OnInit {
 
-  constructor(private musicSheetService: MusicsheetService, private route: ActivatedRoute) { }
+  rearrangeForm!: FormGroup;
+  score!: string;
+  msAuthor!: string;
+  msTitle!: string;
+
+  constructor(private musicSheetService: MusicsheetService, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.params['id']);
+
+    this.route.params.subscribe((res) => {
+      this.musicSheetService.getMusicSheetData(res['id']).subscribe((s) => {
+        this.score = s.content;
+      });
+    });
+
+    this.rearrangeForm = this.formBuilder.group({
+      author : new FormControl('', Validators.compose([])),
+      title: new FormControl('', Validators.compose([])),
+      visibility: new FormControl('0', Validators.compose([]))
+    })
+
+  }
+
+  rearrangeSheet() {
+    //handle form
   }
 
 }
