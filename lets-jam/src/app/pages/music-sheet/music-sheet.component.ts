@@ -8,6 +8,7 @@ import { MusicsheetIdCommentBody } from 'src/app/model/requests-model/musicsheet
 import { MusicsheetMusicsheetIdBody } from 'src/app/model/requests-model/musicsheetMusicsheetIdBody';
 import { CommentService } from 'src/app/services/comment.service';
 import { MusicsheetService } from 'src/app/services/musicsheet.service';
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-music-sheet',
@@ -26,12 +27,12 @@ export class MusicSheetComponent implements OnInit {
   replies!: Comment[];
   commentId?: number;
   answerId?: number;
-  urlXML!: string;
+  urlXML!: SafeResourceUrl;
   urlPNG!: any;
 
   @ViewChild(FlatComponent) child!: FlatComponent;
 
-  constructor(private route: ActivatedRoute, private musicSheetService: MusicsheetService, private commentService: CommentService) { }
+  constructor(private route: ActivatedRoute, private musicSheetService: MusicsheetService, private commentService: CommentService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
 
@@ -65,7 +66,7 @@ export class MusicSheetComponent implements OnInit {
         console.log(res);
         this.comment = '';
         this.commentService.getMusicSheetComments(this.musicSheet.id).subscribe((res) => {
-          this.comments = res;  
+          this.comments = res;
         });
       })
     }
@@ -74,7 +75,7 @@ export class MusicSheetComponent implements OnInit {
   viewComment(id: number) {
     //this.showAnswer = true;
     console.log(id)
-    this.commentId = id;  
+    this.commentId = id;
   }
 
   addAnswer($event: KeyboardEvent, id: number) {
@@ -99,20 +100,13 @@ export class MusicSheetComponent implements OnInit {
     })
   }
 
-  downloadXml($event: any) {
-    // if(!this.urlXML) {
-    //   $event?.preventDefault();
-    // }
-    let a = $event.target;
-    this.child.embed.getMusicXML().then( (r: any) => {
-      const blob = new Blob([r], { type: "application/xml" });
-      this.urlXML = window.URL.createObjectURL(blob);
-      // a.click();
-      // if(this.urlXML) {
-      //   a.remove();
-      // }
-    });
- 
+  downloadXml(event: any) {
+    if (event) {
+      this.child.embed.getMusicXML().then( (r: any) => {
+        const blob = new Blob([r], { type: "application/xml" });
+        this.urlXML = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
+      });
+    }
   }
 
   downloadPNG() {
@@ -131,7 +125,7 @@ export class MusicSheetComponent implements OnInit {
     this.child.embed.print();
   }
 
-  
+
 
 }
 

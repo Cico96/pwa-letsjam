@@ -49,6 +49,9 @@ export class FlatComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     try {
       this.embed.loadJSON(JSON.parse(changes['score'].currentValue))
+      this.embed.on('scoreLoaded', () => {
+        this.sheetEventLoaded?.emit(true);
+      })
     } catch {
       this.embed.loadMusicXML(changes['score'].currentValue)
       this.embed.on('scoreLoaded', () => {
@@ -66,7 +69,7 @@ export class FlatComponent implements OnInit {
     this.embed.getMusicXML().then((r: any) => {
       const blob = new Blob([r], { type: "application/xml" });
       this.url = window.URL.createObjectURL(blob);
-      
+
     });
     return this.url;
   }

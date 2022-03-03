@@ -71,14 +71,14 @@
                             </div>
                         </div>
 
-                        <app-flat [score]="score" class="w-100"></app-flat>
+                        <app-flat (sheetEventLoaded)="downloadXml($event)" [score]="score" class="w-100"></app-flat>
 
                         <h3 class="mt-4 mb-3">{{"MusicSheet.download" | translate}}</h3>
                         <div class="d-flex flex-row align-items-center justify-content-between mb-4 pl-5 pr-5"
                             style="gap:10px">
                             <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s" id="downloadXml"
                                 style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
-                                <a class="btn" (click)="downloadXml($event)" href="{{urlXML}}" download="{{musicSheet.title}}.musicxml">{{"MusicSheet.download_xml" | translate}}</a>
+                                <a class="btn" [href]="urlXML" download="{{musicSheet.title}}.musicxml">{{"MusicSheet.download_xml" | translate}}</a>
                             </div>
 
                             <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s" id="downloadPdf"
