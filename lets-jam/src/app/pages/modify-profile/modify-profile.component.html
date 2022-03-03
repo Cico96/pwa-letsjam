@@ -1,0 +1,77 @@
+
+<div style="padding-top: 90px;">
+  <section class="hero-area pt-4 pb-4">
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-12 mt-4 pt-4 pb-4">
+          <h3 class="mt-4 mb-4" >{{"ModifyProfile.modifyProfilo" | translate}}</h3>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+          <input type="hidden" />
+          <input type="hidden" />
+          <div class="main-wrap">
+            <div class="left-column">
+              <img class="new-avatar" id="frame" src="#">
+              <img *ngIf="loggedUser.avatar" src="{{loggedUser.avatar}}" alt="profile avatar" class="profile-avatar">
+              <img *ngIf="!loggedUser.avatar" src="'https://avatars.dicebear.com/api/male/'+{{loggedUser.firstname}}+'.svg'" alt="profile avatar" class="profile-avatar">
+              <label name="imgInput">
+                <input name="imgInput" id="avatar" type="file" accept="image/*">
+              </label>
+            </div>
+            <div class="right-column">
+              <label name="firstname">
+                {{"ModifyProfile.name" | translate}}
+                <input value="{{loggedUser.firstname}}" name="firstname" type="text" required/>
+              </label>
+              <label name="lastname">
+                 {{"ModifyProfile.surname" | translate}}
+                <input value="{{loggedUser.lastname}}" name="lastname" type="text" required/>
+              </label>
+              <label name="username">
+                Username
+                <input value="{{loggedUser.username}}" name="username" type="text" required/>
+              </label>
+              <label name="email">
+                Email
+                <input value="{{loggedUser.email}}" name="email" type="email" required/>
+              </label>
+              <div *ngIf="loggedUser.role == 'UTENTE'" class="preferred-genres">
+                <span style="align-self: flex-start; font-weight: 500;" >{{"ModifyProfile.preferredGenres" | translate}}</span>
+                <div *ngFor=" let genre of prefererdGenres">
+                  <input value="{{genre.id}}" type="checkbox"/>
+                  <span> {{genre.name}} </span>
+                </div>
+              </div>
+              <div *ngIf="loggedUser.role == 'UTENTE'" class="preferred-genres">
+                <span style="align-self: flex-start;font-weight: 500;" >{{"ModifyProfile.preferredInstruments" | translate}}</span>
+                <div *ngFor=" let instrument of preferredInstruments">
+                  <input  value="{{instrument.id}}" type="checkbox"/>
+                  <span>{{instrument.name}} </span>
+                </div>
+              </div>
+              <div class="button btn">
+                <button class="button btn" >{{"ModifyProfile.modify" | translate}}</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+<!--  <script>-->
+<!--    document.getElementById('avatar').addEventListener('change', (e) => {-->
+<!--      let images = document.querySelector('.left-column').querySelectorAll('img')-->
+<!--      images.forEach((el,i) => {-->
+<!--        if(i === 0) {-->
+<!--          el.style.display = 'block'-->
+<!--          el.src = URL.createObjectURL(e.target.files[0]);-->
+<!--        } else {-->
+<!--          el.style.display = 'none'-->
+<!--        }-->
+<!--      })-->
+<!--    })-->
+<!--  </script>-->
+</div>
+<!--</body>-->
+
+<!--</html>-->

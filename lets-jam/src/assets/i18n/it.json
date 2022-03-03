@@ -145,6 +145,15 @@
     "button": "Invio",
     "addNewConversation": "Aggiungi nuova conversazione"
   },
+  "ModifyProfile": {
+    "modifyProfilo": "Modifica profilo",
+    "name": "Nome",
+    "modify": "Modifica",
+    "surname": "Cognome",
+    "preferredGenres": "Generi preferiti",
+    "send": "Invia",
+    "preferredInstruments": "Strumenti preferiti"
+  },
   "Rearrange": {
     "title": "Riarrangia lo spartito",
     "musicSheet_title": "Titolo spartito",

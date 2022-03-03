@@ -78,7 +78,7 @@
                             style="gap:10px">
                             <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s" id="downloadXml"
                                 style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
-                                <a class="btn" (click)="downloadXml($event)" href="https://{{urlXML}}" download="{{musicSheet.title}}.musicxml">{{"MusicSheet.download_xml" | translate}}</a>
+                                <a class="btn" (click)="downloadXml($event)" href="{{urlXML}}" download="{{musicSheet.title}}.musicxml">{{"MusicSheet.download_xml" | translate}}</a>
                             </div>
 
                             <div class="button wow fadeInUp submit mt-4" data-wow-delay=".7s" id="downloadPdf"
@@ -112,7 +112,7 @@
                                         style="gap:10px">
                                         <a class="respond-button" (click)="viewComment(comment.id)">{{"Common.replay" |
                                             translate}}</a>
-                                            
+
                                         <div *ngIf="commentId == comment.id" class="write-comment">
                                             <div class="user-image"
                                                 style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
@@ -120,11 +120,11 @@
                                             <input type="text" [(ngModel)]="answer"
                                                 (keydown)="addAnswer($event, commentId)"
                                                 [placeholder]="'Common.write_comment' | translate" style="flex:17;">
-                                        </div>    
+                                        </div>
 
                                         <a class="showResponses-button" *ngIf="comment.replies > 0 && comment.id != answerId"
                                             (click)="showReplies(comment.id)">{{"Common.show_replay" | translate}} {{' ' +comment.replies}}</a>
-                                            
+
                                         <div *ngIf="comment.id == answerId">
                                             <div *ngFor="let reply of replies" class="comment response d-flex align-items-center justify-content-start">
                                                 <div class="user-image" *ngIf="reply.user.avatar"
@@ -143,7 +143,7 @@
                                 </div>
                             </div>
 
-                            
+
 
                             <div class="write-comment">
                                 <div class="user-image"

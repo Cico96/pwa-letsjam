@@ -29,6 +29,7 @@ import { FlatComponent } from './components/flat/flat.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RearrangeMusicSheetComponent } from './pages/rearrange-music-sheet/rearrange-music-sheet.component';
+import { ModifyProfileComponent } from './pages/modify-profile/modify-profile.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -55,6 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FlatComponent,
     ProfileComponent,
     RearrangeMusicSheetComponent,
+    ModifyProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,6 @@ import Embed from 'flat-embed/src/embed';
 import {FlatComponent} from "../../components/flat/flat.component";
 import {SongService} from "../../services/song.service";
 import {Song} from "../../model/song";
-import {User} from "../../model/user";
 import {RefreshTokenService} from "../../services/refresh-token.service";
 import {MusicsheetService} from "../../services/musicsheet.service";
 
@@ -40,7 +39,7 @@ export class CreateUploadComponent implements OnInit {
   availableSongs?: Array<Song>;
   choosenNewSong?: Song;
 
-  constructor(private formBuilder: FormBuilder, private is: InstrumentService,private mss: MusicsheetService, private refreshT: RefreshTokenService,
+  constructor(private formBuilder: FormBuilder, private is: InstrumentService, private mss: MusicsheetService, private refreshT: RefreshTokenService,
               private gs: GenreService, private scoreService: ScoreService, private songService: SongService) {
   }
 
@@ -124,15 +123,19 @@ export class CreateUploadComponent implements OnInit {
 
   extractInfo(isLoaded: boolean) {
     if (isLoaded) {
-      this.scoreService.analyzeScore({
-        score: this.score
-      }).subscribe((data) => {
-          this.sheetTitle = data.title;
-          this.sheetAuthor = data.author;
-        },
-        (err) => {
-          console.log(err.error)
-        });
+      this.child.getCurrentJsonSheet().then((data: any) => {
+
+        console.log(JSON.stringify(data))
+        this.scoreService.analyzeScore({
+          score: JSON.stringify(data)
+        }).subscribe((data) => {
+            this.sheetTitle = data.title;
+            this.sheetAuthor = data.author;
+          },
+          (err) => {
+            console.log(err.error)
+          });
+      })
       this.showFileData = true
     }
   }
@@ -167,7 +170,7 @@ export class CreateUploadComponent implements OnInit {
         rearranged: false,
         content: JSON.stringify(data),
         song: this.newMusicSheetSong,
-        user: this.refreshT.getLoggedUser(),
+        // user: this.refreshT.getLoggedUser(),
       }
       this.mss.addMusicSheet(this.newMusicSheet).subscribe(() => {
         console.log('forese')
