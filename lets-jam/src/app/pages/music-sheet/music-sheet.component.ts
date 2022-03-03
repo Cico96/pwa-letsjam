@@ -24,6 +24,7 @@ export class MusicSheetComponent implements OnInit {
   //showAnswer: boolean = false;
   replies!: Comment[];
   commentId?: number;
+  answerId?: number;
 
   constructor(private route: ActivatedRoute, private musicSheetService: MusicsheetService, private commentService: CommentService) { }
 
@@ -76,14 +77,15 @@ export class MusicSheetComponent implements OnInit {
       const answer: MusicsheetIdCommentBody = { content: this.answer};
       this.commentService.addComment(this.musicSheet.id, answer, id).subscribe((res) => {
         this.answer = '';
-        // this.commentService.getReplies(id).subscribe((r) => {
-        //   this.replies = r;
-        // })
+        this.commentService.getReplies(id).subscribe((r) => {
+          this.replies = r;
+        });
       })
     }
   }
 
   showReplies(id: number) {
+    this.answerId = id;
     this.commentService.getReplies(id).subscribe((res) => {
       if(res.length > 0) {
         this.replies = res;

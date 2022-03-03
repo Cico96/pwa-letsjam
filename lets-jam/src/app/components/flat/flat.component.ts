@@ -37,6 +37,10 @@ export class FlatComponent implements OnInit {
         controlsPosition: "top"
       }
     });
+
+    // this.embed.getMusicXML().then((res: any) => {
+    //   console.log(res)
+    // })
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -112,34 +112,38 @@
                                         style="gap:10px">
                                         <a class="respond-button" (click)="viewComment(comment.id)">{{"Common.replay" |
                                             translate}}</a>
+                                            
+                                        <div *ngIf="commentId == comment.id" class="write-comment">
+                                            <div class="user-image"
+                                                style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
+                                            </div>
+                                            <input type="text" [(ngModel)]="answer"
+                                                (keydown)="addAnswer($event, commentId)"
+                                                [placeholder]="'Common.write_comment' | translate" style="flex:17;">
+                                        </div>    
 
-                                        <a class="showResponses-button" *ngIf="comment.replies > 0"
+                                        <a class="showResponses-button" *ngIf="comment.replies > 0 && comment.id != answerId"
                                             (click)="showReplies(comment.id)">{{"Common.show_replay" | translate}} {{' ' +comment.replies}}</a>
                                             
-                                        <div *ngFor="let reply of replies" class="comment response d-flex align-items-center justify-content-start">
-                                            <div class="user-image" *ngIf="reply.user.avatar"
-                                            style="{{'background:url(http://letsjam.ccml.it' + reply.user.avatar +')'}}">
-                                            </div>
-                                            <div class="user-image" *ngIf="!reply.user.avatar"
-                                                style="{{'background:url(https://avatars.dicebear.com/api/male/' + reply.user.firstname + '.svg)'}}">
-                                            </div>
-                                            <div class="d-flex flex-column align-items-start justify-content-start" style="flex:17;">
-                                                <h6 class="user-name">{{reply.user.firstname + ' ' + reply.user.lastname}}</h6>
-                                                <p class="comment-content">{{reply.content}}</p>
+                                        <div *ngIf="comment.id == answerId">
+                                            <div *ngFor="let reply of replies" class="comment response d-flex align-items-center justify-content-start">
+                                                <div class="user-image" *ngIf="reply.user.avatar"
+                                                style="{{'background:url(http://letsjam.ccml.it' + reply.user.avatar +')'}}">
+                                                </div>
+                                                <div class="user-image" *ngIf="!reply.user.avatar"
+                                                    style="{{'background:url(https://avatars.dicebear.com/api/male/' + reply.user.firstname + '.svg)'}}">
+                                                </div>
+                                                <div class="d-flex flex-column align-items-start justify-content-start" style="flex:17;">
+                                                    <h6 class="user-name">{{reply.user.firstname + ' ' + reply.user.lastname}}</h6>
+                                                    <p class="comment-content">{{reply.content}}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div *ngIf="commentId != undefined" class="write-comment">
-                                <div class="user-image"
-                                    style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
-                                </div>
-                                <input type="text" [(ngModel)]="answer"
-                                    (keydown)="addAnswer($event, commentId)"
-                                    [placeholder]="'Common.write_comment' | translate" style="flex:17;">
-                            </div>
+                            
 
                             <div class="write-comment">
                                 <div class="user-image"
