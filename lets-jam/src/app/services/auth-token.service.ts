@@ -23,13 +23,4 @@ export class AuthTokenService {
 
   }
 
-  isAdmin(): boolean {
-    let usr = localStorage.getItem('user')
-    if (usr) {
-      let user = JSON.parse(usr)
-      return user.role == 'AMMINISTRATORE';
-    }
-    return false
-  }
-
 }

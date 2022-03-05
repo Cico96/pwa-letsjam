@@ -30,8 +30,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RearrangeMusicSheetComponent } from './pages/rearrange-music-sheet/rearrange-music-sheet.component';
 import { ModifyProfileComponent } from './pages/modify-profile/modify-profile.component';
-import { AdminVerifySheetsComponent } from './pages/admin-verify-sheets/admin-verify-sheets.component';
-import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-manage-users.component';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -59,8 +58,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProfileComponent,
     RearrangeMusicSheetComponent,
     ModifyProfileComponent,
-    AdminVerifySheetsComponent,
-    AdminManageUsersComponent,
   ],
   imports: [
     BrowserModule,

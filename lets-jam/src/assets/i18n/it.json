@@ -132,11 +132,6 @@
       "chooseGenre": "Seleziona il genere del brano"
     }
   },
-  "Admin": {
-    "manageSheets_verify": "Verifica lo spartito",
-    "manageSheets_confirm": "Confermi di voler verificare lo spartito?",
-    "confirm_button": "Conferma"
-  },
   "Profile": {
     "preferredGenres": "Generi preferiti",
     "preferredInstruments": "Strumenti preferiti",

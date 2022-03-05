@@ -28,26 +28,20 @@
                             <!--<p class="lang" style="display: none;" text="${#locale}"></p>-->
                             <p class="lang" style="display: none;"></p>
                             <ul id="nav" class="navbar-nav ml-auto">
-                                <li *ngIf="!isAdmin()" class="nav-item">
+                                <li class="nav-item">
                                     <a [routerLink]="['/home']" [routerLinkActive]="['active']">Home</a>
                                 </li>
-                                <li *ngIf="!isAdmin()" class="nav-item">
+                                <li class="nav-item">
                                     <a [routerLink]="['/musicsheets']" [routerLinkActive]="['active']">{{"Common.musicSheets" | translate}}</a>
                                 </li>
-                                <li *ngIf="!isAdmin()" class="nav-item">
+                                <li class="nav-item">
                                     <a [routerLink]="['/songs']" [routerLinkActive]="['active']">{{"Common.songs" | translate}}</a>
                                 </li>
-                                <li *ngIf="!isAdmin()" class="nav-item">
+                                <li class="nav-item">
                                     <a [routerLink]="['/create-upload']" [routerLinkActive]="['active']">{{"Common.createUpload" | translate}}</a>
                                 </li>
-                                <li *ngIf="!isAdmin()" class="nav-item">
+                                <li class="nav-item">
                                     <a [routerLink]="['/about-us']" [routerLinkActive]="['active']">{{"Common.aboutus" | translate}}</a>
-                                </li>
-                                <li *ngIf="isAdmin()" class="nav-item">
-                                    <a [routerLinkActive]="['active']" [routerLink]="['/verify-sheets']" >{{"Common.verifyMusicsheets" | translate}}</a>
-                                </li>
-                                <li *ngIf="isAdmin()" class="nav-item">
-                                    <a [routerLinkActive]="['active']" [routerLink]="['/manage-users']">{{"Common.manageUsers" | translate}}</a>
                                 </li>
                                 <li *ngIf="loggedUser" class="ml-4 d-flex align-items-center justify-content-end">
                                     <a class="p-0" [routerLink]="['/profile']">
