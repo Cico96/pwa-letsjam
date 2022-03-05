@@ -28,27 +28,27 @@
                             <!--<p class="lang" style="display: none;" text="${#locale}"></p>-->
                             <p class="lang" style="display: none;"></p>
                             <ul id="nav" class="navbar-nav ml-auto">
-                                <li class="nav-item">
+                                <li *ngIf="!isAdmin()" class="nav-item">
                                     <a [routerLink]="['/home']" [routerLinkActive]="['active']">Home</a>
                                 </li>
-                                <li class="nav-item">
+                                <li *ngIf="!isAdmin()" class="nav-item">
                                     <a [routerLink]="['/musicsheets']" [routerLinkActive]="['active']">{{"Common.musicSheets" | translate}}</a>
                                 </li>
-                                <li class="nav-item">
+                                <li *ngIf="!isAdmin()" class="nav-item">
                                     <a [routerLink]="['/songs']" [routerLinkActive]="['active']">{{"Common.songs" | translate}}</a>
                                 </li>
-                                <li class="nav-item">
+                                <li *ngIf="!isAdmin()" class="nav-item">
                                     <a [routerLink]="['/create-upload']" [routerLinkActive]="['active']">{{"Common.createUpload" | translate}}</a>
                                 </li>
-                                <li class="nav-item">
+                                <li *ngIf="!isAdmin()" class="nav-item">
                                     <a [routerLink]="['/about-us']" [routerLinkActive]="['active']">{{"Common.aboutus" | translate}}</a>
                                 </li>
-                                <!--<li sec:authorize="isAuthenticated() && hasRole('AMMINISTRATORE')" class="nav-item">
-                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/admin/verifyMusicsheet') ? 'active' : ''}" href="/admin/verifyMusicsheet" text="#{common.verifyMusicsheets}"></a>
+                                <li *ngIf="isAdmin()" class="nav-item">
+                                    <a [routerLinkActive]="['active']" [routerLink]="['/verify-sheets']" >{{"Common.verifyMusicsheets" | translate}}</a>
                                 </li>
-                                <li sec:authorize="isAuthenticated() && hasRole('AMMINISTRATORE')" class="nav-item">
-                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/admin/manageUsers') ? 'active' : ''}" href="/admin/manageUsers" text="#{common.manageUsers}"></a>
-                                </li>-->
+                                <li *ngIf="isAdmin()" class="nav-item">
+                                    <a [routerLinkActive]="['active']" [routerLink]="['/manage-users']">{{"Common.manageUsers" | translate}}</a>
+                                </li>
                                 <li *ngIf="loggedUser" class="ml-4 d-flex align-items-center justify-content-end">
                                     <a class="p-0" [routerLink]="['/profile']">
                                         <img *ngIf="loggedUser.avatar" src="{{loggedUser.avatar}}" alt="profile avatar" class="profile">

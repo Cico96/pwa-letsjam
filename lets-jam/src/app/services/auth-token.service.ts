@@ -10,11 +10,11 @@ export class AuthTokenService {
   getAuthToken() {
 
     return localStorage.getItem('token');
-    
+
   }
 
   isAuthenticated(): boolean {
-    
+
     if(localStorage.getItem('token')) {
       return true;
     }else {
@@ -22,5 +22,14 @@ export class AuthTokenService {
     }
 
   }
-  
+
+  isAdmin(): boolean {
+    let usr = localStorage.getItem('user')
+    if (usr) {
+      let user = JSON.parse(usr)
+      return user.role == 'AMMINISTRATORE';
+    }
+    return false
+  }
+
 }

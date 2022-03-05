@@ -33,6 +33,10 @@ export class HeaderComponent implements OnInit {
     return this.authToken.isAuthenticated();
   }
 
+  isAdmin(): boolean {
+    return this.authToken.isAdmin();
+  }
+
   changeLang(lang: string) {
     this.translate.use(lang).subscribe((res) => {
     })

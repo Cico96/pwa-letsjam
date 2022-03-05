@@ -18,8 +18,8 @@ import {Observable} from 'rxjs';
 import {Genre} from '../model/genre';
 import {UserIdGenresBody} from '../model/requests-model/userIdGenresBody';
 
-import {BASE_PATH} from './configuration-api/variables';
-import {Configuration} from './configuration-api/configuration';
+import { BASE_PATH, COLLECTION_FORMATS } from '../services/configuration-api/variables';
+import { Configuration } from '../services/configuration-api/configuration';
 
 
 @Injectable({

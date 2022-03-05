@@ -12,7 +12,7 @@
 
 import {Inject, Injectable, Optional} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
-import { CustomHttpUrlEncodingCodec } from './configuration-api/encoder';
+import { CustomHttpUrlEncodingCodec } from '../services/configuration-api/encoder';
 
 import {Observable} from 'rxjs';
 
@@ -24,8 +24,8 @@ import {UserIdGenresBody} from '../model/requests-model/userIdGenresBody';
 import {UserIdInstrumentsBody} from '../model/requests-model/userIdInstrumentsBody';
 import {UserUserIdBody} from '../model/requests-model/userUserIdBody';
 
-import {BASE_PATH} from './configuration-api/variables';
-import {Configuration} from './configuration-api/configuration';
+import { BASE_PATH, COLLECTION_FORMATS } from '../services/configuration-api/variables';
+import { Configuration } from '../services/configuration-api/configuration';
 
 
 @Injectable({
@@ -675,21 +675,16 @@ export class UserService {
   }
 
   /**
-   * Updates specified user&#x27;s avatar
+   * Updates current logged user&#x27;s avatar
    *
-   * @param userId
    * @param body
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
    */
-  public updateUserAvatar(userId: number, body?: Object, observe?: 'body', reportProgress?: boolean): Observable<User>;
-  public updateUserAvatar(userId: number, body?: Object, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
-  public updateUserAvatar(userId: number, body?: Object, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
-  public updateUserAvatar(userId: number, body?: Object, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-
-    if (userId === null || userId === undefined) {
-      throw new Error('Required parameter userId was null or undefined when calling updateUserAvatar.');
-    }
+  public updateUserAvatar(body?: Object, observe?: 'body', reportProgress?: boolean): Observable<User>;
+  public updateUserAvatar(body?: Object, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+  public updateUserAvatar(body?: Object, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+  public updateUserAvatar(body?: Object, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
 
     let headers = this.defaultHeaders;
@@ -720,7 +715,7 @@ export class UserService {
       headers = headers.set('Content-Type', httpContentTypeSelected);
     }
 
-    return this.httpClient.request<User>('put', `${this.basePath}/user/${encodeURIComponent(String(userId))}/avatar`,
+    return this.httpClient.request<User>('put', `${this.basePath}/user/avatar`,
       {
         body: body,
         withCredentials: this.configuration.withCredentials,
