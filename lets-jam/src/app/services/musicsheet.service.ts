@@ -11,20 +11,23 @@
  *//* tslint:disable:no-unused-variable member-ordering */
 
 import { Inject, Injectable, Optional } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
-import { CustomHttpUrlEncodingCodec } from './configuration-api/encoder';
+import {
+    HttpClient, HttpHeaders, HttpParams,
+    HttpResponse, HttpEvent
+} from '@angular/common/http';
+import { CustomHttpUrlEncodingCodec } from '../services/configuration-api/encoder';
 
 import { Observable } from 'rxjs';
 
 import { Comment } from '../model/comment';
 import { MusicSheet } from '../model/music-sheet';
 import { MusicSheetData } from '../model/music-sheet-data';
-//import { string } from '../model/string';
+import { MusicsheetIdCommentBody } from '../model/requests-model/musicsheetIdCommentBody';
 import { MusicsheetMusicsheetIdBody } from '../model/requests-model/musicsheetMusicsheetIdBody';
 import { NewMusicSheet } from '../model/requests-model/new-music-sheet';
 
-import { BASE_PATH, COLLECTION_FORMATS } from './configuration-api/variables';
-import { Configuration } from './configuration-api/configuration';
+import { BASE_PATH, COLLECTION_FORMATS } from '../services/configuration-api/variables';
+import { Configuration } from '../services/configuration-api/configuration';
 
 
 @Injectable({
@@ -32,7 +35,7 @@ import { Configuration } from './configuration-api/configuration';
 })
 export class MusicsheetService {
 
-    protected basePath = 'http://192.168.1.195:8080/letsjamrestapi/rest';
+    protected basePath = 'https://letsjam.ccml.it/rest';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -70,10 +73,10 @@ export class MusicsheetService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addComment(musicsheetId: number, body?: string, parent?: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Comment>>;
-    public addComment(musicsheetId: number, body?: string, parent?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Comment>>>;
-    public addComment(musicsheetId: number, body?: string, parent?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Comment>>>;
-    public addComment(musicsheetId: number, body?: string, parent?: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public addComment(musicsheetId: number, body?: MusicsheetIdCommentBody, parent?: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Comment>>;
+    public addComment(musicsheetId: number, body?: MusicsheetIdCommentBody, parent?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Comment>>>;
+    public addComment(musicsheetId: number, body?: MusicsheetIdCommentBody, parent?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Comment>>>;
+    public addComment(musicsheetId: number, body?: MusicsheetIdCommentBody, parent?: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         if (musicsheetId === null || musicsheetId === undefined) {
             throw new Error('Required parameter musicsheetId was null or undefined when calling addComment.');
@@ -130,21 +133,16 @@ export class MusicsheetService {
      * Add like from specified user to specified musicsheet
      * 
      * @param musicsheetId 
-     * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addLike(musicsheetId: number, userId: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public addLike(musicsheetId: number, userId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public addLike(musicsheetId: number, userId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public addLike(musicsheetId: number, userId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public addLike(musicsheetId: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public addLike(musicsheetId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public addLike(musicsheetId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public addLike(musicsheetId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         if (musicsheetId === null || musicsheetId === undefined) {
             throw new Error('Required parameter musicsheetId was null or undefined when calling addLike.');
-        }
-
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling addLike.');
         }
 
         let headers = this.defaultHeaders;
@@ -169,7 +167,7 @@ export class MusicsheetService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('post', `${this.basePath}/musicsheet/${encodeURIComponent(String(musicsheetId))}/like/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.request<any>('post', `${this.basePath}/musicsheet/${encodeURIComponent(String(musicsheetId))}/like`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -302,6 +300,15 @@ export class MusicsheetService {
     public getAllMusicSheets(search?: string, sortby?: string, sortdirection?: string, genres?: Array<string>, instruments?: Array<string>, verified?: boolean, rearranged?: boolean, tablature?: boolean, pagenumber?: number, pagesize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<MusicSheet>>>;
     public getAllMusicSheets(search?: string, sortby?: string, sortdirection?: string, genres?: Array<string>, instruments?: Array<string>, verified?: boolean, rearranged?: boolean, tablature?: boolean, pagenumber?: number, pagesize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<MusicSheet>>>;
     public getAllMusicSheets(search?: string, sortby?: string, sortdirection?: string, genres?: Array<string>, instruments?: Array<string>, verified?: boolean, rearranged?: boolean, tablature?: boolean, pagenumber?: number, pagesize?: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+
+
+
+
+
+
+
+
+
 
 
         let queryParameters = new HttpParams({ encoder: new CustomHttpUrlEncodingCodec() });
@@ -525,21 +532,16 @@ export class MusicsheetService {
      * Removes like from specified user to specified musicsheet
      * 
      * @param musicsheetId 
-     * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public removeLike(musicsheetId: number, userId: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public removeLike(musicsheetId: number, userId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public removeLike(musicsheetId: number, userId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public removeLike(musicsheetId: number, userId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public removeLike(musicsheetId: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public removeLike(musicsheetId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public removeLike(musicsheetId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public removeLike(musicsheetId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         if (musicsheetId === null || musicsheetId === undefined) {
             throw new Error('Required parameter musicsheetId was null or undefined when calling removeLike.');
-        }
-
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling removeLike.');
         }
 
         let headers = this.defaultHeaders;
@@ -564,7 +566,7 @@ export class MusicsheetService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('delete', `${this.basePath}/musicsheet/${encodeURIComponent(String(musicsheetId))}/like/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.request<any>('delete', `${this.basePath}/musicsheet/${encodeURIComponent(String(musicsheetId))}/like`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

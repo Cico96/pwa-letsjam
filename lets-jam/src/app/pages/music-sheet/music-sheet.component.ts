@@ -9,6 +9,7 @@ import { MusicsheetMusicsheetIdBody } from 'src/app/model/requests-model/musicsh
 import { CommentService } from 'src/app/services/comment.service';
 import { MusicsheetService } from 'src/app/services/musicsheet.service';
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import { RefreshTokenService } from 'src/app/services/refresh-token.service';
 
 @Component({
   selector: 'app-music-sheet',
@@ -29,6 +30,8 @@ export class MusicSheetComponent implements OnInit {
   answerId?: number;
   urlXML!: SafeResourceUrl;
   urlPNG!: any;
+
+  like: boolean = false;
 
   @ViewChild(FlatComponent) child!: FlatComponent;
 
@@ -100,29 +103,46 @@ export class MusicSheetComponent implements OnInit {
     })
   }
 
-  downloadXml(event: any) {
+  download(event: any) {
     if (event) {
       this.child.embed.getMusicXML().then( (r: any) => {
         const blob = new Blob([r], { type: "application/xml" });
         this.urlXML = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
       });
+      this.child.embed.getPNG({
+        result: "dataURL",
+        layout: "page",
+        dpi: 300,
+      })
+      .then((r: any) => {
+        this.urlPNG = r;
+      });
     }
   }
+  
 
-  downloadPNG() {
-    this.child.embed.getPNG({
-      result: "dataURL",
-      layout: "page",
-      dpi: 300,
-    })
-    .then((r: any) => {
-      this.urlPNG = r;
-    })
-    console.log(this.urlPNG)
-  }
 
   print() {
     this.child.embed.print();
+  }
+
+  likeDislike() {
+    
+    if(this.like == false) {
+      this.musicSheetService.addLike(this.musicSheet.id).subscribe(() => {
+        this.musicSheetService.getMusicSheetById(this.musicSheet.id).subscribe((ms) => {
+          this.musicSheet = ms;
+        })
+      });
+      this.like = true;
+    } else {
+      this.musicSheetService.removeLike(this.musicSheet.id).subscribe(() => {
+        this.musicSheetService.getMusicSheetById(this.musicSheet.id).subscribe((ms) => {
+          this.musicSheet = ms;
+        })
+      })
+      this.like = false;
+    }
   }
 
 
