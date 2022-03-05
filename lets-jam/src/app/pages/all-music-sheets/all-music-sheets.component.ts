@@ -49,7 +49,6 @@ export class AllMusicSheetsComponent implements OnInit {
       search: new FormControl(''),
       genres: new FormControl(''),
       instruments: new FormControl(''),
-      sortDirection: new FormControl(''),
       sortBy: new FormControl(''),
       filter: new FormControl(''),
     });

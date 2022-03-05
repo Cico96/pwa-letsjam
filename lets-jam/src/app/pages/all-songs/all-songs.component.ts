@@ -17,6 +17,7 @@ export class AllSongsComponent implements OnInit {
   page: number = 1;
 
   sidebarForm!: FormGroup
+  search?: string;
 
   constructor(private fb: FormBuilder, private gs: GenreService, private ss: SongService) {
     this.sidebarForm = this.fb.group({

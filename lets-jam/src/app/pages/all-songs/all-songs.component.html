@@ -7,8 +7,8 @@
                 <div class="sidebar">
                     <form [formGroup]="sidebarForm" id="sidebar-form">
                         <div class="search mb-5">
-<!--                            <svg th:replace="fragments/icons :: search"></svg>-->
-                            <input type="text" [placeholder]="'Common.search' | translate">
+                            <img src="../../../assets/icons/search.svg">
+                            <input type="text" [placeholder]="'Common.search' | translate" [(ngModel)]="search">
                         </div>
 
 
@@ -34,16 +34,6 @@
                                   <img src="assets/icons/sort.svg"/>
                                 </div>
                                 <h4 style="color: white;"> {{"Common.sortBy" | translate}} </h4>
-                                <div class="option-icon sort-direction">
-                                    <div *ngIf="sidebarForm.get('sortdirection')?.value == 'ASC'">
-                                      <img src="assets/icons/sortAsc.svg"/>
-                                    </div>
-                                    <div *ngIf="sidebarForm.get('sortdirection')?.value == 'DESC'" >
-                                      <img src="assets/icons/sortDesc.svg"/>
-                                    </div>
-                                    <input *ngIf="sidebarForm.get('sortdirection')?.value == 'ASC'" type="text" name="sortDirection" value="ASC" formControlName="sortDirection" hidden>
-                                    <input *ngIf="sidebarForm.get('sortdirection')?.value == 'DESC'" type="text" name="sortDirection" value="DESC" formControlName="sortDirection" hidden>
-                                </div>
                             </div>
 
                             <div class="sub-option-container">
@@ -112,6 +102,11 @@
                                 </div>
                             </div>
                         </div>
+                        <button type="submit" id="rearrange-submit" class="button wow fadeInUp submit mt-4" data-wow-delay=".7s"
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content; border-width: inherit;
+                                background-color: transparent;">
+                            <a class="btn">{{"Common.search" | translate}}</a>
+                        </button>
                     </form>
                 </div>
                 <div class="col pt-4 pb-4 pl-4 relative" style="padding: 20px;overflow-y: scroll; overflow-x:hidden">
