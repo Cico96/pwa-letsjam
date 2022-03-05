@@ -3379,6 +3379,10 @@ blockquote span {
   color: #333;
 }
 
+button {
+  border:none;
+}
+
 .sidebar .widget.search-widget form button {
   border: none;
   position: absolute;
@@ -5173,7 +5177,7 @@ blockquote span {
   background-position: bottom;
   text-align: center;
   height: 600px;
-} 
+}
 
 .single-service h3{
   line-height: normal;
