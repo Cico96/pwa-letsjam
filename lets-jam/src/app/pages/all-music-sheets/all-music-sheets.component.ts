@@ -50,7 +50,7 @@ export class AllMusicSheetsComponent implements OnInit {
       genres: new FormControl(''),
       instruments: new FormControl(''),
       sortBy: new FormControl(''),
-      filter: new FormControl(''),
+      filter: new FormControl('')
     });
 
   }

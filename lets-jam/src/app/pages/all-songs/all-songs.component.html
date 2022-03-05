@@ -5,10 +5,10 @@
     <section class="hero-area">
             <div class="row">
                 <div class="sidebar">
-                    <form [formGroup]="sidebarForm" id="sidebar-form">
+                    <form [formGroup]="sidebarForm" id="sidebar-form" (ngSubmit)="searchResult()">
                         <div class="search mb-5">
                             <img src="../../../assets/icons/search.svg">
-                            <input type="text" [placeholder]="'Common.search' | translate" [(ngModel)]="search">
+                            <input type="text" [placeholder]="'Common.search' | translate" formControlName="search" [(ngModel)]="search">
                         </div>
 
 
@@ -22,7 +22,7 @@
 
                             <div class="sub-option-container">
                                 <div class="checkbox-option" *ngFor="let genre of genres">
-                                    <input type="checkbox" class="form-check-input" value="{{genre.name}}" formControlName="genres">
+                                    <input type="checkbox" class="form-check-input" [value]="genre.name" formControlName="genres" (change)="genresValues($event)">
                                     <p>{{genre.name}}</p>
                                 </div>
                             </div>
@@ -38,19 +38,19 @@
 
                             <div class="sub-option-container">
                                 <div class="radio-option">
-                                    <input type="radio" class="form-check-input" value="title" name="sortBy" formControlName="sortBy">
+                                    <input type="radio" class="form-check-input" value="TITLE"  formControlName="sortBy">
                                     <p> {{"Common.title" | translate}} </p>
                                 </div>
                                 <div class="radio-option">
-                                    <input type="radio" class="form-check-input" name="sortBy" value="albumName" formControlName="sortBy">
+                                    <input type="radio" class="form-check-input" value="ALBUMNAME" formControlName="sortBy">
                                     <p> {{"Common.albumName" | translate}}</p>
                                 </div>
                                 <div class="radio-option">
-                                    <input type="radio" class="form-check-input" name="sortBy" value="createDateTime" formControlName="sortBy">
+                                    <input type="radio" class="form-check-input" value="CREATEDATETIME" formControlName="sortBy">
                                     <p> {{"Common.songDate" | translate}}</p>
                                 </div>
                                 <div class="radio-option">
-                                    <input type="radio" class="form-check-input" name="sortBy" value="duration" formControlName="sortBy">
+                                    <input type="radio" class="form-check-input" name="sortBy" value="DURATION" formControlName="sortBy">
                                     <p> {{"Common.duration" | translate}}</p>
                                 </div>
                             </div>
@@ -89,15 +89,15 @@
                             </div>
 
                             <div class="sub-option-container">
-                                <div class="checkbox-option">
-                                    <input type="checkbox" formControlName="explicit" class="form-check-input">
+                                <div class="radio-option">
+                                    <input type="radio" formControlName="filter" class="form-check-input" value="explicit">
                                     <p>{{"Common.isExplicit" | translate}}</p>
                                 </div>
                             </div>
 
                             <div class="sub-option-container">
-                                <div class="checkbox-option">
-                                    <input type="checkbox" formControlName="hasLyrics" class="form-check-input">
+                                <div class="radio-option">
+                                    <input type="radio" formControlName="filter" class="form-check-input" value="hasLyrics">
                                     <p>{{"Common.hasLyrics" | translate}}</p>
                                 </div>
                             </div>

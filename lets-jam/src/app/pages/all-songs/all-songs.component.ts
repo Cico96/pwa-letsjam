@@ -18,15 +18,15 @@ export class AllSongsComponent implements OnInit {
 
   sidebarForm!: FormGroup
   search?: string;
+  genresName?: Array<string>;
 
   constructor(private fb: FormBuilder, private gs: GenreService, private ss: SongService) {
     this.sidebarForm = this.fb.group({
+      search: new FormControl(''),
       genres: new FormControl('', []),
-      sortDirection: new FormControl('', []),
       sortBy: new FormControl('', []),
       albumType: new FormControl('', []),
-      explicit: new FormControl('', []),
-      hasLyrics: new FormControl('', []),
+      filter: new FormControl('')
     });
   }
 
@@ -41,6 +41,34 @@ export class AllSongsComponent implements OnInit {
 
   pageChanged(num: number){
     this.page = num;
+  }
+
+  genresValues($event: any) {
+
+    if(this.genresName == undefined) {
+      this.genresName = [];
+    }if(this.genresName != undefined && this.genresName?.includes($event.target.defaultValue)){
+      this.genresName = this.genresName.filter((g) => g !== $event.target.defaultValue);
+    }else {
+      this.genresName?.push($event.target.defaultValue)
+    }
+
+  }
+
+  searchResult() {
+    
+    let explicit;
+    let hasLyrics;
+    
+    if(Boolean(this.sidebarForm.get('filter')?.value)) {
+      explicit = true;
+    }else {
+      hasLyrics = true;
+    }
+
+    this.ss.getSongs(this.search, this.sidebarForm.get('sortBy')?.value, undefined, this.genresName, explicit, hasLyrics, this.sidebarForm.get('albumType')?.value).subscribe((s) => {
+      this.songs = s;
+    })
   }
 
 }
