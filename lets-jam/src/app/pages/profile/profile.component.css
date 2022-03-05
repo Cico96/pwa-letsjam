@@ -1,0 +1,13 @@
+.modifyProfileWrapper {
+  height: 80px;
+  width: 100%;
+}
+
+.navbar-brand {
+  height: 100%;
+}
+
+.navbar-brand img {
+  height: 100%;
+  width: auto;
+}

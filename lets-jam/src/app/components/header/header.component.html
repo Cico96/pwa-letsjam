@@ -25,51 +25,39 @@
                         </button>
 
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                            <!--<p class="lang" style="display: none;" th:text="${#locale}"></p>-->
+                            <!--<p class="lang" style="display: none;" text="${#locale}"></p>-->
                             <p class="lang" style="display: none;"></p>
                             <ul id="nav" class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a [routerLink]="['/home']">Home</a>
+                                    <a [routerLink]="['/home']" [routerLinkActive]="['active']">Home</a>
                                 </li>
-                                <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
-                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/musicsheets/') ? 'active' : ''}" href="/musicsheets/" th:text="#{common.musicsheets}"></a>
-                                </li>-->
                                 <li class="nav-item">
-                                    <a [routerLink]="['/musicsheets']">{{"Common.musicSheets" | translate}}</a>
+                                    <a [routerLink]="['/musicsheets']" [routerLinkActive]="['active']">{{"Common.musicSheets" | translate}}</a>
                                 </li>
-                                <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
-                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/songs/') ? 'active' : ''}" href="/songs/" th:text="#{common.songs}"></a>
-                                </li>-->
                                 <li class="nav-item">
-                                    <a [routerLink]="['/songs']">{{"Common.songs" | translate}}</a>
+                                    <a [routerLink]="['/songs']" [routerLinkActive]="['active']">{{"Common.songs" | translate}}</a>
                                 </li>
-                                <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
-                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/musicsheets/create') ? 'active' : ''}" href="/musicsheets/create" th:text="#{common.createupload}"></a>
-                                </li>-->
                                 <li class="nav-item">
-                                    <a [routerLink]="['/create-upload']">{{"Common.createUpload" | translate}}</a>
+                                    <a [routerLink]="['/create-upload']" [routerLinkActive]="['active']">{{"Common.createUpload" | translate}}</a>
                                 </li>
-                                <!--<li sec:authorize="isAnonymous() || (isAuthenticated() && hasRole('UTENTE'))" class="nav-item">
-                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/about-us') ? 'active' : ''}" href="/about-us" th:text="#{common.aboutus}"></a>
-                                </li>-->
                                 <li class="nav-item">
-                                    <a [routerLink]="['/about-us']">{{"Common.aboutus" | translate}}</a>
+                                    <a [routerLink]="['/about-us']" [routerLinkActive]="['active']">{{"Common.aboutus" | translate}}</a>
                                 </li>
                                 <!--<li sec:authorize="isAuthenticated() && hasRole('AMMINISTRATORE')" class="nav-item">
-                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/admin/verifyMusicsheet') ? 'active' : ''}" href="/admin/verifyMusicsheet" th:text="#{common.verifyMusicsheets}"></a>
+                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/admin/verifyMusicsheet') ? 'active' : ''}" href="/admin/verifyMusicsheet" text="#{common.verifyMusicsheets}"></a>
                                 </li>
                                 <li sec:authorize="isAuthenticated() && hasRole('AMMINISTRATORE')" class="nav-item">
-                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/admin/manageUsers') ? 'active' : ''}" href="/admin/manageUsers" th:text="#{common.manageUsers}"></a>
-                                </li>
-                                <li class="ml-4 d-flex align-items-center justify-content-end">
-                                    <a class="p-0" th:with="loggedUser=${#authentication.getPrincipal().getUser()}" sec:authorize="isAuthenticated()" href="/profilo">
-                                        <img th:if="${loggedUser.avatar}" th:src="${loggedUser.avatar}" alt="profile avatar" class="profile">
-                                        <img th:unless="${loggedUser.avatar}" th:src="'https://avatars.dicebear.com/api/male/'+${loggedUser.firstname}+'.svg'" alt="profile avatar" class="profile">
+                                    <a th:class="''+${#httpServletRequest.requestURI.equals('/admin/manageUsers') ? 'active' : ''}" href="/admin/manageUsers" text="#{common.manageUsers}"></a>
+                                </li>-->
+                                <li *ngIf="loggedUser" class="ml-4 d-flex align-items-center justify-content-end">
+                                    <a class="p-0" [routerLink]="['/profile']">
+                                        <img *ngIf="loggedUser.avatar" src="{{loggedUser.avatar}}" alt="profile avatar" class="profile">
+                                        <img *ngIf="!loggedUser.avatar" src="https://avatars.dicebear.com/api/male/{{loggedUser.firstname}}.svg" alt="profile avatar" class="profile">
                                     </a>
                                 </li>
-                                <li class="nav-item ml-2" sec:authorize="isAuthenticated()">
-                                    <a sec:authentication="name" th:class="''+${#httpServletRequest.requestURI.equals('/profilo') ? 'active' : ''}" href="/profilo"></a>
-                                </li>-->
+                                <li *ngIf="loggedUser" class="nav-item ml-2">
+                                    <a [routerLink]="['/profile']" [routerLinkActive]="['active']">{{loggedUser.firstname}}</a>
+                                </li>
                                 <li class="nav-item flag-container" (click)="changeLang('en')" *ngIf="currentLang == 'it'"  style="height: 50px; margin-top: 17px;"><img style="height: 100%;" src="../../../assets/img/i18n/it-flag.png" alt="it"></li>
                                 <li class="nav-item flag-container" (click)="changeLang('it')" *ngIf="currentLang == 'en'"  style="height: 50px; margin-top: 17px;"><img style="height: 100%;" src="../../../assets/img/i18n/uk-flag.png" alt="en"></li>
                             </ul>
