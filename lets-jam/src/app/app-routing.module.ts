@@ -13,6 +13,10 @@ import { AuthGuardService } from './services/guards/auth-guard.service';
 import {ProfileComponent} from "./pages/profile/profile.component";
 import { RearrangeMusicSheetComponent } from './pages/rearrange-music-sheet/rearrange-music-sheet.component';
 import {ModifyProfileComponent} from "./pages/modify-profile/modify-profile.component";
+import {AuthorizeUserGuardService} from "./services/guards/authorize-user-guard.service";
+import {AdminVerifySheetsComponent} from "./pages/admin-verify-sheets/admin-verify-sheets.component";
+import {AdminManageUsersComponent} from "./pages/admin-manage-users/admin-manage-users.component";
+import {AuthorizeAdminGuardService} from "./services/guards/authorize-admin-guard.service";
 
 const routes: Routes = [
   {
@@ -34,21 +38,22 @@ const routes: Routes = [
   {
     path: 'musicsheets',
     component: AllMusicSheetsComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService, AuthorizeUserGuardService]
   },
   {
     path: 'songs',
     component: AllSongsComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService, AuthorizeUserGuardService]
   },
   {
     path: 'song/:id',
-    component: SongComponent
+    component: SongComponent,
+    canActivate: [AuthGuardService, AuthorizeUserGuardService]
   },
   {
     path: 'create-upload',
     component: CreateUploadComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService, AuthorizeUserGuardService]
   },
   {
     path: 'about-us',
@@ -56,19 +61,33 @@ const routes: Routes = [
   },
   {
     path: 'musicSheet/:id',
-    component: MusicSheetComponent
+    component: MusicSheetComponent,
+    canActivate: [AuthGuardService, AuthorizeUserGuardService]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'modify-profile',
-    component: ModifyProfileComponent
+    component: ModifyProfileComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'rearrangeMusicSheet/:id',
-    component: RearrangeMusicSheetComponent
+    component: RearrangeMusicSheetComponent,
+    canActivate: [AuthGuardService, AuthorizeUserGuardService]
+  },
+  {
+    path: 'verify-sheets',
+    component: AdminVerifySheetsComponent,
+    canActivate: [AuthGuardService, AuthorizeAdminGuardService]
+  },
+  {
+    path: 'manage-users',
+    component: AdminManageUsersComponent,
+    canActivate: [AuthGuardService, AuthorizeAdminGuardService]
   }
 ];
 

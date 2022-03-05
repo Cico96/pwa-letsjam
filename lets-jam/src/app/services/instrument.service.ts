@@ -10,260 +10,258 @@
  * Do not edit the class manually.
  *//* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
+import {Inject, Injectable, Optional} from '@angular/core';
+import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { CustomHttpUrlEncodingCodec } from '../services/configuration-api/encoder';
 
-import { Observable } from 'rxjs';
-import { Instrument } from '../model/instrument';
-import { UserIdInstrumentsBody } from '../model/requests-model/userIdInstrumentsBody';
+import {Observable} from 'rxjs';
+
+import {Instrument} from '../model/instrument';
+import {UserIdInstrumentsBody} from '../model/requests-model/userIdInstrumentsBody';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../services/configuration-api/variables';
 import { Configuration } from '../services/configuration-api/configuration';
 
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class InstrumentService {
 
-    protected basePath = 'https://letsjam.ccml.it/rest';
-    public defaultHeaders = new HttpHeaders();
-    public configuration = new Configuration();
+  protected basePath = 'https://letsjam.ccml.it/rest';
+  public defaultHeaders = new HttpHeaders();
+  public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-        if (basePath) {
-            this.basePath = basePath;
-        }
-        if (configuration) {
-            this.configuration = configuration;
-            this.basePath = basePath || configuration.basePath || this.basePath;
-        }
+  constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    if (basePath) {
+      this.basePath = basePath;
+    }
+    if (configuration) {
+      this.configuration = configuration;
+      this.basePath = basePath || configuration.basePath || this.basePath;
+    }
+  }
+
+  /**
+   * @param consumes string[] mime-types
+   * @return true: consumes contains 'multipart/form-data', false: otherwise
+   */
+  private canConsumeForm(consumes: string[]): boolean {
+    const form = 'multipart/form-data';
+    for (const consume of consumes) {
+      if (form === consume) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  /**
+   * Adds specified instrument from specified user&#x27;s preferred instruments
+   *
+   * @param userId
+   * @param body
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public addPreferredInstrument(userId: number, body?: UserIdInstrumentsBody, observe?: 'body', reportProgress?: boolean): Observable<any>;
+  public addPreferredInstrument(userId: number, body?: UserIdInstrumentsBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+  public addPreferredInstrument(userId: number, body?: UserIdInstrumentsBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+  public addPreferredInstrument(userId: number, body?: UserIdInstrumentsBody, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+
+    if (userId === null || userId === undefined) {
+      throw new Error('Required parameter userId was null or undefined when calling addPreferredInstrument.');
     }
 
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (const consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
+
+    let headers = this.defaultHeaders;
+
+    // authentication (bearerAuth) required
+    if (this.configuration.accessToken) {
+      const accessToken = typeof this.configuration.accessToken === 'function'
+        ? this.configuration.accessToken()
+        : this.configuration.accessToken;
+      headers = headers.set('Authorization', 'Bearer ' + accessToken);
+    }
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = [
+      'text/plain'
+    ];
+    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
     }
 
-
-    /**
-     * Adds specified instrument from specified user&#x27;s preferred instruments
-     * 
-     * @param userId 
-     * @param body 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public addPreferredInstrument(userId: number, body?: UserIdInstrumentsBody, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public addPreferredInstrument(userId: number, body?: UserIdInstrumentsBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public addPreferredInstrument(userId: number, body?: UserIdInstrumentsBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public addPreferredInstrument(userId: number, body?: UserIdInstrumentsBody, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling addPreferredInstrument.');
-        }
-
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearerAuth) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'text/plain'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<any>('post', `${this.basePath}/user/${encodeURIComponent(String(userId))}/instruments`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
+    // to determine the Content-Type header
+    const consumes: string[] = [
+      'application/json'
+    ];
+    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+    if (httpContentTypeSelected != undefined) {
+      headers = headers.set('Content-Type', httpContentTypeSelected);
     }
 
-    /**
-     * Gets all the instruments
-     * 
-     * @param name 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getAllInstruments(name?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Instrument>>;
-    public getAllInstruments(name?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Instrument>>>;
-    public getAllInstruments(name?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Instrument>>>;
-    public getAllInstruments(name?: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    return this.httpClient.request<any>('post', `${this.basePath}/user/${encodeURIComponent(String(userId))}/instruments`,
+      {
+        body: body,
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: observe,
+        reportProgress: reportProgress
+      }
+    );
+  }
+
+  /**
+   * Gets all the instruments
+   *
+   * @param name
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public getAllInstruments(name?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Instrument>>;
+  public getAllInstruments(name?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Instrument>>>;
+  public getAllInstruments(name?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Instrument>>>;
+  public getAllInstruments(name?: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
 
-        let queryParameters = new HttpParams({ encoder: new CustomHttpUrlEncodingCodec() });
-        if (name !== undefined && name !== null) {
-            queryParameters = queryParameters.set('name', <any>name);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearerAuth) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'text/plain'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<Array<Instrument>>('get', `${this.basePath}/instruments`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
+    let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+    if (name !== undefined && name !== null) {
+      queryParameters = queryParameters.set('name', <any>name);
     }
 
-    /**
-     * Gets user&#x27;s preferred instruments
-     * 
-     * @param userId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getUserPreferredInstruments(userId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Instrument>>;
-    public getUserPreferredInstruments(userId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Instrument>>>;
-    public getUserPreferredInstruments(userId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Instrument>>>;
-    public getUserPreferredInstruments(userId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    let headers = this.defaultHeaders;
 
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling getUserPreferredInstruments.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (bearerAuth) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'text/plain'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<Array<Instrument>>('get', `${this.basePath}/user/${encodeURIComponent(String(userId))}/instruments`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
+    // authentication (bearerAuth) required
+    if (this.configuration.accessToken) {
+      const accessToken = typeof this.configuration.accessToken === 'function'
+        ? this.configuration.accessToken()
+        : this.configuration.accessToken;
+      headers = headers.set('Authorization', 'Bearer ' + accessToken);
+    }
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = [
+      'application/json',
+      'text/plain'
+    ];
+    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
     }
 
-    /**
-     * Removes specified instrument from specified user&#x27;s preferred instruments
-     * 
-     * @param userId 
-     * @param instrumentId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public removePreferredInstrument(userId: number, instrumentId: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public removePreferredInstrument(userId: number, instrumentId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public removePreferredInstrument(userId: number, instrumentId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public removePreferredInstrument(userId: number, instrumentId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    // to determine the Content-Type header
+    const consumes: string[] = [];
 
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling removePreferredInstrument.');
-        }
+    return this.httpClient.request<Array<Instrument>>('get', `${this.basePath}/instruments`,
+      {
+        params: queryParameters,
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: observe,
+        reportProgress: reportProgress
+      }
+    );
+  }
 
-        if (instrumentId === null || instrumentId === undefined) {
-            throw new Error('Required parameter instrumentId was null or undefined when calling removePreferredInstrument.');
-        }
+  /**
+   * Gets user&#x27;s preferred instruments
+   *
+   * @param userId
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public getUserPreferredInstruments(userId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Instrument>>;
+  public getUserPreferredInstruments(userId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Instrument>>>;
+  public getUserPreferredInstruments(userId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Instrument>>>;
+  public getUserPreferredInstruments(userId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
-        let headers = this.defaultHeaders;
-
-        // authentication (bearerAuth) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'text/plain'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<any>('delete', `${this.basePath}/user/${encodeURIComponent(String(userId))}/instruments/${encodeURIComponent(String(instrumentId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
+    if (userId === null || userId === undefined) {
+      throw new Error('Required parameter userId was null or undefined when calling getUserPreferredInstruments.');
     }
+
+    let headers = this.defaultHeaders;
+
+    // authentication (bearerAuth) required
+    if (this.configuration.accessToken) {
+      const accessToken = typeof this.configuration.accessToken === 'function'
+        ? this.configuration.accessToken()
+        : this.configuration.accessToken;
+      headers = headers.set('Authorization', 'Bearer ' + accessToken);
+    }
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = [
+      'application/json',
+      'text/plain'
+    ];
+    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    }
+
+    // to determine the Content-Type header
+    const consumes: string[] = [];
+
+    return this.httpClient.request<Array<Instrument>>('get', `${this.basePath}/user/${encodeURIComponent(String(userId))}/instruments`,
+      {
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: observe,
+        reportProgress: reportProgress
+      }
+    );
+  }
+
+  /**
+   * Removes specified instrument from specified user&#x27;s preferred instruments
+   *
+   * @param userId
+   * @param instrumentId
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public removePreferredInstrument(userId: number, instrumentId: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+  public removePreferredInstrument(userId: number, instrumentId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+  public removePreferredInstrument(userId: number, instrumentId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+  public removePreferredInstrument(userId: number, instrumentId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+
+    if (userId === null || userId === undefined) {
+      throw new Error('Required parameter userId was null or undefined when calling removePreferredInstrument.');
+    }
+
+    if (instrumentId === null || instrumentId === undefined) {
+      throw new Error('Required parameter instrumentId was null or undefined when calling removePreferredInstrument.');
+    }
+
+    let headers = this.defaultHeaders;
+
+    // authentication (bearerAuth) required
+    if (this.configuration.accessToken) {
+      const accessToken = typeof this.configuration.accessToken === 'function'
+        ? this.configuration.accessToken()
+        : this.configuration.accessToken;
+      headers = headers.set('Authorization', 'Bearer ' + accessToken);
+    }
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = [
+      'text/plain'
+    ];
+    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    }
+
+    // to determine the Content-Type header
+    const consumes: string[] = [];
+
+    return this.httpClient.request<any>('delete', `${this.basePath}/user/${encodeURIComponent(String(userId))}/instruments/${encodeURIComponent(String(instrumentId))}`,
+      {
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: observe,
+        reportProgress: reportProgress
+      }
+    );
+  }
 
 }

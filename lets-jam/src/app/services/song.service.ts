@@ -12,14 +12,14 @@
 
 import {Inject, Injectable, Optional} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
-import { CustomHttpUrlEncodingCodec } from './configuration-api/encoder';
+import { CustomHttpUrlEncodingCodec } from '../services/configuration-api/encoder';
 
 import {Observable} from 'rxjs';
 
 import {Song} from '../model/song';
 
-import {BASE_PATH} from './configuration-api/variables';
-import {Configuration} from './configuration-api/configuration';
+import { BASE_PATH, COLLECTION_FORMATS } from '../services/configuration-api/variables';
+import { Configuration } from '../services/configuration-api/configuration';
 
 
 @Injectable({

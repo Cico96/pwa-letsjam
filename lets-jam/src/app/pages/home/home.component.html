@@ -109,7 +109,7 @@
                         <p class="wow fadeInUp" data-wow-delay=".6s">{{"Home.mostpopular_description" | translate}}</p>
                     </div>
 
-                  <app-music-sheet-card *ngFor="let musicSheet of musicSheetsByLikes" [musicSheet]="musicSheet"></app-music-sheet-card>
+                  <app-music-sheet-card *ngFor="let musicSheet of musicSheetsByLikes" [routerLink]="['/musicSheet',musicSheet.id]" [musicSheet]="musicSheet"></app-music-sheet-card>
 
                     <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="../../../assets/img/service-patern.png" alt="#"
                     style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 287px;right: -25px;">

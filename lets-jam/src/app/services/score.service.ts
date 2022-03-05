@@ -12,17 +12,18 @@
 
 import {Inject, Injectable, Optional} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
-import { CustomHttpUrlEncodingCodec } from './configuration-api/encoder';
+import { CustomHttpUrlEncodingCodec } from '../services/configuration-api/encoder';
 
 import {Observable} from 'rxjs';
 
-import {InlineResponse2001} from "../model/requests-model/inlineResponse2001";
-import {ScoreAnalyzeBody} from "../model/requests-model/scoreAnalyzeBody";
-import {ScorePartsBody} from "../model/requests-model/scorePartsBody";
+import {InlineResponse200} from '../model/requests-model/inlineResponse200';
+import {InlineResponse2001} from '../model/requests-model/inlineResponse2001';
+import {ScoreAnalyzeBody} from '../model/requests-model/scoreAnalyzeBody';
+import {ScorePartsBody} from '../model/requests-model/scorePartsBody';
 
-import {BASE_PATH} from './configuration-api/variables';
-import {Configuration} from './configuration-api/configuration';
-import {InlineResponse200} from "../model/requests-model/inlineResponse200";
+import { BASE_PATH, COLLECTION_FORMATS } from '../services/configuration-api/variables';
+import { Configuration } from '../services/configuration-api/configuration';
+
 
 @Injectable({
   providedIn: 'root'
