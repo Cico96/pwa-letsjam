@@ -4,10 +4,10 @@
     <section class="hero-area">
         <div class="row">
             <div class="sidebar">
-                <form [formGroup]="sidebarForm" id="sidebar-form">
+                <form [formGroup]="sidebarForm" id="sidebar-form" (ngSubmit)="searchResult()">
                     <div class="search mb-5">
                         <img src="../../../assets/icons/search.svg">
-                        <input type="text" [placeholder]="'Common.search' | translate" formControlName="search" >
+                        <input type="text" [placeholder]="'Common.search' | translate" formControlName="search" [(ngModel)]="search">
                     </div>
 
 
@@ -21,7 +21,7 @@
 
                         <div class="sub-option-container">
                             <div class="checkbox-option" *ngFor="let genre of genres">
-                                <input type="checkbox" class="form-check-input" formControlName="genres" [value]="genre.name" >
+                                <input type="checkbox" class="form-check-input" formControlName="genres" [value]="genre.name" (change)="genresValues($event)">
                                 <p style="text-transform: capitalize;">{{genre.name}}</p>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
 
                         <div class="sub-option-container">
                             <div class="checkbox-option" *ngFor="let instrument of instruments">
-                                <input type="checkbox" class="form-check-input" formControlName="instruments" >
+                                <input type="checkbox" class="form-check-input" formControlName="instruments" [value]="instrument.name" (change)="instrumetsValues($event)">
                                 <p style="text-transform: capitalize;">{{instrument.name}}</p>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                                 <img src="../../../assets/icons/sort.svg">
                             </div>
                             <h4 style="color: white;">{{"Common.sort" | translate}}</h4>
-                            <div class="option-icon sort-direction">
+                            <!--<div class="option-icon sort-direction">
 
                                 <div *ngIf="sidebarForm.get('sortDirection')?.value == 'ASC'">
                                     <img src="../../../assets/icons/sortAsc.svg">
@@ -62,25 +62,25 @@
                                 <input *ngIf="sidebarForm.get('sortDirection')?.value == 'DESC'" type="text"
                                     formControlName="sortDirection" value="DESC" hidden >
 
-                            </div>
+                            </div>-->
                         </div>
 
                         <div class="sub-option-container">
                             <div class="radio-option">
-                                <input type="radio" class="form-check-input" formControlName="sortBy" value="title" >
+                                <input type="radio" class="form-check-input" formControlName="sortBy" value="TITLE" >
                                 <p>{{"Common.title" | translate}}</p>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" class="form-check-input" formControlName="sortBy" value="song.title" >
+                                <input type="radio" class="form-check-input" formControlName="sortBy" value="SONGTITLE" >
                                 <p>{{"Common.song_name" | translate}}</p>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" class="form-check-input" formControlName="sortBy" value="createDateTime" >
+                                <input type="radio" class="form-check-input" formControlName="sortBy" value="CREATEDATETIME" >
                                 <p>{{"Common.creation_date" | translate}}</p>
                             </div>
                             <div class="radio-option">
                                 <input type="radio" class="form-check-input" formControlName="sortBy"
-                                    value="likes.size">
+                                    value="LIKES">
                                 <p>{{"Common.likes" | translate}}</p>
                             </div>
                         </div>
@@ -95,17 +95,16 @@
                         </div>
 
                         <div class="sub-option-container">
-                            <div class="checkbox-option">
-                                <input type="checkbox" class="form-check-input" formControlName="verified">
+                            <div class="radio-option">
+                                <input type="radio" class="form-check-input" formControlName="filter" value="verified">
                                 <p>{{"MusicSheet.verified" | translate}}</p>
                             </div>
-                            <div class="checkbox-option">
-                                <input type="checkbox" class="form-check-input" formControlName="rearranged">
+                            <div class="radio-option">
+                                <input type="radio" class="form-check-input" formControlName="filter" value="rearrange">
                                 <p>{{"MusicSheet.rearranged" | translate}}</p>
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" formControlName="pageNumber">
                     <button type="submit" id="rearrange-submit" class="button wow fadeInUp submit mt-4" data-wow-delay=".7s"
                                 style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content; border-width: inherit;
                                 background-color: transparent;">

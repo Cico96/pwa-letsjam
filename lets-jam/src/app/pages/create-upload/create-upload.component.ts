@@ -28,7 +28,7 @@ export class CreateUploadComponent implements OnInit {
   instrumentsSelected?: Array<string>
   file?: any;
   score: string = '';
-  sheetTitle?: string;
+  sheetTitle?: string;  
   sheetAuthor?: string;
   newSheetForm!: FormGroup;
 
