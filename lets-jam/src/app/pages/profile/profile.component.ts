@@ -4,6 +4,8 @@ import {User} from "../../model/user";
 import {Genre} from "../../model/genre";
 import {Instrument} from "../../model/instrument";
 import {UserService} from "../../services/user.service";
+import {MusicsheetService} from "../../services/musicsheet.service";
+import {MusicSheet} from "../../model/music-sheet";
 
 @Component({
   selector: 'app-profile',
@@ -15,8 +17,9 @@ export class ProfileComponent implements OnInit {
   loggedUser!: User;
   prefererdGenres!: Array<Genre>
   preferredInstruments!:Array<Instrument>
+  myMusicSheets!:Array<MusicSheet>
 
-  constructor(private rts: RefreshTokenService, private us: UserService) { }
+  constructor(private rts: RefreshTokenService, private us: UserService, private mss: MusicsheetService) { }
 
   ngOnInit(): void {
     this.loggedUser = this.rts.getLoggedUser()
@@ -28,6 +31,10 @@ export class ProfileComponent implements OnInit {
         this.preferredInstruments = response;
       })
     }
+
+    this.mss.getAllMusicSheets().subscribe((data) => {
+      this.myMusicSheets = data.filter((sheet) =>  sheet.user.id == this.loggedUser.id )
+    })
   }
 
 }

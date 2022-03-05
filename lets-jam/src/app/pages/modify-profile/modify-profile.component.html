@@ -13,7 +13,7 @@
             <div class="left-column">
               <img class="new-avatar" id="frame" src="#">
               <img *ngIf="loggedUser.avatar" src="{{loggedUser.avatar}}" alt="profile avatar" class="profile-avatar">
-              <img *ngIf="!loggedUser.avatar" src="'https://avatars.dicebear.com/api/male/'+{{loggedUser.firstname}}+'.svg'" alt="profile avatar" class="profile-avatar">
+              <img *ngIf="!loggedUser.avatar" src="https://avatars.dicebear.com/api/male/{{loggedUser.firstname}}.svg" alt="profile avatar" class="profile-avatar">
               <label name="imgInput">
                 <input name="imgInput" id="avatar" type="file" accept="image/*">
               </label>

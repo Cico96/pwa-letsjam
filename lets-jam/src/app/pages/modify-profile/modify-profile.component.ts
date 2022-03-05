@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RefreshTokenService} from "../../services/refresh-token.service";
 import {UserService} from "../../services/user.service";
 import {User} from "../../model/user";
@@ -14,9 +14,11 @@ export class ModifyProfileComponent implements OnInit {
 
   loggedUser!: User;
   prefererdGenres!: Array<Genre>
-  preferredInstruments!:Array<Instrument>
+  preferredInstruments!: Array<Instrument>
 
-  constructor(private rts: RefreshTokenService, private us: UserService) { }
+
+  constructor(private rts: RefreshTokenService, private us: UserService) {
+  }
 
   ngOnInit(): void {
     this.loggedUser = this.rts.getLoggedUser()

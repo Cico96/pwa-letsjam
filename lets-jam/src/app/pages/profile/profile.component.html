@@ -1,26 +1,16 @@
-<!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{layout/layout}">
-<head>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/song.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/musicSheetCard.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/chat.css}">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
-<body>
+
 <div style="padding-top: 90px;">
   <section style="min-height: calc(100vh - 600px);" class="hero-area pt-4 pb-4">
     <div class="container mt-4">
       <div class="row">
         <div class="col-3 pt-5 text-center">
-          <img *ngIf="loggedUser.avatar" src="profilo.avatar" alt="profile avatar" class="profile-avatar">
-          <img *ngIf="!loggedUser.avatar" src="'https://avatars.dicebear.com/api/male/'+${profilo.firstname}+'.svg'" alt="profile avatar" class="profile-avatar">
-
-<!--          add router link to page-->
-<!--          <a class="navbar-brand" th:href="@{/modifica-profilo}">-->
-<!--            <svg th:replace="fragments/icons :: modifyProfile"></svg>-->
-<!--          </a>-->
+          <img *ngIf="loggedUser.avatar" src="{{loggedUser.avatar}}" alt="profile avatar" class="profile-avatar">
+          <img *ngIf="!loggedUser.avatar" src="https://avatars.dicebear.com/api/male/{{loggedUser.firstname}}.svg" alt="profile avatar" class="profile-avatar">
+          <div class="modifyProfileWrapper">
+            <a class="navbar-brand" [routerLink]="['/modify-profile']">
+              <img src="assets/icons/modifyProfile.svg">
+            </a>
+          </div>
         </div>
         <div class="col-3 pt-4 profile-generics">
           <div class="mt-4">
@@ -41,7 +31,7 @@
 <!--                <svg th:replace="fragments/icons :: genres"></svg>-->
                 <i></i>
               </div>
-              <h3 th:text="#{profile.preferredGenres}+':'" class=""></h3>
+              <h3 class="">{{"Profile.preferredGenres" | translate}}</h3>
             </div>
             <span class="pref-genre" *ngFor="let genre of prefererdGenres"> {{genre.name}}</span>
           </div>
@@ -74,9 +64,9 @@
           <div class="container">
             <div class="row">
               <div class="col-12 relative">
-<!--                <div th:each="musicsheet : ${myMusicSheets}">-->
-<!--                  <div th:replace="fragments/musicSheetCard :: musicSheetCard(musicsheet = ${musicsheet})"></div>-->
-<!--                </div>-->
+
+                  <app-music-sheet-card *ngFor="let sheet of myMusicSheets" [musicSheet]="sheet"></app-music-sheet-card>
+
                 <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="assets/img/service-patern.png" alt="#"
                      style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 287px;right: -25px;">
                 <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="assets/img/service-patern.png" alt="#"
@@ -90,6 +80,4 @@
     </div>
   </section>
 </div>
-</body>
 
-</html>

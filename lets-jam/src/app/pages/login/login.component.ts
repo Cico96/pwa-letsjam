@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(4),
         Validators.maxLength(30),
         // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
       ]))
