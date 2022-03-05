@@ -32,7 +32,7 @@
                         <span class="label mr-2">{{"MusicSheet.uploaded_date" | translate}}</span>
                         <p>{{musicSheet.createDateTime | date: 'dd/MM/YYYY'}}</p>
                     </div>
-                    <div class="mt-4 d-flex align-items-center like" style="gap: 5px;">
+                    <div class="mt-4 d-flex align-items-center like" style="gap: 5px;" (click)="likeDislike()" [ngClass]="{'liked': like}">
                         <div class="icon round mr-2">
                             <img src="../../../assets/icons/like.svg">
                             <i></i>
@@ -71,7 +71,7 @@
                             </div>
                         </div>
 
-                        <app-flat (sheetEventLoaded)="downloadXml($event)" [score]="score" class="w-100"></app-flat>
+                        <app-flat (sheetEventLoaded)="download($event)" [score]="score" class="w-100"></app-flat>
 
                         <h3 class="mt-4 mb-3">{{"MusicSheet.download" | translate}}</h3>
                         <div class="d-flex flex-row align-items-center justify-content-between mb-4 pl-5 pr-5"
@@ -87,7 +87,7 @@
                             </div>
 
                             <div class="button wow fadeInUp mt-4" id="downloadPng" data-wow-delay=".7s"
-                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;" (click)="downloadPNG()">
+                                style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; width: fit-content;">
                                 <a class="btn" href="{{urlPNG}}" download="{{musicSheet.title}}.png">{{"MusicSheet.download_png" | translate}}</a>
                             </div>
                         </div>

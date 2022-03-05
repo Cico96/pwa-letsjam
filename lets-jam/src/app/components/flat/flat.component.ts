@@ -64,15 +64,6 @@ export class FlatComponent implements OnInit {
     return this.embed.getJSON();
   }
 
-  getMusicXML() {
-
-    this.embed.getMusicXML().then((r: any) => {
-      const blob = new Blob([r], { type: "application/xml" });
-      this.url = window.URL.createObjectURL(blob);
-
-    });
-    return this.url;
-  }
 
 
 }
