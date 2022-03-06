@@ -34,7 +34,8 @@ export class AllSongsComponent implements OnInit {
     this.gs.getAllGenres().subscribe((res) => {
       this.genres = res
     });
-    this.ss.getSongs(undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1, 5).subscribe((res) => {
+    this.ss.getSongs().subscribe((res) => {
+      console.log(res)
       this.songs = res
     });
   }
@@ -56,10 +57,10 @@ export class AllSongsComponent implements OnInit {
   }
 
   searchResult() {
-    
+
     let explicit;
     let hasLyrics;
-    
+
     if(Boolean(this.sidebarForm.get('filter')?.value)) {
       explicit = true;
     }else {

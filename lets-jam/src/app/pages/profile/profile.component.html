@@ -24,12 +24,11 @@
             <h5 class="">{{loggedUser.email}}</h5>
           </div>
         </div>
-        <div *ngIf="loggedUser.role === 'UTENTE'" class="col-6 pt-4 profile-preferred">
+        <div class="col-6 pt-4 profile-preferred">
           <div>
             <div class="d-flex align-items-center">
               <div class="icon mr-2">
-<!--                <svg th:replace="fragments/icons :: genres"></svg>-->
-                <i></i>
+                <img src="{{'../../../assets/icons/genres.svg'}}">
               </div>
               <h3 class="">{{"Profile.preferredGenres" | translate}}</h3>
             </div>
@@ -38,23 +37,20 @@
           <div>
             <div class="d-flex align-items-center">
               <div class="icon mr-2">
-<!--                <svg th:replace="fragments/icons :: violin"></svg>-->
-                <i></i>
+                <img src="{{'../../../assets/icons/violin.svg'}}">
               </div>
               <h3  class=""> Strumenti preferiti:</h3>
             </div>
             <div class="d-flex aling-items-center justify-content-start w-100 mt-3 pl-4" style="gap: 15px;">
               <div class="icon round" style="width: 60px; height: 60px;" *ngFor="let inst of preferredInstruments">
-<!--                <svg th:replace="fragments/icons :: __${instrument.name.toLowerCase()}__"></svg>-->
-<!--                <svg th:replace="fragments/icons :: __${instrument.name.toLowerCase()}__"></svg>-->
-                <i></i>
+                <img src="{{'../../../assets/icons/' + inst.name.toLowerCase() + '.svg'}}">
               </div>
             </div>
 
           </div>
         </div>
       </div>
-      <div *ngIf="loggedUser.role === 'UTENTE'" class="row">
+      <div class="row">
         <div class="col-12 mt-4 pt-4 pb-4">
           <h3 class="mt-4 mb-4">{{"Profile.yourSheets" | translate}}</h3>
         </div>
@@ -65,7 +61,21 @@
             <div class="row">
               <div class="col-12 relative">
 
-                  <app-music-sheet-card *ngFor="let sheet of myMusicSheets" [musicSheet]="sheet"></app-music-sheet-card>
+                <div *ngFor="let musicSheet of myMusicSheets  | paginate:  {
+                    id:'some_id',
+                    itemsPerPage: 3,
+                    currentPage: page}">
+                  <app-music-sheet-card [musicSheet]="musicSheet" (click)="goToMusicSheet(musicSheet.id)"></app-music-sheet-card>
+                </div>
+
+                <pagination-controls id="some_id"
+                                     (pageChange)="pageChanged($event)"
+                                     (pageBoundsCorrection)="pageChanged($event)"
+                                     previousLabel="Previous"
+                                     nextLabel="Next"
+                                     screenReaderPaginationLabel="Pagination"
+                                     screenReaderPageLabel="page">
+                </pagination-controls>
 
                 <img class="service-patern wow fadeInRight overlay-image" data-wow-delay=".5s" src="assets/img/service-patern.png" alt="#"
                      style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;position: absolute;top: 287px;right: -25px;">

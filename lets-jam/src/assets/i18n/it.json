@@ -105,7 +105,12 @@
   "Song": {
     "heading": "Tutti i nostri brani",
     "albumType": "Tipo di Album",
-    "duration": "Durata"
+    "duration": "Durata",
+    "musicSheets": " Esplora gli spartiti per il brano",
+    "minutes": "minuti",
+    "seconds": "secondi",
+    "musicSheet": "Alcuni spartiti",
+    "description": "Prendi ispirazione, suona, scarica o riarrangia gli spartiti inseriti dalla nostra community"
   },
   "CreteUpload": {
     "title": "Crea nuovo spartito",

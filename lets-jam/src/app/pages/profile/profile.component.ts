@@ -6,6 +6,7 @@ import {Instrument} from "../../model/instrument";
 import {UserService} from "../../services/user.service";
 import {MusicsheetService} from "../../services/musicsheet.service";
 import {MusicSheet} from "../../model/music-sheet";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -18,8 +19,9 @@ export class ProfileComponent implements OnInit {
   prefererdGenres!: Array<Genre>
   preferredInstruments!:Array<Instrument>
   myMusicSheets!:Array<MusicSheet>
+  page: number = 1;
 
-  constructor(private rts: RefreshTokenService, private us: UserService, private mss: MusicsheetService) { }
+  constructor(private rts: RefreshTokenService, private us: UserService, private mss: MusicsheetService, private router: Router) { }
 
   ngOnInit(): void {
     this.loggedUser = this.rts.getLoggedUser()
@@ -35,6 +37,14 @@ export class ProfileComponent implements OnInit {
     this.mss.getAllMusicSheets().subscribe((data) => {
       this.myMusicSheets = data.filter((sheet) =>  sheet.user.id == this.loggedUser.id )
     })
+  }
+
+  pageChanged(num: number){
+    this.page = num;
+  }
+
+  goToMusicSheet(id: number) {
+    this.router.navigate(['/musicSheet', id])
   }
 
 }
