@@ -39,7 +39,7 @@ export class RefreshTokenService {
           window.localStorage.setItem('token', token);
         }
       });
-    }, 60000 * 5);
+    }, 60000 * 60);
   }
 
   clearRefreshTimeout() {

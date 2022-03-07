@@ -5,6 +5,7 @@ import {MusicsheetService} from 'src/app/services/musicsheet.service';
 import {Observable} from "rxjs";
 import { GenreService } from 'src/app/services/genre.service';
 import { Genre } from 'src/app/model/genre';
+import { RefreshTokenService } from 'src/app/services/refresh-token.service';
 
 
 @Component({
@@ -22,16 +23,17 @@ export class HomeComponent implements OnInit {
       name:'',
       sheets:[]
     }
-  ]
+  ];
+  loggedUser: any;
 
-  constructor(private ms: MusicsheetService, private auth: AuthService, private genreService: GenreService) {
+  constructor(private ms: MusicsheetService, private auth: AuthService, private genreService: GenreService, private refreshToken: RefreshTokenService) {
   }
 
   ngOnInit(): void {
 
     this.orderMusicSheetsBylikes();
     this.musicSheetPerGenre();
-
+    this.loggedUser = this.refreshToken.getLoggedUser();
   }
 
 
