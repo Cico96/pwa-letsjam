@@ -7,6 +7,9 @@ import {Instrument} from "../../model/instrument";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {GenreService} from "../../services/genre.service";
 import {InstrumentService} from "../../services/instrument.service";
+import {UserUserIdBody} from "../../model/requests-model/userUserIdBody";
+import {UserIdGenresBody} from "../../model/requests-model/userIdGenresBody";
+import {UserIdInstrumentsBody} from "../../model/requests-model/userIdInstrumentsBody";
 
 @Component({
   selector: 'app-modify-profile',
@@ -23,6 +26,8 @@ export class ModifyProfileComponent implements OnInit {
   modifyUserForm!: FormGroup;
   genres!: Array<Genre>;
   instruments!: Array<Instrument>;
+  instrumentsToUpdate?: Array<string>;
+  genresToUpdate?: Array<string>;
 
   newAvatarFile?: any;
 
@@ -37,19 +42,22 @@ export class ModifyProfileComponent implements OnInit {
       this.us.getUserPreferredGenres(id).subscribe((response) => {
         this.prefererdGenres = response;
 
-        this.us.getUserPreferredInstruments(id).subscribe((response) => {
-          this.preferredInstruments = response;
-
-          this.genreService.getAllGenres().subscribe((response) => {
-            this.genres = response;
-
-            this.InstrumentsService.getAllInstruments().subscribe((response) => {
-              this.instruments = response;
-            })
-          })
+        this.genreService.getAllGenres().subscribe((response) => {
+          this.genres = response;
         })
+
+      })
+
+      this.us.getUserPreferredInstruments(id).subscribe((response) => {
+        this.preferredInstruments = response;
+
+        this.InstrumentsService.getAllInstruments().subscribe((response) => {
+          this.instruments = response;
+        })
+
       })
     }
+
     this.modifyUserForm = this.formBuilder.group({
       firstname: new FormControl(this.loggedUser.firstname, Validators.compose([
         Validators.minLength(2),
@@ -67,17 +75,29 @@ export class ModifyProfileComponent implements OnInit {
         Validators.minLength(2),
         Validators.maxLength(20),
       ])),
-      // prefererdGenres: new FormArray(
-      //   this.genres.map(el => {
-      //     return this.formBuilder.control(true)
-      //   })
-      // ),
-      // preferredInstruments: new FormArray(
-      //   this.instruments.map(el => {
-      //     return this.formBuilder.control(true)
-      //   })
-      // ),
+      genres: new FormControl(),
+      instruments: new FormControl(),
     });
+  }
+
+  instrumetsValues(event: any){
+    if(this.instrumentsToUpdate == undefined) {
+      this.instrumentsToUpdate = [];
+    }if(this.instrumentsToUpdate != undefined && this.instrumentsToUpdate.includes(event.target.value)) {
+      this.instrumentsToUpdate = this.instrumentsToUpdate?.filter((i) => i !== event.target.value);
+    }else {
+      this.instrumentsToUpdate?.push(event.target.value)
+    }
+  }
+
+  genresValues(event: any){
+    if(this.genresToUpdate == undefined) {
+      this.genresToUpdate = [];
+    }if(this.genresToUpdate != undefined && this.genresToUpdate.includes(event.target.value)) {
+      this.genresToUpdate = this.genresToUpdate?.filter((i) => i !== event.target.value);
+    }else {
+      this.genresToUpdate?.push(event.target.value)
+    }
   }
 
   onFileChange(event: any) {
@@ -87,40 +107,46 @@ export class ModifyProfileComponent implements OnInit {
     this.newAvatarFile = event.target.files[0];
   }
 
-  isPreferredInstrument(preferredI:Array<Instrument>,instrument:Instrument) {
-    let result = preferredI.find((el) => {return el.id == instrument.id})
-    console.log(result !== undefined)
-    return result !== undefined
-  }
-
   updateUser() {
-    let genres = this.modifyUserForm.get('email')?.value
-    let instruments = this.modifyUserForm.get('instruments')?.value
     let newAvatar = this.newAvatarFile
 
-    let newUser = {
+    let newUser: UserUserIdBody = {
       firstname: this.modifyUserForm.get('firstname')?.value,
       lastname: this.modifyUserForm.get('lastname')?.value,
       email: this.modifyUserForm.get('email')?.value,
     }
 
-    genres.forEach((genre:Genre) => {
-      let addGenre = {
-        genreId: genre,
-      }
-    })
+    if (this.loggedUser.id !== undefined) {
+      let userId = this.loggedUser.id
+      this.us.updateUserById(newUser, userId).subscribe(data => {
+        // console.log(data)
+      });
 
-    instruments.forEach((instrument:Instrument) => {
-      let addInstrument = {
-        genreId: instrument,
-      }
-    })
+      this.genresToUpdate?.forEach((genre: string) => {
+        let addGenre: UserIdGenresBody = {
+          genreId: parseInt(genre),
+        }
+        this.us.addPreferredGenre(userId ,addGenre).subscribe(data => {
+          // console.log(data)
+        });
+      })
 
-    // this.us.updateUserById();
-    // this.us.addPreferredGenre();
-    // this.us.addPreferredInstrument();
-    // this.us.updateUserAvatar();
+      this.instrumentsToUpdate?.forEach((instrument:string) => {
+        let addInstrument: UserIdInstrumentsBody = {
+          instrumentId: parseInt(instrument),
+        }
 
+        this.us.addPreferredInstrument(userId, addInstrument).subscribe(data => {
+          // console.log(data)
+        });
+      })
+
+      this.us.updateUserAvatar(newAvatar).subscribe(data => {
+        console.log(data)
+      });
+
+      this.rts.saveLoggedUser(JSON.stringify(userId))
+    }
   }
 
 }

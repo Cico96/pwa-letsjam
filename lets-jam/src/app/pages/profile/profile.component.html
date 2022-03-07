@@ -4,8 +4,10 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col-3 pt-5 text-center">
-          <img *ngIf="loggedUser.avatar" src="{{loggedUser.avatar}}" alt="profile avatar" class="profile-avatar">
-          <img *ngIf="!loggedUser.avatar" src="https://avatars.dicebear.com/api/male/{{loggedUser.firstname}}.svg" alt="profile avatar" class="profile-avatar">
+          <img [src]="loggedUser.avatar ?
+                   'http://letsjam.ccml.it' + loggedUser.avatar
+                   :'https://avatars.dicebear.com/api/male/'+loggedUser.firstname+'.svg'"
+               alt="profile avatar" class="profile-avatar">
           <div class="modifyProfileWrapper">
             <a class="navbar-brand" [routerLink]="['/modify-profile']">
               <img src="assets/icons/modifyProfile.svg">
