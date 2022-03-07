@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.currentLang = this.translate.currentLang;
     this.loggedUser = this.rts.getLoggedUser();
-    //console.log(this.currentLang)
   }
 
   logout() {
@@ -37,7 +36,6 @@ export class HeaderComponent implements OnInit {
   changeLang(lang: string) {
     this.translate.use(lang).subscribe(() => {
       this.currentLang = lang;
-      console.log(this.currentLang)
     })
   }
 
