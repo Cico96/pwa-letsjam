@@ -2,3 +2,22 @@
   width: 400px;
   height: 400px;
 }
+
+
+.comment-wrap{
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+}
+
+.write-comment {
+  width:100%;
+}
+
+.respond-wrap {
+  width:100%
+}
+
+.comment-res {
+  margin-bottom:16px;
+}

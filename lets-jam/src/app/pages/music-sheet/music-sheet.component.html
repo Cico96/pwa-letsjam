@@ -108,7 +108,7 @@
                                     <h6 class="user-name">{{comment.user.firstname + ' ' + comment.user.lastname}}</h6>
                                     <p class="comment-content">{{comment.content}}</p>
 
-                                    <div class="d-flex align-items-center justify-content-start comment-actions"
+                                    <div class="d-flex comment-wrap align-items-start justify-content-start comment-actions"
                                         style="gap:10px">
                                         <a class="respond-button" (click)="viewComment(comment.id)">{{"Common.replay" |
                                             translate}}</a>
@@ -125,15 +125,15 @@
                                         <a class="showResponses-button" *ngIf="comment.replies > 0 && comment.id != answerId"
                                             (click)="showReplies(comment.id)">{{"Common.show_replay" | translate}} {{' ' +comment.replies}}</a>
 
-                                        <div *ngIf="comment.id == answerId">
-                                            <div *ngFor="let reply of replies" class="comment response d-flex align-items-center justify-content-start">
+                                        <div class="respond-wrap" *ngIf="comment.id == answerId">
+                                            <div *ngFor="let reply of replies" class="comment-res response d-flex align-items-center justify-content-start">
                                                 <div class="user-image" *ngIf="reply.user.avatar"
                                                 style="{{'background:url(http://letsjam.ccml.it' + reply.user.avatar +')'}}">
                                                 </div>
                                                 <div class="user-image" *ngIf="!reply.user.avatar"
                                                     style="{{'background:url(https://avatars.dicebear.com/api/male/' + reply.user.firstname + '.svg)'}}">
                                                 </div>
-                                                <div class="d-flex flex-column align-items-start justify-content-start" style="flex:17;">
+                                                <div class="d-flex flex-column align-items-start ml-4 justify-content-start" style="flex:17;">
                                                     <h6 class="user-name">{{reply.user.firstname + ' ' + reply.user.lastname}}</h6>
                                                     <p class="comment-content">{{reply.content}}</p>
                                                 </div>
