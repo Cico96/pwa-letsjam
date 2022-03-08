@@ -25,7 +25,7 @@
                 <p *ngIf="musicSheet.song != null && musicSheet.song.genre != null"><span>Genere: </span>{{musicSheet.song.genre.name}}</p>
                 <p *ngIf="musicSheet.song && !musicSheet.song.genre"><span>Genere: </span> Non definito</p>
                 <div class="d-flex align-items-center justify-content-between mt-2" style="gap:10px;">
-                    <div class="avatar" *ngIf="musicSheet.user.avatar" style="{{'background:url(' + musicSheet.user.avatar + '.svg)'}}">
+                    <div class="avatar" *ngIf="musicSheet.user.avatar" style="{{'background:url(http://letsjam.ccml.it' + musicSheet.user.avatar + ')'}}">
                     </div>
                     <div class="avatar" *ngIf="!musicSheet.user.avatar" style="{{'background:url(https://avatars.dicebear.com/api/male/' + musicSheet.user.firstname + '.svg)'}}">
                     </div>

@@ -27,13 +27,13 @@ export class HomeComponent implements OnInit {
   loggedUser: any;
 
   constructor(private ms: MusicsheetService, private auth: AuthService, private genreService: GenreService, private refreshToken: RefreshTokenService) {
+    this.loggedUser = this.refreshToken.getLoggedUser();
   }
 
   ngOnInit(): void {
 
     this.orderMusicSheetsBylikes();
     this.musicSheetPerGenre();
-    this.loggedUser = this.refreshToken.getLoggedUser();
   }
 
 

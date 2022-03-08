@@ -20,6 +20,7 @@ export class RefreshTokenService {
     if (id !== null) {
       this.userService.getUserById(parseInt(id)).subscribe((data) => {
         window.localStorage.setItem('user', JSON.stringify(data));
+        console.log(data)
       })
     }
   }

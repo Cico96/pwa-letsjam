@@ -13,7 +13,7 @@
               <img class="new-avatar" id="frame" src="#">
 <!--              <img *ngIf="loggedUser.avatar" src="{{loggedUser.avatar}}" alt="profile avatar" class="profile-avatar" >-->
               <img [src]="loggedUser.avatar ?
-                   'http://letsjam.ccml.it' + loggedUser.avatar
+                   'http://letsjam.ccml.it/' + loggedUser.avatar
                    :'https://avatars.dicebear.com/api/male/'+loggedUser.firstname+'.svg'"
                    alt="profile avatar" class="profile-avatar" #avat>
               <label name="imgInput">

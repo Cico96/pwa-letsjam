@@ -15,7 +15,8 @@ export class HeaderComponent implements OnInit {
   currentLang = this.translate.currentLang;
   loggedUser?: User;
 
-  constructor(private translate: TranslateService, private rts: RefreshTokenService, private authToken: AuthTokenService, private authService: AuthService) { }
+  constructor(private translate: TranslateService, private rts: RefreshTokenService,
+              private authToken: AuthTokenService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.currentLang = this.translate.currentLang;
