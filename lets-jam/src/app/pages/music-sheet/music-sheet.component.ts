@@ -102,7 +102,7 @@ export class MusicSheetComponent implements OnInit {
       }
     })
   }
-
+ // commento
   download(event: any) {
     if (event) {
       this.child.embed.getMusicXML().then( (r: any) => {
@@ -119,7 +119,7 @@ export class MusicSheetComponent implements OnInit {
       });
     }
   }
-  
+
 
 
   print() {
@@ -127,7 +127,7 @@ export class MusicSheetComponent implements OnInit {
   }
 
   likeDislike() {
-    
+
     if(this.like == false) {
       this.musicSheetService.addLike(this.musicSheet.id).subscribe(() => {
         this.musicSheetService.getMusicSheetById(this.musicSheet.id).subscribe((ms) => {
