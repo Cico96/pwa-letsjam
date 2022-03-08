@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout().subscribe((res) => {
       this.rts.clearRefreshTimeout();
       localStorage.clear();
+      window.location.reload();
     });
   }
 

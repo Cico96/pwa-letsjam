@@ -11,7 +11,7 @@
                 </div>
                <div class="d-flex flex-row align-items-center justify-content-between interaction-container" style="gap: 10px;">
                    <div class="action-container">
-                       <img src="../../../assets/icons/like.svg">
+                       <img src="../../../assets/icons/like.svg" style="height: 50%; width: 50%;">
                        <span>{{musicSheet.likes}}</span>
                        <i></i>
                    </div>
@@ -32,11 +32,10 @@
                     <p class="mt-1"style="margin:0; text-transform: capitalize;">{{musicSheet.user.firstname}}</p>
                 </div>
             </div>
-            <div *ngIf="musicSheet.user.role == 'AMMINISTRATORE'" class="d-flex flex-row align-items-center justify-content-end" style="gap:20px">
+            <div class="d-flex flex-row align-items-center justify-content-end" style="gap:20px">
 
                 <div class="icon" *ngFor="let instrument of musicSheet.instruments">
-                    <img src="{{'../../../assets/icons/' + instrument.name + '.svg'}}">
-                    <i></i>
+                    <img src="{{'../../../assets/icons/' + instrument.name.toLowerCase() + '.svg'}}">
                 </div>
 
             </div>
