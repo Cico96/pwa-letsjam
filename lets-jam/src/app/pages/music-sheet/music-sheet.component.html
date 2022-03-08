@@ -137,6 +137,9 @@
                                                     <h6 class="user-name">{{reply.user.firstname + ' ' + reply.user.lastname}}</h6>
                                                     <p class="comment-content">{{reply.content}}</p>
                                                 </div>
+                                                <input type="text" [(ngModel)]="answer"
+                                                    (keydown)="addAnswer($event, comment.id)"
+                                                    [placeholder]="'Common.write_comment' | translate" style="flex:17;">
                                             </div>
                                         </div>
                                     </div>
