@@ -7,6 +7,7 @@ import {UserService} from "../../services/user.service";
 import {MusicsheetService} from "../../services/musicsheet.service";
 import {MusicSheet} from "../../model/music-sheet";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-profile',
@@ -15,28 +16,36 @@ import {Router} from "@angular/router";
 })
 export class ProfileComponent implements OnInit {
 
-  loggedUser!: User;
+  loggedUser?: User;
   prefererdGenres!: Array<Genre>
   preferredInstruments!:Array<Instrument>
   myMusicSheets!:Array<MusicSheet>
   page: number = 1;
+  userSub?: Subscription;
 
   constructor(private rts: RefreshTokenService, private us: UserService, private mss: MusicsheetService, private router: Router) { }
 
   ngOnInit(): void {
-    this.loggedUser = this.rts.getLoggedUser()
-    if (this.loggedUser.id !== undefined) {
-      this.us.getUserPreferredGenres(this.loggedUser.id).subscribe((response) => {
-        this.prefererdGenres = response;
-      })
-      this.us.getUserPreferredInstruments(this.loggedUser.id).subscribe((response) => {
-        this.preferredInstruments = response;
-      })
-    }
+    console.log('ciao')
+    this.userSub = this.rts.getLoggedUser().subscribe((usr: User | undefined) => {
+      console.log(usr)
+      if (usr && usr.id) {
+        this.loggedUser = usr
 
-    this.mss.getAllMusicSheets().subscribe((data) => {
-      this.myMusicSheets = data.filter((sheet) =>  sheet.user.id == this.loggedUser.id )
+        if (this.loggedUser.id !== undefined) {
+          this.us.getUserPreferredGenres(usr.id).subscribe((response) => {
+            this.prefererdGenres = response;
+          })
+          this.us.getUserPreferredInstruments(usr.id).subscribe((response) => {
+            this.preferredInstruments = response;
+          })
+          this.mss.getAllMusicSheets().subscribe((data) => {
+            this.myMusicSheets = data.filter((sheet) =>  sheet.user.id == usr.id )
+          })
+        }
+      }
     })
+    console.log(this.userSub)
   }
 
   pageChanged(num: number){
@@ -45,6 +54,10 @@ export class ProfileComponent implements OnInit {
 
   goToMusicSheet(id: number) {
     this.router.navigate(['/musicSheet', id])
+  }
+
+  ngOnDestroy(): void {
+    this.userSub?.unsubscribe();
   }
 
 }

@@ -4,9 +4,9 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col-3 pt-5 text-center">
-          <img [src]="loggedUser.avatar ?
-                   'http://letsjam.ccml.it/' + loggedUser.avatar
-                   :'https://avatars.dicebear.com/api/male/'+loggedUser.firstname+'.svg'"
+          <img [src]="loggedUser?.avatar ?
+                   'http://letsjam.ccml.it' + loggedUser?.avatar
+                   :'https://avatars.dicebear.com/api/male/'+loggedUser?.firstname+'.svg'"
                alt="profile avatar" class="profile-avatar">
           <div class="modifyProfileWrapper">
             <a class="navbar-brand" [routerLink]="['/modify-profile']">
@@ -16,14 +16,14 @@
         </div>
         <div class="col-3 pt-4 profile-generics">
           <div class="mt-4">
-            <h3 class="profile-name">{{loggedUser.firstname}}</h3>
-            <h3 class="profile-name mt-4">{{loggedUser.lastname}}</h3>
+            <h3 class="profile-name">{{loggedUser?.firstname}}</h3>
+            <h3 class="profile-name mt-4">{{loggedUser?.lastname}}</h3>
           </div>
           <div>
             <h6 class="profile-descr">username:</h6>
-            <h5 class="">{{loggedUser.username}}</h5>
+            <h5 class="">{{loggedUser?.username}}</h5>
             <h6 class="profile-descr mt-2">email:</h6>
-            <h5 class="">{{loggedUser.email}}</h5>
+            <h5 class="">{{loggedUser?.email}}</h5>
           </div>
         </div>
         <div class="col-6 pt-4 profile-preferred">

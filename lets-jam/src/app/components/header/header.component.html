@@ -45,11 +45,11 @@
                 <li class="nav-item">
                   <a [routerLink]="['/about-us']" [routerLinkActive]="['active']">{{"Common.aboutus" | translate}}</a>
                 </li>
-                <li *ngIf="loggedUser" class="ml-4 d-flex align-items-center justify-content-end">
+                <li *ngIf="loggedUser !== undefined" class="ml-4 d-flex align-items-center justify-content-end">
                   <a class="p-0" [routerLink]="['/profile']">
 
                     <img [src]="loggedUser.avatar ?
-                   'http://letsjam.ccml.it/' + loggedUser.avatar
+                   'http://letsjam.ccml.it' + loggedUser.avatar
                    :'https://avatars.dicebear.com/api/male/'+loggedUser.firstname+'.svg'" alt="profile avatar"
                          class="profile">
                   </a>

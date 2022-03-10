@@ -10,6 +10,7 @@ import {InstrumentService} from "../../services/instrument.service";
 import {UserUserIdBody} from "../../model/requests-model/userUserIdBody";
 import {UserIdGenresBody} from "../../model/requests-model/userIdGenresBody";
 import {UserIdInstrumentsBody} from "../../model/requests-model/userIdInstrumentsBody";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-modify-profile',
@@ -28,6 +29,7 @@ export class ModifyProfileComponent implements OnInit {
   instruments!: Array<Instrument>;
   instrumentsToUpdate?: Array<string>;
   genresToUpdate?: Array<string>;
+  userSub?: Subscription;
 
   newAvatarFile?: any;
 
@@ -36,7 +38,11 @@ export class ModifyProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loggedUser = this.rts.getLoggedUser()
+    this.userSub = this.rts.getLoggedUser().subscribe((usr: User | undefined) => {
+      if (usr) {
+        this.loggedUser = usr
+      }
+    })
     if (this.loggedUser.id !== undefined) {
       let id = this.loggedUser.id
       this.us.getUserPreferredGenres(id).subscribe((response) => {
@@ -141,12 +147,20 @@ export class ModifyProfileComponent implements OnInit {
         });
       })
 
-      this.us.updateUserAvatar(newAvatar).subscribe(data => {
-        console.log(data)
-      });
+      if (newAvatar) {
+        this.us.updateUserAvatar(newAvatar).subscribe(data => {
+          console.log(data)
+        });
+      }
 
-      this.rts.saveLoggedUser(JSON.stringify(userId))
+      setTimeout(() => {
+        this.rts.saveLoggedUser(JSON.stringify(userId))
+      },1000)
     }
+  }
+
+  ngOnDestroy(): void {
+    this.userSub?.unsubscribe();
   }
 
 }

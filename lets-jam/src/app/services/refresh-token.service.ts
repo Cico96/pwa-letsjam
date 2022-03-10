@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {AuthService} from "./auth.service";
 import {User} from "../model/user";
 import {UserService} from "./user.service";
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RefreshTokenService {
 
-  currentUser!: User;
+  currentUser: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
   timeoutId?: any;
 
 
@@ -20,6 +21,7 @@ export class RefreshTokenService {
     if (id !== null) {
       this.userService.getUserById(parseInt(id)).subscribe((data) => {
         window.localStorage.setItem('user', JSON.stringify(data));
+        this.currentUser.next(data);
         console.log(data)
       })
     }
@@ -28,8 +30,10 @@ export class RefreshTokenService {
   getLoggedUser() {
     const user = window.localStorage.getItem('user');
     if (user) {
-      return JSON.parse(user);
+      console.log(user)
+      this.currentUser.next(JSON.parse(user))
     }
+    return this.currentUser.asObservable();
   }
 
   refreshToken() {

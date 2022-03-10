@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {MusicSheet} from 'src/app/model/music-sheet';
 import {AuthService} from 'src/app/services/auth.service';
 import {MusicsheetService} from 'src/app/services/musicsheet.service';
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import { GenreService } from 'src/app/services/genre.service';
 import { Genre } from 'src/app/model/genre';
 import { RefreshTokenService } from 'src/app/services/refresh-token.service';
+import {User} from "../../model/user";
 
 
 @Component({
@@ -24,13 +25,17 @@ export class HomeComponent implements OnInit {
       sheets:[]
     }
   ];
-  loggedUser: any;
+  loggedUser?: User;
+  userSub?: Subscription;
 
   constructor(private ms: MusicsheetService, private auth: AuthService, private genreService: GenreService, private refreshToken: RefreshTokenService) {
-    this.loggedUser = this.refreshToken.getLoggedUser();
   }
 
   ngOnInit(): void {
+    this.userSub = this.refreshToken.getLoggedUser().subscribe((usr) => {
+      // console.log(usr)
+      this.loggedUser = usr
+    });
 
     this.orderMusicSheetsBylikes();
     this.musicSheetPerGenre();
@@ -58,6 +63,10 @@ export class HomeComponent implements OnInit {
 
       })
     });
+  }
+
+  ngOnDestroy(): void {
+    this.userSub?.unsubscribe();
   }
 
 }
