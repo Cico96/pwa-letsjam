@@ -66,7 +66,6 @@ export class MusicSheetComponent implements OnInit {
     if($event.key == 'Enter') {
       const comment: MusicsheetIdCommentBody = { content: this.comment};
       this.commentService.addComment(this.musicSheet.id, comment).subscribe((res) => {
-        console.log(res);
         this.comment = '';
         this.commentService.getMusicSheetComments(this.musicSheet.id).subscribe((res) => {
           this.comments = res;
@@ -77,7 +76,6 @@ export class MusicSheetComponent implements OnInit {
 
   viewComment(id: number) {
     //this.showAnswer = true;
-    console.log(id)
     this.commentId = id;
   }
 

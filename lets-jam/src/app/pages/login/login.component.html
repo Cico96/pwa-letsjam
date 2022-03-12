@@ -1,18 +1,3 @@
-<!--<th:block layout:fragment="css">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-    
-    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/tiny-slider.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/glightbox.min.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
-</th:block>
-<script type="text/javascript" th:src="@{/js/login.js}" ></script>
-<script type="text/javascript" th:src="@{/js/i18n.js}" ></script>-->
-
-<!--<div th:if="${param.error}" class="error-message" th:text="#{login.error}"></div>
-<div th:if="${param.logout}" class="warning-message" th:text="#{login.loggedout}"></div>-->
-
 <div class="body">
     <small *ngIf="error == 404" class="error-message" style="margin-top: 20px;">{{"Login.error" | translate}}</small>
     <small *ngIf="error == 401" class="error-message" style="margin-top: 20px;">{{"Login.error" | translate}}</small>
@@ -27,7 +12,7 @@
                 <input type="text" formControlName="email" [placeholder]="'Login.email_placeholder' | translate"/>
                 <small style="color: red;" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">{{"Register.email_required" | translate}}</small>
             </div>
-    
+
             <div class="input-container mb-3">
                 <label class="mb-1"> Password </label>
                 <input type="password" formControlName="password" [placeholder]="'Login.password_placeholder' | translate"/>
@@ -41,7 +26,7 @@
             </div>
         </form>
         <a [routerLink]="['/register']" class="mt-2" style="font-size: 16px;">{{"Login.register" | translate}}</a>
-    
+
         <!--<div class="internationalization">
             <p class="lang" style="display: none;" th:text="${#locale}"></p>
             <img class="flag-container" th:if="${#locale.toString() == 'it'}" th:src="@{/img/i18n/it-flag.png}" alt="it">
@@ -49,4 +34,4 @@
         </div>-->
     </div>
 </div>
-    
+

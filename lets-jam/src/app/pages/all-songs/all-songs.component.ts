@@ -35,7 +35,6 @@ export class AllSongsComponent implements OnInit {
       this.genres = res
     });
     this.ss.getSongs().subscribe((res) => {
-      console.log(res)
       this.songs = res
     });
   }

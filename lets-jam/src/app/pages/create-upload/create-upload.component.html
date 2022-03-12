@@ -52,18 +52,18 @@
                  id="newSongContainer">
               <label name="song" class="mb-0" style="width: 100%;">
                 {{"CreteUpload.song.title" | translate}}
-                <input name="songTitle" type="text"/>
+                <input formControlName="songTitle" name="songTitle" type="text"/>
               </label>
 
               <label name="song" class="mb-0" style="width: 100%;">
                 {{"CreteUpload.song.author" | translate}}
-                <input name="songAuthor" type="text"/>
+                <input formControlName="songAuthor" name="songAuthor" type="text"/>
               </label>
 
             </div>
             <!-- Existing song -->
             <input *ngIf="newSheetForm.get('songType')?.value == 0" (change)="searchSong($event)"
-                   id="chooseSong" name="song" type="text"
+                   id="chooseSong" name="song" type="text" formControlName="song"
                    placeholder="{{'CreteUpload.song.placeholder' | translate}}"/>
             <ul *ngIf="availableSongs !== undefined" id="songList">
               <!-- songs result from search -->

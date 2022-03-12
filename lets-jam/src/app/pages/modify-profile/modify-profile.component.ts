@@ -149,7 +149,7 @@ export class ModifyProfileComponent implements OnInit {
 
       if (newAvatar) {
         this.us.updateUserAvatar(newAvatar).subscribe(data => {
-          console.log(data)
+          // console.log(data)
         });
       }
 

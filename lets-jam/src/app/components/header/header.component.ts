@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.currentLang = this.translate.currentLang;
     this.userSub = this.rts.getLoggedUser().subscribe((usr: User | undefined) => {
-      // console.log(usr)
       this.loggedUser = usr
 
     });

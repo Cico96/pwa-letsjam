@@ -22,7 +22,6 @@ export class RefreshTokenService {
       this.userService.getUserById(parseInt(id)).subscribe((data) => {
         window.localStorage.setItem('user', JSON.stringify(data));
         this.currentUser.next(data);
-        console.log(data)
       })
     }
   }
@@ -30,7 +29,6 @@ export class RefreshTokenService {
   getLoggedUser() {
     const user = window.localStorage.getItem('user');
     if (user) {
-      console.log(user)
       this.currentUser.next(JSON.parse(user))
     }
     return this.currentUser.asObservable();

@@ -28,7 +28,7 @@ export class CreateUploadComponent implements OnInit {
   instrumentsSelected?: Array<string>
   file?: any;
   score: string = '';
-  sheetTitle?: string;  
+  sheetTitle?: string;
   sheetAuthor?: string;
   newSheetForm!: FormGroup;
 
@@ -61,13 +61,11 @@ export class CreateUploadComponent implements OnInit {
     });
 
     this.newSheetForm = this.formBuilder.group({
-      songTitle: new FormControl('', Validators.compose([
-        Validators.minLength(2),
-        Validators.maxLength(30),
-      ])),
+      songTitle: new FormControl('', Validators.compose([Validators.maxLength(30),])),
       newSheetGenre: new FormControl('', Validators.compose([])),
       sheetTitle: new FormControl('', Validators.compose([])),
       sheetAuthor: new FormControl('', Validators.compose([])),
+      song: new FormControl('', Validators.compose([])),
       songType: new FormControl('0', Validators.compose([])),
       musicSheetVisibility: new FormControl('0', Validators.compose([])),
       songAuthor: new FormControl('', Validators.compose([
@@ -125,7 +123,6 @@ export class CreateUploadComponent implements OnInit {
     if (isLoaded) {
       this.child.getCurrentJsonSheet().then((data: any) => {
 
-        console.log(JSON.stringify(data))
         this.scoreService.analyzeScore({
           score: JSON.stringify(data)
         }).subscribe((data) => {
@@ -150,6 +147,8 @@ export class CreateUploadComponent implements OnInit {
 
   selectSong(sg: Song) {
     this.availableSongs = undefined;
+    // this.newSheetForm.get('songType').value = 0
+    this.newSheetForm.patchValue({song: sg.title})
     this.choosenNewSong = sg;
   }
 

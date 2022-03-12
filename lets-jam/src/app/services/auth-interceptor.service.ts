@@ -11,11 +11,12 @@ import {Router} from '@angular/router';
 import {catchError, Observable, of, tap, throwError} from 'rxjs';
 import {AuthTokenService} from './auth-token.service';
 import {AuthService} from './auth.service';
+import {RefreshTokenService} from "./refresh-token.service";
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor(private authToken: AuthTokenService, private router: Router, private authService: AuthService) {
+  constructor(private authToken: AuthTokenService, private router: Router, private authService: AuthService, private rts: RefreshTokenService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -43,8 +44,10 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
     //handle your auth error or rethrow
-    if (err.status === 401 || err.status === 403) { 
+    if (err.status === 401 || err.status === 403) {
         //navigate /delete cookies or whatever
+        localStorage.clear();
+        this.rts.currentUser.next(undefined)
         this.router.navigate(['login']);
         // if you've caught / handled the error, you don't want to rethrow it unless you also want downstream consumers to have to handle it as well.
         return of(err.message); // or EMPTY may be appropriate here

@@ -9,7 +9,7 @@
       <div *ngIf="song.albumName" class="d-flex align-items-center mt-1 song-info">
         <div class="icon mr-2">
 <!--          <svg th:replace="fragments/icons :: album"></svg>-->
-          <i></i>
+          <img src="../../../assets/icons/album.svg">
         </div>
         <span class="label mr-2">Album: </span>
         <p>{{song.albumName}}</p>
@@ -17,7 +17,7 @@
       <div *ngIf="song.author" class="d-flex align-items-center mt-1 song-info">
         <div class="icon mr-2">
 <!--          <svg th:replace="fragments/icons :: album-type"></svg>-->
-          <i></i>
+          <img src="../../../assets/icons/albumType.svg">
         </div>
         <span class="label mr-2">{{"Common.author" | translate}}:</span>
         <p>{{song.author}}</p>
@@ -25,7 +25,7 @@
       <div *ngIf="song.duration" class="d-flex align-items-center mt-1 song-info">
         <div class="icon mr-2">
 <!--          <svg th:replace="fragments/icons :: duration"></svg>-->
-          <i></i>
+          <img src="../../../assets/icons/duration.svg">
         </div>
         <span class="label mr-2">{{"Common.duration" | translate}}:</span>
 <!--        <p>[[${(song.duration/1000)/60}]] [[#{common.minutes}]] [[${(song.duration/1000)%60}]] [[#{common.seconds}]]</p>-->

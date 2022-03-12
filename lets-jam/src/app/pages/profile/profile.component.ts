@@ -26,9 +26,7 @@ export class ProfileComponent implements OnInit {
   constructor(private rts: RefreshTokenService, private us: UserService, private mss: MusicsheetService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log('ciao')
     this.userSub = this.rts.getLoggedUser().subscribe((usr: User | undefined) => {
-      console.log(usr)
       if (usr && usr.id) {
         this.loggedUser = usr
 
@@ -45,7 +43,6 @@ export class ProfileComponent implements OnInit {
         }
       }
     })
-    console.log(this.userSub)
   }
 
   pageChanged(num: number){

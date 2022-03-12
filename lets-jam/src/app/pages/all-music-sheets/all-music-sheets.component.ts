@@ -65,7 +65,7 @@ export class AllMusicSheetsComponent implements OnInit {
   }
 
   genresValues($event: any) {
-    
+
     if(this.genresName == undefined) {
       this.genresName = [];
     }if(this.genresName != undefined && this.genresName?.includes($event.target.defaultValue)){
@@ -84,7 +84,6 @@ export class AllMusicSheetsComponent implements OnInit {
     }else {
       this.instrumentsName?.push($event.target.defaultValue)
     }
-    console.log(this.instrumentsName)
   }
 
   searchResult() {
@@ -95,7 +94,7 @@ export class AllMusicSheetsComponent implements OnInit {
     // console.log(Boolean(this.sidebarForm.get('rearranged')?.value));
     let verified;
     let rearranged;
-    
+
     if(Boolean(this.sidebarForm.get('filter')?.value)) {
       verified = true;
     }else {
@@ -103,7 +102,6 @@ export class AllMusicSheetsComponent implements OnInit {
     }
 
     this.musicSheetService.getAllMusicSheets(this.search, this.sidebarForm.get('sortBy')?.value, undefined, this.genresName, this.instrumentsName, verified, rearranged).subscribe((ms) => {
-      console.log('okok')
       this.musicSheets = ms;
     })
   }
