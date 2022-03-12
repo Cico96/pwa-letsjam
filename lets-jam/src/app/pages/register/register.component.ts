@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
         // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
       ]))
     });
+    console.log(this.error)
   }
 
   onSubmit() {

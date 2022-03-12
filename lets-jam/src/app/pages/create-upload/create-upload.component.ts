@@ -60,17 +60,23 @@ export class CreateUploadComponent implements OnInit {
     });
 
     this.newSheetForm = this.formBuilder.group({
-      sheetTitle: new FormControl('', Validators.compose([])),
-      sheetAuthor: new FormControl('', Validators.compose([])),
+      sheetTitle: new FormControl('', Validators.compose([
+        Validators.minLength(1),
+        Validators.maxLength(30),
+        Validators.required
+      ])),
+      sheetAuthor: new FormControl('', Validators.compose([
+        Validators.minLength(1),
+        Validators.maxLength(30),
+        Validators.required
+      ])),
       songType: new FormControl('0', Validators.compose([])),
       song: new FormControl('', Validators.compose([])),
       songTitle: new FormControl('', Validators.compose([
-        Validators.minLength(1),
-        Validators.maxLength(30),
+        
       ])),
       songAuthor: new FormControl('', Validators.compose([
-        Validators.minLength(1),
-        Validators.maxLength(30),
+
       ])),
       newSheetGenre: new FormControl('', Validators.compose([Validators.required])),
       musicSheetVisibility: new FormControl('0', Validators.compose([])),
@@ -155,27 +161,29 @@ export class CreateUploadComponent implements OnInit {
   }
 
   saveSheet() {
-    this.child.getCurrentJsonSheet().then((data: any) => {
-      this.newMusicSheetSong = {
-        id: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong?.id : undefined,
-        spotifyId: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong?.spotifyId : undefined,
-        songtype: !Boolean(this.newSheetForm.get('songType')?.value),
-        title: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong!.title : this.newSheetForm.get('songTitle')?.value,
-        author: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong!.author : this.newSheetForm.get('songAuthor')?.value,
-        genreId: this.newSheetForm.get('newSheetGenre')?.value,
-      }
-      this.newMusicSheet = {
-        title: this.newSheetForm.get('sheetTitle')?.value,
-        author: this.newSheetForm.get('sheetAuthor')?.value,
-        visibility: Boolean(this.newSheetForm.get('musicSheetVisibility')?.value),
-        rearranged: false,
-        content: JSON.stringify(data),
-        song: this.newMusicSheetSong,
-        // user: this.refreshT.getLoggedUser(),
-      }
-      this.mss.addMusicSheet(this.newMusicSheet).subscribe(() => {
-        this.router.navigate(['/login']);
-      });
-    })
+    if(this.newSheetForm.valid) {
+      this.child.getCurrentJsonSheet().then((data: any) => {
+        this.newMusicSheetSong = {
+          id: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong?.id : undefined,
+          spotifyId: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong?.spotifyId : undefined,
+          songtype: !Boolean(this.newSheetForm.get('songType')?.value),
+          title: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong!.title : this.newSheetForm.get('songTitle')?.value,
+          author: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong!.author : this.newSheetForm.get('songAuthor')?.value,
+          genreId: this.newSheetForm.get('newSheetGenre')?.value,
+        }
+        this.newMusicSheet = {
+          title: this.newSheetForm.get('sheetTitle')?.value,
+          author: this.newSheetForm.get('sheetAuthor')?.value,
+          visibility: Boolean(this.newSheetForm.get('musicSheetVisibility')?.value),
+          rearranged: false,
+          content: JSON.stringify(data),
+          song: this.newMusicSheetSong,
+          // user: this.refreshT.getLoggedUser(),
+        }
+        this.mss.addMusicSheet(this.newMusicSheet).subscribe(() => {
+          this.router.navigate(['/login']);
+        });
+      })
+    }
   }
 }

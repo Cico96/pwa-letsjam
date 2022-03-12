@@ -124,7 +124,9 @@
       "author": "Autore Spartito",
       "visibility": "Visibilità",
       "visibilitypublic": "Pubblico",
-      "visibilityprivate": "Privato"
+      "visibilityprivate": "Privato",
+      "title_required": "Il titolo è obbligatorio",
+      "author_required": "L' autore è obbligatorio"
     },
     "song": {
       "songBrano": "Brano",
@@ -152,7 +154,8 @@
     "surname": "Cognome",
     "preferredGenres": "Generi preferiti",
     "send": "Invia",
-    "preferredInstruments": "Strumenti preferiti"
+    "preferredInstruments": "Strumenti preferiti",
+    "error_required": "Il campo è obbligatorio"
   },
   "Rearrange": {
     "title": "Riarrangia lo spartito",

@@ -68,18 +68,21 @@ export class ModifyProfileComponent implements OnInit {
       firstname: new FormControl(this.loggedUser.firstname, Validators.compose([
         Validators.minLength(2),
         Validators.maxLength(20),
+        Validators.required,
       ])),
       lastname: new FormControl(this.loggedUser.lastname, Validators.compose([
         Validators.minLength(2),
         Validators.maxLength(20),
+        Validators.required,
       ])),
       username: new FormControl(this.loggedUser.username, Validators.compose([
         Validators.minLength(2),
         Validators.maxLength(20),
+        Validators.required,
       ])),
       email: new FormControl(this.loggedUser.email, Validators.compose([
-        Validators.minLength(2),
-        Validators.maxLength(20),
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+        Validators.required,
       ])),
       genres: new FormControl(),
       instruments: new FormControl(),
@@ -114,48 +117,53 @@ export class ModifyProfileComponent implements OnInit {
   }
 
   updateUser() {
-    let newAvatar = this.newAvatarFile
 
-    let newUser: UserUserIdBody = {
-      firstname: this.modifyUserForm.get('firstname')?.value,
-      lastname: this.modifyUserForm.get('lastname')?.value,
-      email: this.modifyUserForm.get('email')?.value,
-    }
+    if(this.modifyUserForm.valid) {
+      
+      console.log(this.modifyUserForm)
+      let newAvatar = this.newAvatarFile
 
-    if (this.loggedUser.id !== undefined) {
-      let userId = this.loggedUser.id
-      this.us.updateUserById(newUser, userId).subscribe(data => {
-        // console.log(data)
-      });
-
-      this.genresToUpdate?.forEach((genre: string) => {
-        let addGenre: UserIdGenresBody = {
-          genreId: parseInt(genre),
-        }
-        this.us.addPreferredGenre(userId ,addGenre).subscribe(data => {
-          // console.log(data)
-        });
-      })
-
-      this.instrumentsToUpdate?.forEach((instrument:string) => {
-        let addInstrument: UserIdInstrumentsBody = {
-          instrumentId: parseInt(instrument),
-        }
-
-        this.us.addPreferredInstrument(userId, addInstrument).subscribe(data => {
-          // console.log(data)
-        });
-      })
-
-      if (newAvatar) {
-        this.us.updateUserAvatar(newAvatar).subscribe(data => {
-          // console.log(data)
-        });
+      let newUser: UserUserIdBody = {
+        firstname: this.modifyUserForm.get('firstname')?.value,
+        lastname: this.modifyUserForm.get('lastname')?.value,
+        email: this.modifyUserForm.get('email')?.value,
       }
 
-      setTimeout(() => {
-        this.rts.saveLoggedUser(JSON.stringify(userId))
-      },1000)
+      if (this.loggedUser.id !== undefined) {
+        let userId = this.loggedUser.id
+        this.us.updateUserById(newUser, userId).subscribe(data => {
+          // console.log(data)
+        });
+
+        this.genresToUpdate?.forEach((genre: string) => {
+          let addGenre: UserIdGenresBody = {
+            genreId: parseInt(genre),
+          }
+          this.us.addPreferredGenre(userId ,addGenre).subscribe(data => {
+            // console.log(data)
+          });
+        })
+
+        this.instrumentsToUpdate?.forEach((instrument:string) => {
+          let addInstrument: UserIdInstrumentsBody = {
+            instrumentId: parseInt(instrument),
+          }
+
+          this.us.addPreferredInstrument(userId, addInstrument).subscribe(data => {
+            // console.log(data)
+          });
+        })
+
+        if (newAvatar) {
+          this.us.updateUserAvatar(newAvatar).subscribe(data => {
+            // console.log(data)
+          });
+        }
+
+        setTimeout(() => {
+          this.rts.saveLoggedUser(JSON.stringify(userId))
+        },1000)
+      }
     }
   }
 

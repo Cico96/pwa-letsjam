@@ -23,20 +23,23 @@
             <div class="right-column">
               <label name="firstname">
                 {{"ModifyProfile.name" | translate}}
-                <input formControlName="firstname" value="{{loggedUser.firstname}}" name="firstname" type="text"
-                       required/>
+                <input formControlName="firstname" value="{{loggedUser.firstname}}" type="text"/>
+                <small style="color: red;" *ngIf="modifyUserForm.get('firstname')?.invalid && modifyUserForm.get('firstname')?.touched">{{"ModifyProfile.error_required" | translate}}</small>
               </label>
               <label name="lastname">
                 {{"ModifyProfile.surname" | translate}}
-                <input formControlName="lastname" value="{{loggedUser.lastname}}" name="lastname" type="text" required/>
+                <input formControlName="lastname" value="{{loggedUser.lastname}}" type="text"/>
+                <small style="color: red;" *ngIf="modifyUserForm.get('lastname')?.invalid && modifyUserForm.get('lastname')?.touched">{{"ModifyProfile.error_required" | translate}}</small>
               </label>
               <label name="username">
                 Username
-                <input formControlName="username" value="{{loggedUser.username}}" name="username" type="text" required/>
+                <input formControlName="username" value="{{loggedUser.username}}" type="text"/>
+                <small style="color: red;" *ngIf="modifyUserForm.get('uername')?.invalid && modifyUserForm.get('username')?.touched">{{"ModifyProfile.error_required" | translate}}</small>
               </label>
               <label name="email">
                 Email
                 <input formControlName="email" value="{{loggedUser.email}}" name="email" type="email" required/>
+                <small style="color: red;" *ngIf="modifyUserForm.get('email')?.invalid && modifyUserForm.get('email')?.touched">{{"ModifyProfile.error_required" | translate}}</small>
               </label>
               <div class="preferred-genres">
                 <span
