@@ -3,7 +3,7 @@
         <div class="d-flex flex-row align-items-center justify-content-between mb-2">
             <h3>{{musicSheet?.title}}</h3>
             <div style="display: flex">
-                <div class="d-flex align-items-center" *ngIf="musicSheet.user.role !== 'AMMINISTRATORE'">
+                <div class="d-flex align-items-center">
                    <div [attr.id]="musicSheet.id" class="verified-badge d-flex align-items-center" [class]="!musicSheet.verified ? 'not-verified-badge' : ''">
                        <img src="assets/icons/verifyBadge.svg" />
                       verificato
@@ -38,11 +38,6 @@
                     <img src="{{'../../../assets/icons/' + instrument.name.toLowerCase() + '.svg'}}">
                 </div>
 
-            </div>
-            <div class="verify-btn" *ngIf="musicSheet.user.role == 'AMMINISTRATORE'">
-                <div *ngIf="!musicSheet.verified" class="action-container">
-                    <span class="d-flex flex-row align-items-center justify-content-end" style="gap:20px">{{"Admin.manage_verify" | translate}}</span>
-                </div>
             </div>
     </div>
 </div>

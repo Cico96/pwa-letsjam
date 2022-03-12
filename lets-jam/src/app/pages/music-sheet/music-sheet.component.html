@@ -9,7 +9,7 @@
                     <div class="d-flex align-items-center mt-4 song-info">
                         <div class="icon mr-2">
                             <img src="../../../assets/icons/user.svg" style="height: 50%;">
-                        
+
                         </div>
                         <span class="label mr-2">{{"MusicSheet.uploaded_by" | translate}}</span>
                         <p>{{musicSheet?.user?.firstname + ' ' + musicSheet?.user?.lastname}}</p>
@@ -17,7 +17,7 @@
                     <div class="d-flex align-items-center mt-4 song-info">
                         <div class="icon mr-2">
                             <img src="../../../assets/icons/album.svg" style="height: 50%;">
-                           
+
                         </div>
                         <span class="label mr-2"></span>
                         <a [routerLink]="['song', musicSheet.song.id]">
@@ -27,7 +27,7 @@
                     <div class="d-flex align-items-center mt-4 song-info">
                         <div class="icon mr-2">
                             <img src="../../../assets/icons/upload.svg" style="height: 50%;">
-                     
+
                         </div>
                         <span class="label mr-2">{{"MusicSheet.uploaded_date" | translate}}</span>
                         <p>{{musicSheet.createDateTime | date: 'dd/MM/YYYY'}}</p>
@@ -35,7 +35,7 @@
                     <div class="mt-4 d-flex align-items-center like" style="gap: 5px;" (click)="likeDislike()" [ngClass]="{'liked': like}">
                         <div class="icon round mr-2">
                             <img src="../../../assets/icons/like.svg" style="height: 50%;">
-                           
+
                         </div>
                         <span>{{musicSheet.likes}}</span>
                         {{"Common.likes" | translate}}
@@ -43,12 +43,6 @@
                     <div class="verified-badge mt-4 d-flex align-items-center" *ngIf="musicSheet.verified">
                         <img src="../../../assets/icons/verifyBadge.svg">
                         {{"MusicSheet.verified" | translate}}
-                    </div>
-                    <div class="verify-btn verify-btn-detail-pg" *ngIf="musicSheet.user.role == 'AMMINISTRATORE'">
-                        <div *ngIf="!musicSheet.verified" class="action-container">
-                            <span class="d-flex flex-row align-items-center justify-content-end"
-                                style="gap:20px">Verifica spartito</span>
-                        </div>
                     </div>
                 </div>
 
@@ -163,13 +157,4 @@
     <a [routerLink]="['/rearrangeMusicSheet', musicSheet?.id]" class="rearrangeButton btn-hover">
         <img src="../../../assets/icons/modify.svg" style="height: 50%;">
     </a>
-
-    <div *ngIf="musicSheet?.user?.role == 'AMMINISTRATORE'" id="confirm-verify-modal" class="modal-wrap">
-        <span>{{"Admin.manageSheets_confirm" | translate}}</span>
-        <div id="verify">
-            <button class="upUs btn btn-hover btn-block btn-dark btn-outline-light btn-close-white"
-                type="submit">{{"Admin.confirm_button" | translate}}</button>
-        </div>
-    </div>
-
 </div>

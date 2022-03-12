@@ -14,6 +14,7 @@ import {SongService} from "../../services/song.service";
 import {Song} from "../../model/song";
 import {RefreshTokenService} from "../../services/refresh-token.service";
 import {MusicsheetService} from "../../services/musicsheet.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-upload',
@@ -23,7 +24,6 @@ import {MusicsheetService} from "../../services/musicsheet.service";
 export class CreateUploadComponent implements OnInit {
 
   selectedOption?: string;
-  printedOption?: string;
 
   instrumentsSelected?: Array<string>
   file?: any;
@@ -40,7 +40,7 @@ export class CreateUploadComponent implements OnInit {
   choosenNewSong?: Song;
 
   constructor(private formBuilder: FormBuilder, private is: InstrumentService, private mss: MusicsheetService, private refreshT: RefreshTokenService,
-              private gs: GenreService, private scoreService: ScoreService, private songService: SongService) {
+              private gs: GenreService, private scoreService: ScoreService, private songService: SongService, private router: Router) {
   }
 
   init: boolean = true
@@ -48,7 +48,6 @@ export class CreateUploadComponent implements OnInit {
   showUploadFile: boolean = false
   showFileData: boolean = false
   confirm: boolean = false
-  newSong: boolean = false
   instruments!: Array<Instrument>
   genres!: Array<Genre>
 
@@ -61,17 +60,20 @@ export class CreateUploadComponent implements OnInit {
     });
 
     this.newSheetForm = this.formBuilder.group({
-      songTitle: new FormControl('', Validators.compose([Validators.maxLength(30),])),
-      newSheetGenre: new FormControl('', Validators.compose([])),
       sheetTitle: new FormControl('', Validators.compose([])),
       sheetAuthor: new FormControl('', Validators.compose([])),
-      song: new FormControl('', Validators.compose([])),
       songType: new FormControl('0', Validators.compose([])),
-      musicSheetVisibility: new FormControl('0', Validators.compose([])),
-      songAuthor: new FormControl('', Validators.compose([
-        Validators.minLength(2),
+      song: new FormControl('', Validators.compose([])),
+      songTitle: new FormControl('', Validators.compose([
+        Validators.minLength(1),
         Validators.maxLength(30),
-      ]))
+      ])),
+      songAuthor: new FormControl('', Validators.compose([
+        Validators.minLength(1),
+        Validators.maxLength(30),
+      ])),
+      newSheetGenre: new FormControl('', Validators.compose([Validators.required])),
+      musicSheetVisibility: new FormControl('0', Validators.compose([])),
     });
   }
 
@@ -155,11 +157,11 @@ export class CreateUploadComponent implements OnInit {
   saveSheet() {
     this.child.getCurrentJsonSheet().then((data: any) => {
       this.newMusicSheetSong = {
-        id: this.choosenNewSong?.id,
-        spotifyId: this.choosenNewSong?.spotifyId,
-        songtype: Boolean(this.newSheetForm.get('songType')?.value),
-        title: this.choosenNewSong!.title,
-        author: this.choosenNewSong!.author,
+        id: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong?.id : undefined,
+        spotifyId: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong?.spotifyId : undefined,
+        songtype: !Boolean(this.newSheetForm.get('songType')?.value),
+        title: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong!.title : this.newSheetForm.get('songTitle')?.value,
+        author: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong!.author : this.newSheetForm.get('songAuthor')?.value,
         genreId: this.newSheetForm.get('newSheetGenre')?.value,
       }
       this.newMusicSheet = {
@@ -172,7 +174,7 @@ export class CreateUploadComponent implements OnInit {
         // user: this.refreshT.getLoggedUser(),
       }
       this.mss.addMusicSheet(this.newMusicSheet).subscribe(() => {
-        console.log('forese')
+        this.router.navigate(['/login']);
       });
     })
   }
