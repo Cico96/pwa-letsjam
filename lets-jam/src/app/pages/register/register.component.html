@@ -1,6 +1,6 @@
 <div class="body">
-    <small *ngIf="error == 409 || 500 && error!==undefined" class="error-message" style="margin-top: 20px;">{{"Register.error" | translate}}</small>
-    <div class="form-container flex-row" style="width:900px; margin-top: 120px;">
+    <small *ngIf="error == 409 || 500 && error!==undefined" class="error-message">{{"Register.error" | translate}}</small>
+    <div class="form-container flex-row" style="width:900px;">
         <div class="d-flex flex-column align-items-center justify-content-between pb-4" style="flex:5; height: 100%;">
             <h2 class="mb-4 text-center">{{"Login.register" | translate}}</h2>
             <div class="logo-container mb-4">
@@ -48,7 +48,5 @@
                 </button>
             </div>
         </form>
-        
     </div>
-
 </div>
