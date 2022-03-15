@@ -89,12 +89,12 @@
                         <h3 class="mt-5 mb-2">{{"Common.comments" | translate}}</h3>
                         <div class="comments-container d-flex flex-column mt-4 mb-3 w-100 p-5">
 
-                            <div *ngFor="let comment of comments"
-                                class="comment d-flex align-items-center justify-content-start">
-                                <div class="user-image" *ngIf="comment.user.avatar"
+                            <div *ngFor="let comment of comments">
+                              <div *ngIf="!comment.parentId" class="comment d-flex align-items-center justify-content-start">
+                                <div class="user-image align-self-start" *ngIf="comment.user.avatar"
                                     style="{{'background:url(http://letsjam.ccml.it' + comment.user.avatar +')'}}">
                                 </div>
-                                <div class="user-image" *ngIf="!comment.user.avatar"
+                                <div class="user-image align-self-start" *ngIf="!comment.user.avatar"
                                     style="{{'background:url(https://avatars.dicebear.com/api/male/' + comment.user.firstname + '.svg)'}}">
                                 </div>
                                 <div class="d-flex flex-column align-items-start justify-content-start"
@@ -135,6 +135,7 @@
                                         </div>
                                     </div>
                                 </div>
+                              </div>
                             </div>
 
 

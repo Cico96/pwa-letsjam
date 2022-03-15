@@ -94,14 +94,19 @@ export class AllMusicSheetsComponent implements OnInit {
     // console.log(Boolean(this.sidebarForm.get('rearranged')?.value));
     let verified;
     let rearranged;
+    let sortBy = undefined
 
-    if(Boolean(this.sidebarForm.get('filter')?.value)) {
+    if (this.sidebarForm.get('sortBy')?.value) {
+      sortBy = this.sidebarForm.get('sortBy')?.value;
+    }
+
+    if(this.sidebarForm.get('filter')?.value == 'verified') {
       verified = true;
-    }else {
+    }else if(this.sidebarForm.get('filter')?.value == 'rearranged') {
       rearranged = true;
     }
 
-    this.musicSheetService.getAllMusicSheets(this.search, this.sidebarForm.get('sortBy')?.value, undefined, this.genresName, this.instrumentsName, verified, rearranged).subscribe((ms) => {
+    this.musicSheetService.getAllMusicSheets(this.search, sortBy, undefined, this.genresName, this.instrumentsName, verified, rearranged).subscribe((ms) => {
       this.musicSheets = ms;
     })
   }
