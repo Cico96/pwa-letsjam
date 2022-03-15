@@ -5,10 +5,9 @@
       <img [src]="song.image" alt="song image cover" class="song-image">
     </div>
     <div class="song-info-container">
-      <h3 *ngIf="song.title">{{song.author}}</h3>
+      <h3 *ngIf="song.title">{{song.title}}</h3>
       <div *ngIf="song.albumName" class="d-flex align-items-center mt-1 song-info">
         <div class="icon mr-2">
-<!--          <svg th:replace="fragments/icons :: album"></svg>-->
           <img src="../../../assets/icons/album.svg">
         </div>
         <span class="label mr-2">Album: </span>
@@ -16,7 +15,6 @@
       </div>
       <div *ngIf="song.author" class="d-flex align-items-center mt-1 song-info">
         <div class="icon mr-2">
-<!--          <svg th:replace="fragments/icons :: album-type"></svg>-->
           <img src="../../../assets/icons/albumType.svg">
         </div>
         <span class="label mr-2">{{"Common.author" | translate}}:</span>
@@ -24,11 +22,13 @@
       </div>
       <div *ngIf="song.duration" class="d-flex align-items-center mt-1 song-info">
         <div class="icon mr-2">
-<!--          <svg th:replace="fragments/icons :: duration"></svg>-->
           <img src="../../../assets/icons/duration.svg">
         </div>
         <span class="label mr-2">{{"Common.duration" | translate}}:</span>
-<!--        <p>[[${(song.duration/1000)/60}]] [[#{common.minutes}]] [[${(song.duration/1000)%60}]] [[#{common.seconds}]]</p>-->
+        <p >{{((song.duration/1000)/60) - ((song.duration/1000)/60) % 1}}
+          {{"Song.minutes" | translate}}
+          {{((song.duration/1000)%60) - ((song.duration/1000)%60) % 1}}
+          {{"Song.seconds" | translate}}</p>
       </div>
     </div>
   </div>

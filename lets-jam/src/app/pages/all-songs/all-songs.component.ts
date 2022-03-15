@@ -59,14 +59,24 @@ export class AllSongsComponent implements OnInit {
 
     let explicit;
     let hasLyrics;
+    let sortBy = undefined
+    let albumType = undefined
 
-    if(Boolean(this.sidebarForm.get('filter')?.value)) {
+    if (this.sidebarForm.get('sortBy')?.value) {
+      sortBy = this.sidebarForm.get('sortBy')?.value;
+    }
+
+    if (this.sidebarForm.get('albumType')?.value) {
+      albumType = this.sidebarForm.get('sortBy')?.value;
+    }
+
+    if(this.sidebarForm.get('filter')?.value == 'explicit') {
       explicit = true;
-    }else {
+    }else if(this.sidebarForm.get('filter')?.value == 'hasLyrics') {
       hasLyrics = true;
     }
 
-    this.ss.getSongs(this.search, this.sidebarForm.get('sortBy')?.value, undefined, this.genresName, explicit, hasLyrics, this.sidebarForm.get('albumType')?.value).subscribe((s) => {
+    this.ss.getSongs(this.search, sortBy, undefined, this.genresName, explicit, hasLyrics, albumType).subscribe((s) => {
       this.songs = s;
     })
   }
