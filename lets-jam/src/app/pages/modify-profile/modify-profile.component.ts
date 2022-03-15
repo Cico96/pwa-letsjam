@@ -119,8 +119,7 @@ export class ModifyProfileComponent implements OnInit {
   updateUser() {
 
     if(this.modifyUserForm.valid) {
-      
-      console.log(this.modifyUserForm)
+
       let newAvatar = this.newAvatarFile
 
       let newUser: UserUserIdBody = {
@@ -132,7 +131,6 @@ export class ModifyProfileComponent implements OnInit {
       if (this.loggedUser.id !== undefined) {
         let userId = this.loggedUser.id
         this.us.updateUserById(newUser, userId).subscribe(data => {
-          // console.log(data)
         });
 
         this.genresToUpdate?.forEach((genre: string) => {
@@ -140,7 +138,6 @@ export class ModifyProfileComponent implements OnInit {
             genreId: parseInt(genre),
           }
           this.us.addPreferredGenre(userId ,addGenre).subscribe(data => {
-            // console.log(data)
           });
         })
 
@@ -150,13 +147,11 @@ export class ModifyProfileComponent implements OnInit {
           }
 
           this.us.addPreferredInstrument(userId, addInstrument).subscribe(data => {
-            // console.log(data)
           });
         })
 
         if (newAvatar) {
           this.us.updateUserAvatar(newAvatar).subscribe(data => {
-            // console.log(data)
           });
         }
 
