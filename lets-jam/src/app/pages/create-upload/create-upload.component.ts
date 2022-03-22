@@ -73,7 +73,7 @@ export class CreateUploadComponent implements OnInit {
       songType: new FormControl('0', Validators.compose([])),
       song: new FormControl('', Validators.compose([])),
       songTitle: new FormControl('', Validators.compose([
-        
+
       ])),
       songAuthor: new FormControl('', Validators.compose([
 
@@ -131,15 +131,18 @@ export class CreateUploadComponent implements OnInit {
     if (isLoaded) {
       this.child.getCurrentJsonSheet().then((data: any) => {
 
-        this.scoreService.analyzeScore({
-          score: JSON.stringify(data)
-        }).subscribe((data) => {
-            this.sheetTitle = data.title;
-            this.sheetAuthor = data.author;
-          },
-          (err) => {
-            console.log(err.error)
-          });
+        if (this.selectedOption == 'carica') {
+          this.scoreService.analyzeScore({
+            score: JSON.stringify(data)
+          }).subscribe((data) => {
+              this.sheetTitle = data.title;
+              this.sheetAuthor = data.author;
+            },
+            (err) => {
+              console.log(err.error)
+            });
+        }
+
       })
       this.showFileData = true
     }
@@ -155,7 +158,6 @@ export class CreateUploadComponent implements OnInit {
 
   selectSong(sg: Song) {
     this.availableSongs = undefined;
-    // this.newSheetForm.get('songType').value = 0
     this.newSheetForm.patchValue({song: sg.title})
     this.choosenNewSong = sg;
   }
@@ -163,12 +165,13 @@ export class CreateUploadComponent implements OnInit {
   saveSheet() {
     if(this.newSheetForm.valid) {
       this.child.getCurrentJsonSheet().then((data: any) => {
+        const songType = !parseInt(this.newSheetForm.get('songType')?.value)
         this.newMusicSheetSong = {
-          id: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong?.id : undefined,
-          spotifyId: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong?.spotifyId : undefined,
-          songtype: !Boolean(this.newSheetForm.get('songType')?.value),
-          title: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong!.title : this.newSheetForm.get('songTitle')?.value,
-          author: !Boolean(this.newSheetForm.get('songType')?.value) ? this.choosenNewSong!.author : this.newSheetForm.get('songAuthor')?.value,
+          id: songType ? this.choosenNewSong?.id : undefined,
+          spotifyId: songType ? this.choosenNewSong?.spotifyId : undefined,
+          songtype: songType,
+          title: songType ? this.choosenNewSong!.title : this.newSheetForm.get('songTitle')?.value,
+          author: songType ? this.choosenNewSong!.author : this.newSheetForm.get('songAuthor')?.value,
           genreId: this.newSheetForm.get('newSheetGenre')?.value,
         }
         this.newMusicSheet = {
