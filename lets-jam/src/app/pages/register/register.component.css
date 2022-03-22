@@ -6,6 +6,8 @@
     width: 100vw;
     height: 100vh;
     background-color: #F6F9FC;
+    padding-top: 120px;
+    padding-bottom: 20px;
 }
 
 .form-container{
