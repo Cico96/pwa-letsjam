@@ -106,53 +106,53 @@
     "heading": "All of our songs",
     "albumType": "Album Type",
     "duration": "Duration",
-    "musicSheets": " Esplora gli spartiti per il brano",
-    "minutes": "minuti",
-    "seconds": "secondi",
-    "musicSheet": "Alcuni spartiti",
-    "description": "Prendi ispirazione, suona, scarica o riarrangia gli spartiti inseriti dalla nostra community"
+    "musicSheets": " Explore our music sheets for this song",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "musicSheet": "Some music sheets",
+    "description": "Get inspiration, play, download or rearrange scores posted by our community"
   },
   "CreteUpload": {
-    "title": "Crea nuovo spartito",
-    "whattodo": "Scegli cosa fare",
-    "selectInstruments": "Scegli gli strumenti con cui iniziare",
-    "instrumentserror": "Devi selezionare almeno uno strumento",
-    "create": "Crea",
-    "upload": "Carica",
+    "title": "Create a new MusicSheet",
+    "whattodo": "Choose what to do",
+    "selectInstruments": "Choose the instruments to start with",
+    "instrumentserror": "You must select at least one instrument",
+    "create": "Create",
+    "upload": "Uplaod",
     "musicsheet": {
-      "title": "Titolo Spartito",
-      "author": "Autore Spartito",
-      "visibility": "Visibilità",
-      "visibilitypublic": "Pubblico",
-      "visibilityprivate": "Privato"
+      "title": "Music sheet title",
+      "author": "Music sheet author",
+      "visibility": "Visibility",
+      "visibilitypublic": "Public",
+      "visibilityprivate": "Private"
     },
     "song": {
-      "songBrano": "Brano",
-      "placeholder": "Scrivi il titolo o l'autore del brano",
-      "existing": "Esistente",
-      "new": "Inedito",
-      "title": "Titolo Brano",
-      "author": "Autore Brano",
-      "genre": "Genere Brano",
-      "chooseGenre": "Seleziona il genere del brano"
+      "songBrano": "Song",
+      "placeholder": "Type the song title or song author",
+      "existing": "Existing",
+      "new": "Unpublished",
+      "title": "Song Title",
+      "author": "Song Author",
+      "genre": "Song Genre",
+      "chooseGenre": "Choose the song's genre"
     }
   },
   "Profile": {
-    "preferredGenres": "Generi preferiti",
-    "preferredInstruments": "Strumenti preferiti",
-    "yourSheets": "I tuoi spartiti",
-    "messagesCentre": "Centro messaggi",
-    "button": "Invio",
-    "addNewConversation": "Aggiungi nuova conversazione"
+    "preferredGenres": "Preferred genres",
+    "preferredInstruments": "Preferred instruments",
+    "yourSheets": "Your sheets",
+    "messagesCentre": "Messages centre",
+    "button": "Send",
+    "addNewConversation": "Add new conversation"
   },
   "ModifyProfile": {
-    "modifyProfilo": "Modifica profilo",
-    "name": "Nome",
-    "modify": "Modifica",
-    "surname": "Cognome",
-    "preferredGenres": "Generi preferiti",
-    "send": "Invia",
-    "preferredInstruments": "Strumenti preferiti"
+    "modifyProfilo": "Modify profile",
+    "name": "Name",
+    "modify": "Modify",
+    "surname": "Surname",
+    "preferredGenres": "Preferred genres",
+    "send": "Send",
+    "preferredInstruments": "Preferred instruments"
   },
   "Rearrange": {
     "title": "Riarrangia lo spartito",
