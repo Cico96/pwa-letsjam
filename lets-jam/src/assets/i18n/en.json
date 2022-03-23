@@ -155,13 +155,13 @@
     "preferredInstruments": "Preferred instruments"
   },
   "Rearrange": {
-    "title": "Riarrangia lo spartito",
-    "musicSheet_title": "Titolo spartito",
-    "musicSheet_author": "Autore spartito",
-    "musicSheet_visibility": "Visibilità spartito",
-    "musicSheet_visibility_private": "Privato",
-    "musicSheet_visibility_public": "Pubblico",
-    "check_instruments": "Conferma",
-    "rearrange": "Riarrangia"
+    "title": "Rearrange the music sheet",
+    "musicSheet_title": "Musicsheet title",
+    "musicSheet_author": "Musicsheet author",
+    "musicSheet_visibility": "Visibility",
+    "musicSheet_visibility_private": "Private",
+    "musicSheet_visibility_public": "Public",
+    "check_instruments": "Confirm",
+    "rearrange": "Rearrange"
   }
 }
