@@ -67,7 +67,8 @@ export class AllSongsComponent implements OnInit {
     }
 
     if (this.sidebarForm.get('albumType')?.value) {
-      albumType = this.sidebarForm.get('sortBy')?.value;
+      albumType = this.sidebarForm.get('albumType')?.value;
+      console.log(this.sidebarForm.get('albumType')?.value)
     }
 
     if(this.sidebarForm.get('filter')?.value == 'explicit') {

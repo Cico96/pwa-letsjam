@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().subscribe((res) => {
+    this.authService.logout().subscribe(() => {
       this.rts.clearRefreshTimeout();
       this.router.navigate(['/login']);
       localStorage.clear();
