@@ -184,7 +184,6 @@ export class CreateUploadComponent implements OnInit {
           // user: this.refreshT.getLoggedUser(),
         }
         this.mss.addMusicSheet(this.newMusicSheet).subscribe(() => {
-          this.router.navigate(['/login']);
         });
       })
     }
